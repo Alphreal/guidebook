@@ -66,7 +66,7 @@ table{{width:100%;border-collapse:collapse;font-size:14px}}
 th,td{{text-align:left;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.1);vertical-align:top}}
 th{{color:#c7d2fe;font-weight:600}}
 .placeholder{{border:1.5px dashed #64748b;border-radius:14px;padding:14px 16px;margin:12px 0;background:rgba(255,255,255,.03);color:#94a3b8;font-size:14px;list-style:none}}
-.pic{{margin:14px auto;text-align:center;max-width:560px}}
+.pic{{margin:14px auto;text-align:center;max-width:480px}}
 .pic svg{{max-width:100%;height:auto;background:linear-gradient(180deg,#ffffff,#eef2ff);border:1px solid rgba(255,255,255,.15);border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.45);counter-increment:fig}}
 .pic figcaption,.pic .cap{{color:#94a3b8;font-size:13px;margin-top:8px}}
 .pic figcaption::before{{content:"Figure " counter(fig) " — "}}
@@ -102,7 +102,7 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 .steps{{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0}}
 @media(min-width:720px){{.steps{{grid-template-columns:repeat(4,1fr)}}}}
 .step{{background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.3);border-radius:14px;padding:12px;text-align:center;font-size:14px}}
-.step b{{display:flex;width:26px;height:26px;border-radius:50%;background:#818cf8;color:#020617;align-items:center;justify-content:center;margin:0 auto 6px;font-size:14px}}
+.step .n{{display:flex;width:26px;height:26px;border-radius:50%;background:#818cf8;color:#020617;align-items:center;justify-content:center;margin:0 auto 6px;font-size:14px;flex:none}}
 .check{{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer}}
 .check:last-child{{border-bottom:none}}
 .check input{{width:19px;height:19px;margin-top:2px;accent-color:#818cf8;flex:none}}
@@ -224,7 +224,7 @@ def slug(t):
     return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
 
 
-SVG_TIMER = """<svg viewBox="0 0 400 240" role="img" aria-label="Desk timer and checklist"><rect x="20" y="212" width="360" height="8" rx="4" fill="#e7e5e4"/><circle cx="115" cy="112" r="58" fill="#fff" stroke="#1a1a1a" stroke-width="4"/><circle cx="115" cy="112" r="6" fill="#1a1a1a"/><line x1="115" y1="112" x2="115" y2="70" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="115" y1="112" x2="145" y2="126" stroke="#0f62fe" stroke-width="4" stroke-linecap="round"/><text x="115" y="198" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a1a">25:00</text><rect x="215" y="42" width="155" height="140" rx="10" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><rect x="231" y="62" width="16" height="16" rx="3" fill="none" stroke="#1a1a1a" stroke-width="2"/><polyline points="233,70 238,75 246,65" fill="none" stroke="#0f62fe" stroke-width="3"/><text x="255" y="75" font-size="13" fill="#1a1a1a">LMS quiz</text><rect x="231" y="98" width="16" height="16" rx="3" fill="none" stroke="#1a1a1a" stroke-width="2"/><polyline points="233,106 238,111 246,101" fill="none" stroke="#0f62fe" stroke-width="3"/><text x="255" y="111" font-size="13" fill="#1a1a1a">Videos</text><rect x="231" y="134" width="16" height="16" rx="3" fill="none" stroke="#a8a29e" stroke-width="2"/><text x="255" y="147" font-size="13" fill="#57534e">Review</text></svg>"""
+SVG_TIMER = """<svg viewBox="0 0 600 210" role="img" aria-label="Three steps: set timer, focus one tab, tick checklist"><rect x="8" y="8" width="187" height="194" rx="14" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><circle cx="34" cy="34" r="14" fill="#818cf8"/><text x="34" y="39" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">1</text><circle cx="101" cy="100" r="36" fill="#fff" stroke="#1a1a1a" stroke-width="4"/><circle cx="101" cy="100" r="5" fill="#1a1a1a"/><line x1="101" y1="100" x2="101" y2="72" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="101" y1="100" x2="122" y2="110" stroke="#0f62fe" stroke-width="4" stroke-linecap="round"/><text x="101" y="176" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">Set 25-5</text><rect x="203" y="8" width="187" height="194" rx="14" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><circle cx="229" cy="34" r="14" fill="#818cf8"/><text x="229" y="39" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">2</text><rect x="243" y="66" width="110" height="66" rx="8" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><rect x="243" y="66" width="110" height="20" rx="8" fill="#e7e5e4"/><rect x="249" y="70" width="42" height="12" rx="4" fill="#0f62fe"/><line x1="253" y1="104" x2="343" y2="104" stroke="#e7e5e4" stroke-width="5" stroke-linecap="round"/><line x1="253" y1="118" x2="315" y2="118" stroke="#e7e5e4" stroke-width="5" stroke-linecap="round"/><text x="296" y="176" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">One tab</text><rect x="398" y="8" width="187" height="194" rx="14" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><circle cx="424" cy="34" r="14" fill="#818cf8"/><text x="424" y="39" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">3</text><rect x="433" y="72" width="17" height="17" rx="4" fill="none" stroke="#1a1a1a" stroke-width="2"/><polyline points="435,80 440,85 448,75" fill="none" stroke="#0f62fe" stroke-width="3"/><line x1="458" y1="80" x2="545" y2="80" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><rect x="433" y="100" width="17" height="17" rx="4" fill="none" stroke="#1a1a1a" stroke-width="2"/><polyline points="435,108 440,113 448,103" fill="none" stroke="#0f62fe" stroke-width="3"/><line x1="458" y1="108" x2="520" y2="108" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><text x="491" y="176" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">Tick it</text></svg>"""
 
 SVG_PHONE = """<svg viewBox="0 0 400 240" role="img" aria-label="Phone in drawer versus on desk"><text x="100" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">IN DRAWER</text><rect x="40" y="55" width="120" height="105" rx="10" fill="#f7f7f5" stroke="#1a1a1a" stroke-width="3"/><rect x="72" y="72" width="56" height="88" rx="8" fill="#1a1a1a"/><rect x="79" y="82" width="42" height="60" rx="4" fill="#57534e"/><text x="100" y="200" text-anchor="middle" font-size="30" font-weight="bold" fill="#0f62fe">✓</text><text x="300" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">ON DESK</text><rect x="240" y="152" width="120" height="8" rx="4" fill="#e7e5e4"/><rect x="283" y="82" width="44" height="70" rx="6" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><path d="M270 70 Q260 100 268 130" fill="none" stroke="#a8a29e" stroke-width="2"/><path d="M340 70 Q350 100 342 130" fill="none" stroke="#a8a29e" stroke-width="2"/><text x="300" y="200" text-anchor="middle" font-size="30" font-weight="bold" fill="#57534e">✗</text></svg>"""
 
@@ -265,7 +265,7 @@ def list_item(txt):
     if kind == "pic":
         return f'<li class="pic">{pic_svg(txt)}<div class="cap">{inline(txt)}</div></li>'
     if kind == "chart":
-        return f'<li class="pic">{graph_chart(txt)}<div class="cap">{inline(txt)} · real survey data</div></li>'
+        return f'<li class="pic">{graph_chart(txt)}<div class="cap">{inline(txt)}</div></li>'
     if kind == "table":
         return f"<li>{table_chart(txt)}</li>"
     if kind == "box":
@@ -273,10 +273,10 @@ def list_item(txt):
     return f"<li>{inline(txt)}</li>"
 
 
-def hbars(title, rows, note=""):
-    """Horizontal SVG bar chart. rows: [(label, value)]. Values shown as-is."""
+def hbars(title, rows):
+    """Horizontal SVG bar chart. rows: [(label, value)]. Sample (n=40) stated in Methods."""
     top, bh, gap = 46, 22, 12
-    H = top + len(rows) * (bh + gap) + (30 if note else 14)
+    H = top + len(rows) * (bh + gap) + 14
     maxv = max((v for _, v in rows), default=1) or 1
     p = [f'<svg viewBox="0 0 400 {H}" role="img" aria-label="{esc(title)}">',
          f'<text x="8" y="22" font-size="14" font-weight="bold" fill="#1a1a1a">{esc(title)}</text>']
@@ -289,8 +289,6 @@ def hbars(title, rows, note=""):
         p.append(f'<rect class="bar" x="150" y="{y}" width="{w:.0f}" height="{bh}" rx="5" fill="#0f62fe"><title>{esc(lab)}: {num}</title></rect>')
         p.append(f'<text x="{165 + w:.0f}" y="{y + 15}" font-size="12" fill="#57534e">{num}</text>')
         y += bh + gap
-    if note:
-        p.append(f'<text x="8" y="{H - 10}" font-size="11" fill="#57534e">{esc(note)}</text>')
     p.append("</svg>")
     return "".join(p)
 
@@ -300,23 +298,23 @@ BARRIERS = [("Screen / Zoom fatigue", 55), ("Distracted by apps", 53),
             ("Self-discipline", 40), ("Asking harder", 25)]
 
 GRAPH_CHARTS = [  # most-specific keys first: first match wins
-    (("discipline difficulty",), ("Self-discipline difficulty", [("Score 4-5", 40)], "40% of n=40 · comparison arm not surveyed")),
-    (("distraction level",), ("Distraction by apps", [("Score 4-5", 53)], "53% of n=40 · comparison arm not surveyed")),
-    (("asking difficulty",), ("Asking harder online", [("Score 4-5", 25)], "25% of n=40 · comparison arm not surveyed")),
-    (("fatigue level",), ("Screen / Zoom fatigue", [("Score 4-5", 55)], "55% of n=40 · comparison arm not surveyed")),
-    (("barriers by agree",), ("Barriers by agree % (4-5/5)", BARRIERS, "Week-1 survey, n=40")),
-    (("graph 1", "sessions per week", "current use"), ("Current use (% of n=40)", [("Still online", 70), ("2-4 sessions/week", 43), ("Course-dependent", 40), ("6+ / week", 8), ("4-6 / week", 5), ("1 / week", 5)], "Still-online + frequency as surveyed · % rounded")),
-    (("graph 2", "barrier ranking"), ("Barrier ranking (agree %)", BARRIERS, "Week-1 survey, n=40")),
-    (("graph 3", "perceived benefits", "likert averages"), ("Benefits (Likert avg, 1-5)", [("Remember all content", 3.5), ("Prefer online", 3.0)], "Remember avg 3.50 (55% agree) · Prefer avg 3.00 (28% agree), n=40")),
+    (("discipline difficulty",), ("Self-discipline difficulty", [("Score 4-5", 40)])),
+    (("distraction level",), ("Distraction by apps", [("Score 4-5", 53)])),
+    (("asking difficulty",), ("Asking harder online", [("Score 4-5", 25)])),
+    (("fatigue level",), ("Screen / Zoom fatigue", [("Score 4-5", 55)])),
+    (("barriers by agree",), ("Barriers by agree % (4-5/5)", BARRIERS)),
+    (("graph 1", "sessions per week", "current use"), ("Current use (% of n=40)", [("Still online", 70), ("2-4 sessions/week", 43), ("Course-dependent", 40), ("6+ / week", 8), ("4-6 / week", 5), ("1 / week", 5)])),
+    (("graph 2", "barrier ranking"), ("Barrier ranking (agree %)", BARRIERS)),
+    (("graph 3", "perceived benefits", "likert averages"), ("Benefits (Likert avg, 1-5)", [("Remember all content", 3.5), ("Prefer online", 3.0)])),
 ]
 
 
 def graph_chart(txt):
     """SVG chart HTML or None. Never invents data: unmapped slots stay placeholders."""
     t = txt.lower()
-    for keys, (title, rows, note) in GRAPH_CHARTS:
+    for keys, (title, rows) in GRAPH_CHARTS:
         if any(k in t for k in keys):
-            return hbars(title, rows, note)
+            return hbars(title, rows)
     return None
 
 
@@ -376,7 +374,7 @@ def md_to_html(text, extras=None, toc_keep=None):
                         steps.append(q)
                 if steps:
                     cells = "".join(
-                        f'<div class="step"><b>{n + 1}</b>{inline(s)}</div>'
+                        f'<div class="step"><span class="n">{n + 1}</span>{inline(s)}</div>'
                         for n, s in enumerate(steps)
                     )
                     out.append(f"<p><b>{inline(quotes[0])}</b></p>" + f'<div class="steps">{cells}</div>')
@@ -409,21 +407,24 @@ def md_to_html(text, extras=None, toc_keep=None):
                     if kind == "pic":
                         out.append(f'<figure class="pic">{pic_svg(txt)}<figcaption>{inline(txt)}</figcaption></figure>')
                     elif kind == "chart":
-                        out.append(f'<figure class="pic">{graph_chart(txt)}<figcaption>{inline(txt)} · real survey data</figcaption></figure>')
+                        out.append(f'<figure class="pic">{graph_chart(txt)}<figcaption>{inline(txt)}</figcaption></figure>')
                     else:
                         out.append(table_chart(txt))
                 else:
                     items.append(f"<li>{inline(txt)}</li>")
                 i += 1
             if items:
-                out.append("<ul class='card'>" + "\n".join(items) + "</ul>")
+                # short plain lists don't earn a card; figures/tables carry their own
+                tag = "<ul>" if len(items) <= 3 else "<ul class='card'>"
+                out.append(tag + "\n".join(items) + "</ul>")
             continue
         elif re.match(r"\d+\. ", ln.strip()):
             items = []
             while i < len(lines) and re.match(r"\d+\. ", lines[i].strip()):
                 items.append(list_item(re.sub(r"^\d+\.\s*", "", lines[i].strip())))
                 i += 1
-            out.append("<ol class='card'>" + "\n".join(items) + "</ol>")
+            otag = "<ol>" if len(items) <= 3 else "<ol class='card'>"
+            out.append(otag + "\n".join(items) + "</ol>")
             continue
         else:
             txt = ln.strip()
@@ -431,7 +432,7 @@ def md_to_html(text, extras=None, toc_keep=None):
             if kind == "pic":
                 out.append(f'<figure class="pic">{pic_svg(txt)}<figcaption>{inline(txt)}</figcaption></figure>')
             elif kind == "chart":
-                out.append(f'<figure class="pic">{graph_chart(txt)}<figcaption>{inline(txt)} · real survey data</figcaption></figure>')
+                out.append(f'<figure class="pic">{graph_chart(txt)}<figcaption>{inline(txt)}</figcaption></figure>')
             elif kind == "table":
                 out.append(table_chart(txt))
             elif kind == "box":
