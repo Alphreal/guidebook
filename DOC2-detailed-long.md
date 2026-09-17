@@ -75,23 +75,23 @@ Each recommendation above links to exactly one Top 3–5 survey finding — no p
 
 ## 8. References (starter set — groups extend)
 
-1. Class survey (primary data, n≈50, 2026).
-2. Broadbent & Poon 2015 (self-regulated learning review).
+1. Class survey 2026 (primary data, n≈50).
+2. Broadbent & Poon 2015 (self-regulated learning).
 3. Martin & Bolliger 2018 (engagement strategies).
 4. Fauville et al. 2021 (Zoom fatigue scale).
-5. García & Weiss 2020 (COVID-19 & student performance).
-6. Bailenson (Zoom overload).
-7. Dunlosky 2013 (effective learning techniques review).
+5. García & Weiss 2020 (COVID-19 & performance).
+6. Bailenson (Zoom meeting overload).
+7. Dunlosky 2013 (learning techniques).
 8. Garrison (Community of Inquiry).
-9. Huberman (focus behaviors).
+9. Huberman (sleep, light & focus).
 10. Jordan 2026 (extrinsic-load ceiling).
 11. Moore (transactional distance).
-12. Ophir, Nass & Wagner 2009 (media multitasking).
+12. Ophir et al. 2009 (media multitasking).
 13. Roediger 2006 (retrieval practice).
-14. Saleem 2024 (technostress).
-15. Sweller (Cognitive Load Theory).
+14. Saleem 2024 (technostress creators).
+15. Sweller (cognitive load theory).
 16. Uncapher 2018 (switching costs).
-17. Ward 2017 (Brain Drain).
+17. Ward 2017 (phone presence effect).
 18. Zimmerman (self-regulation cycle).
 
 ## Appendix
