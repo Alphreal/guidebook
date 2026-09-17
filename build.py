@@ -80,6 +80,7 @@ li.pic{{list-style:none}}
 .toc a{{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:5px 14px;font-size:13px;color:#e2e8f0;text-decoration:none;transition:all .15s}}
 .toc a:hover{{border-color:rgba(129,140,248,.6);transform:translateY(-2px)}}
 .toc a.s{{font-size:12px;color:#94a3b8;padding:3px 10px}}
+.toc a.m{{font-size:14px;font-weight:700;color:#fff;background:rgba(129,140,248,.16);border-color:rgba(129,140,248,.6);padding:6px 16px}}
 .dbody{{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease-out}}
 details[open]>.dbody{{grid-template-rows:1fr}}
 .dbody-in{{overflow:hidden;min-height:0}}
