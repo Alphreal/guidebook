@@ -79,15 +79,16 @@ li.pic{{list-style:none}}
 .dbody{{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease-out}}
 details[open]>.dbody{{grid-template-rows:1fr}}
 .dbody-in{{overflow:hidden;min-height:0}}
-.hero{{text-align:center;padding:40px 20px}}
-.hero h1{{font-size:clamp(30px,5vw,46px);margin:10px 0;background:linear-gradient(135deg,#a5b4fc,#e9d5ff);-webkit-background-clip:text;background-clip:text;color:transparent}}
+.hero{{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}}
+.hero h1,.hero h3,.hero p,.hero .sub{{width:100%;max-width:70ch;margin-left:auto!important;margin-right:auto!important;text-align:center!important}}
+.hero h1{{font-size:clamp(30px,5vw,46px);margin:10px auto;background:linear-gradient(135deg,#a5b4fc,#e9d5ff);-webkit-background-clip:text;background-clip:text;color:transparent}}
 .hero .sub{{font-size:16px}}
 .chapter{{border-top:3px solid #818cf8}}
 details.chapter:nth-of-type(4n+1){{border-top-color:#818cf8}}
 details.chapter:nth-of-type(4n+2){{border-top-color:#34d399}}
 details.chapter:nth-of-type(4n+3){{border-top-color:#fbbf24}}
 details.chapter:nth-of-type(4n){{border-top-color:#fb7185}}
-.chapter p,.chapter li,.hero p{{max-width:70ch}}
+.chapter p,.chapter li{{max-width:70ch}}
 .chapter h2{{margin-top:14px}}
 .chapter h3{{color:#c7d2fe}}
 .chapter h3.warn{{color:#fda4af}}
