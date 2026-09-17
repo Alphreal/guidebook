@@ -139,15 +139,16 @@ def hbars(title, rows, note=""):
     """Horizontal SVG bar chart. rows: [(label, value)]. Values shown as-is."""
     top, bh, gap = 46, 22, 12
     H = top + len(rows) * (bh + gap) + (30 if note else 14)
-    maxv = max(v for _, v in rows) or 1
+    maxv = max((v for _, v in rows), default=1) or 1
     p = [f'<svg viewBox="0 0 400 {H}" role="img" aria-label="{esc(title)}">',
          f'<text x="8" y="22" font-size="14" font-weight="bold" fill="#1a1a1a">{esc(title)}</text>']
     y = top
     for lab, v in rows:
         w = 150 * v / maxv
+        num = f"{v:.2f}" if isinstance(v, float) else f"{v:d}"
         p.append(f'<text x="8" y="{y + 15}" font-size="12" fill="#1a1a1a">{esc(lab)}</text>')
         p.append(f'<rect x="150" y="{y}" width="{w:.0f}" height="{bh}" rx="5" fill="#0f62fe"/>')
-        p.append(f'<text x="{165 + w:.0f}" y="{y + 15}" font-size="12" fill="#57534e">{v:g}</text>')
+        p.append(f'<text x="{165 + w:.0f}" y="{y + 15}" font-size="12" fill="#57534e">{num}</text>')
         y += bh + gap
     if note:
         p.append(f'<text x="8" y="{H - 10}" font-size="11" fill="#57534e">{esc(note)}</text>')
@@ -159,15 +160,15 @@ def hbars(title, rows, note=""):
 BARRIERS = [("Screen / Zoom fatigue", 55), ("Distracted by apps", 53),
             ("Self-discipline", 40), ("Asking harder", 25)]
 
-GRAPH_CHARTS = [
+GRAPH_CHARTS = [  # most-specific keys first: first match wins
+    (("discipline difficulty",), ("Self-discipline difficulty", [("Score 4-5", 40)], "40% of n=40 · comparison arm not surveyed")),
+    (("distraction level",), ("Distraction by apps", [("Score 4-5", 53)], "53% of n=40 · comparison arm not surveyed")),
+    (("asking difficulty",), ("Asking harder online", [("Score 4-5", 25)], "25% of n=40 · comparison arm not surveyed")),
+    (("fatigue level",), ("Screen / Zoom fatigue", [("Score 4-5", 55)], "55% of n=40 · comparison arm not surveyed")),
     (("barriers by agree",), ("Barriers by agree % (4-5/5)", BARRIERS, "Week-1 survey, n=40")),
-    (("graph 1", "sessions per week", "frequency"), ("Online frequency (sessions/week)", [("2-4", 43), ("Course-dependent", 40), ("6+", 8), ("4-6", 5), ("1", 5)], "Week-1 survey, n=40 (% rounded)")),
+    (("graph 1", "sessions per week"), ("Online frequency (sessions/week)", [("2-4 / week", 43), ("Course-dependent", 40), ("6+ / week", 8), ("4-6 / week", 5), ("1 / week", 5)], "Options as surveyed · % rounded, sums to 101%")),
     (("graph 2", "barrier ranking"), ("Barrier ranking (agree %)", BARRIERS, "Week-1 survey, n=40")),
-    (("graph 3", "perceived benefits", "likert averages"), ("Benefits (Likert avg, 1-5)", [("Remember all content", 3.5), ("Prefer online", 3.0)], "n=40 - agree (4-5): 55% / 28%")),
-    (("written plan",), ("Struggle with self-discipline", [("Score 4-5", 40)], "Week-1 survey, n=40")),
-    (("focus with/without",), ("Easily distracted by apps", [("Score 4-5", 53)], "Week-1 survey, n=40")),
-    (("help-seeking",), ("Asking harder online", [("Score 4-5", 25)], "Week-1 survey, n=40")),
-    (("fatigue level",), ("Screen / Zoom fatigue", [("Score 4-5", 55)], "Week-1 survey, n=40")),
+    (("graph 3", "perceived benefits", "likert averages"), ("Benefits (Likert avg, 1-5)", [("Remember all content", 3.5), ("Prefer online", 3.0)], "Remember avg 3.50 (55% agree) · Prefer avg 3.00 (28% agree), n=40")),
 ]
 
 

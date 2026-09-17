@@ -21,7 +21,7 @@ First-year students shifting to online/digital self-study face self-regulation g
 
 ## 4. Methods
 
-Anonymous online form (15 questions: multiple choice + 5-point Likert + open). Distributed in class channels with permission; 5–7 minutes. Analysis: descriptive stats only — percentages, averages, rankings. Sample: 40 responses (34 students, 2 teachers, 4 other staff/working adults). Feedback form target 25 (Week 2). Ethics: voluntary, anonymous, no names/IDs, aggregated reporting.
+Anonymous online form (15 questions: multiple choice + 5-point Likert + open). Distributed in class channels with permission; 5–7 minutes. Analysis: descriptive stats only — percentages, averages, rankings. Sample: 40 class-survey responses (subgroups too small to report separately). Feedback form target 25 (Week 2). Ethics: voluntary, anonymous, no names/IDs, aggregated reporting.
 
 ## 5. Results (Week 1 survey, n=40)
 
@@ -34,7 +34,7 @@ Top findings used below:
 - FINDING-1: 55% report screen/Zoom fatigue (avg 3.53/5)
 - FINDING-2: 53% easily distracted by other apps (avg 3.50/5)
 - FINDING-3: 40% struggle with self-discipline unsupervised (avg 3.35/5)
-- FINDING-4: 70% still study online, but only 28% prefer it (avg 3.00/5)
+- FINDING-4: 70% still study online (28/40); benefits are modest — remember-all avg 3.50 (55% agree), prefer-online avg 3.00 with 28% agree (11/40)
 - FINDING-5: 25% find asking questions harder online (avg 2.78/5)
 
 ## 6. Chapters — Finding → Theory → Practice
