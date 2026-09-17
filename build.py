@@ -25,7 +25,7 @@ DOCS = [
 
 # Teacher collection: paste your Google Apps Script Web App URL here, rebuild + push.
 # Empty = Send button shows setup hint. Example: "https://script.google.com/macros/s/ABC.../exec"
-TEACHER_ENDPOINT = "https://script.google.com/macros/s/AKfycbxyDkMIH26s8jiEBQHQJ9Se_k_-oXaQ2yHV0OvpAke2ZaIp0vw53I17actQtp9IJ-W0/exec"
+TEACHER_ENDPOINT = "https://script.google.com/macros/s/AKfycbyK66DvH--P53Ok_f_9WuCFQZ2MShrf2JyuH4Km0j-QELoOc0lezz_Pods8EvZKBRzB/exec"
 
 
 def esc(s):
