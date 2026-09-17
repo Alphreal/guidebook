@@ -56,21 +56,20 @@ th,td{{text-align:left;padding:8px 10px;border-bottom:1px solid #e7e5e4;vertical
 th{{background:#f7f7f5;font-weight:600}}
 .placeholder{{border:1.5px dashed #a8a29e;border-radius:12px;padding:14px 16px;margin:12px 0;background:#fafaf9;color:#57534e;font-size:14px;list-style:none}}
 .pic{{margin:12px 0;text-align:center}}
-.pic svg{{max-width:100%;height:auto;background:#fff;border:1px solid #e7e5e4;border-radius:12px}}
+.pic svg{{max-width:100%;height:auto;background:#fff;border:1px solid #e7e5e4;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.08)}}
 .pic figcaption,.pic .cap{{color:#57534e;font-size:13px;margin-top:6px}}
 li.pic{{list-style:none}}
-.toc{{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px;position:sticky;top:0;z-index:5;background:#f7f7f5;padding:8px 0}}
-.hero{{text-align:center}}
+.toc{{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}}
+@media(min-width:720px){{.toc{{position:sticky;top:0;z-index:5;background:#f7f7f5;padding:8px 0}}}}
+.hero{{text-align:center;background:linear-gradient(180deg,#ffffff,#f1efe9);box-shadow:0 1px 4px rgba(0,0,0,.06)}}
 .hero h1{{font-size:30px}}
-.chapter{{background:#fff;border:1px solid #e7e5e4;border-radius:14px;padding:4px 20px 16px;margin:20px 0}}
+.chapter{{background:#fff;border:1px solid #e7e5e4;border-top:3px solid #0f62fe;border-radius:14px;padding:4px 20px 16px;margin:20px 0;box-shadow:0 1px 4px rgba(0,0,0,.06)}}
+.chapter p,.chapter li,.hero p{{max-width:70ch}}
 .chapter h2{{margin-top:14px}}
 .toc a{{background:#fff;border:1px solid #e7e5e4;border-radius:999px;padding:4px 12px;font-size:13px;color:#1a1a1a;text-decoration:none;transition:background .15s}}
 .toc a:hover{{background:#1a1a1a;color:#fff;border-color:#1a1a1a}}
 .card,ul.card,ol.card{{line-height:1.7}}
 ul.card,ol.card{{box-shadow:0 1px 3px rgba(0,0,0,.05)}}
-.chapter{{box-shadow:0 1px 4px rgba(0,0,0,.06);border-top:3px solid #0f62fe}}
-.hero{{background:linear-gradient(180deg,#ffffff,#f1efe9);box-shadow:0 1px 4px rgba(0,0,0,.06)}}
-.pic svg{{box-shadow:0 1px 4px rgba(0,0,0,.08)}}
 .sub{{color:#57534e;font-size:14px;margin:2px 0 0}}
 @media(min-width:1100px){{.wrap{{max-width:1100px}}.grid2{{grid-template-columns:1fr 1fr 1fr}}}}
 @media print{{.topbar{{display:none}}.toc{{position:static;background:#fff}}.wrap{{max-width:100%;padding:0}}body{{background:#fff}}.card,.tldr{{break-inside:avoid}}}}
