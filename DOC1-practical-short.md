@@ -82,5 +82,3 @@ Then: (1) peer-check with one classmate, (2) post it in the class channel / foru
 3. Which routine will you keep using? (open, one line)
 
 > **Teacher box:** This guide was curated by the 4 student groups from research + our class survey; the teacher facilitated. Participation in all surveys is voluntary and anonymous; results are reported only in aggregate.
-
-*Ethics: voluntary, anonymous, no names/IDs, aggregated results, channel permission obtained.*
