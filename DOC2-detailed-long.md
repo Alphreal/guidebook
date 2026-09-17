@@ -75,13 +75,24 @@ Each recommendation above links to exactly one Top 3–5 survey finding — no p
 
 ## 8. References (starter set — groups extend)
 
-Bailenson (Zoom overload) · Broadbent & Poon 2015 · Dunlosky 2013 · Garrison (CoI) · Huberman (focus behaviors) · Jordan 2026 · Martin & Bolliger 2018 · Moore (transactional distance) · Ophir, Nass & Wagner 2009 · Roediger 2006 · Saleem 2024 · Sweller (CLT) · Uncapher 2018 · Ward 2017 · Zimmerman (self-regulation cycle).
-
 1. Primary data source (project): Anonymous survey of approximately 50 students in our class on recent online/digital learning experiences, barriers, and strategies (to be collected in 2026).
 2. Broadbent, J., & Poon, W. L. (2015). Self-regulated learning strategies & academic achievement in online higher education learning environments: A systematic review. The Internet and Higher Education, 27, 1–13. [https://doi.org/10.1016/j.iheduc.2015.04.007](https://doi.org/10.1016/j.iheduc.2015.04.007)
 3. Martin, F., & Bolliger, D. U. (2018). Engagement Matters: Student Perceptions on the Importance of Engagement Strategies in the Online Learning Environment. Online Learning, 22(1). [https://doi.org/10.24059/olj.v22i1.1092](https://doi.org/10.24059/olj.v22i1.1092)
 4. Fauville, G., Luo, M., Queiroz, A. C. M., & Bailenson, J. N. (2021). Zoom Exhaustion & Fatigue Scale. Computers in Human Behavior Reports, 4, 100119. [https://doi.org/10.1016/j.chbr.2021.100119](https://doi.org/10.1016/j.chbr.2021.100119)
 5. García, E., & Weiss, E. (2020). COVID-19 and student performance, equity, and U.S. education policy: Lessons from pre-pandemic research to inform relief, recovery, and rebuilding. Economic Policy Institute.
+6. Bailenson (Zoom overload).
+7. Dunlosky 2013 (effective learning techniques review).
+8. Garrison (Community of Inquiry).
+9. Huberman (focus behaviors).
+10. Jordan 2026 (extrinsic-load ceiling).
+11. Moore (transactional distance).
+12. Ophir, Nass & Wagner 2009 (media multitasking).
+13. Roediger 2006 (retrieval practice).
+14. Saleem 2024 (technostress).
+15. Sweller (Cognitive Load Theory).
+16. Uncapher 2018 (switching costs).
+17. Ward 2017 (Brain Drain).
+18. Zimmerman (self-regulation cycle).
 
 ## Appendix
 
