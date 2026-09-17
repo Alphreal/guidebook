@@ -403,7 +403,7 @@ def md_to_html(text, extras=None, toc_keep=None):
                 sid = f"{base}-{n}"
             seen.add(sid)
             title = ln[3:].strip()
-            main = bool(re.match(r"^(Chapter|Lesson|0\.)", title))
+            main = bool(re.match(r"^(Chapter|Lesson|0\.|\d+\.|Appendix)", title))
             toc.append((sid, title, main))
             out.append(f'<h2 id="{sid}">{inline(ln[3:])}</h2>')
         elif ln.startswith("# "):
