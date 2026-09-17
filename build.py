@@ -95,10 +95,10 @@ SVG_CHAT = """<svg viewBox="0 0 400 250" role="img" aria-label="Good help post e
 SVG_STRETCH = """<svg viewBox="0 0 400 240" role="img" aria-label="Screen distance and stretching"><rect x="36" y="66" width="124" height="84" rx="8" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><rect x="48" y="78" width="100" height="60" rx="4" fill="#dbeafe"/><line x1="98" y1="150" x2="98" y2="176" stroke="#1a1a1a" stroke-width="4"/><line x1="70" y1="176" x2="126" y2="176" stroke="#1a1a1a" stroke-width="4"/><line x1="168" y1="196" x2="262" y2="196" stroke="#57534e" stroke-width="2"/><polygon points="168,196 178,191 178,201" fill="#57534e"/><polygon points="262,196 252,191 252,201" fill="#57534e"/><text x="215" y="186" text-anchor="middle" font-size="13" fill="#57534e">50 cm</text><circle cx="310" cy="60" r="14" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><line x1="310" y1="74" x2="310" y2="140" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="310" y1="92" x2="284" y2="112" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="310" y1="92" x2="336" y2="112" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="310" y1="140" x2="294" y2="196" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="310" y1="140" x2="326" y2="196" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><text x="310" y="222" text-anchor="middle" font-size="13" fill="#57534e">20-20-20</text></svg>"""
 
 PICS = [
-    (("timer", "checklist"), SVG_TIMER),
-    (("phone", "drawer", "desk", "focus"), SVG_PHONE),
-    (("chat", "good vs vague", "help post"), SVG_CHAT),
-    (("stretch", "screen", "distance", "fatigue"), SVG_STRETCH),
+    (("desk timer", "timer", "checklist", "25-5"), SVG_TIMER),
+    (("phone-in-drawer", "phone-on-desk", "phone in drawer", "phone on desk", "drawer", "phone"), SVG_PHONE),
+    (("chat example", "good vs vague", "help post", "class chat"), SVG_CHAT),
+    (("stretch", "screen distance", "20-20-20", "fatigue"), SVG_STRETCH),
 ]
 
 
@@ -110,13 +110,21 @@ def pic_svg(txt):
     return None
 
 
-def list_item(txt):
+def slot_kind(txt):
+    """Shared classifier: pic (illustrate), box (honest placeholder), text."""
     low = txt.lower()
     if low.startswith(("[picture", "[image")):
-        svg = pic_svg(txt)
-        if svg:
-            return f'<li class="pic">{svg}<div class="cap">{inline(txt)}</div></li>'
-    if low.startswith(("[graph", "[picture", "[qr", "[image")):
+        return "pic" if pic_svg(txt) else "box"
+    if low.startswith(("[graph", "[qr")):
+        return "box"
+    return "text"
+
+
+def list_item(txt):
+    kind = slot_kind(txt)
+    if kind == "pic":
+        return f'<li class="pic">{pic_svg(txt)}<div class="cap">{inline(txt)}</div></li>'
+    if kind == "box":
         return f'<li class="placeholder">{inline(txt)}</li>'
     return f"<li>{inline(txt)}</li>"
 
@@ -181,13 +189,10 @@ def md_to_html(text):
             continue
         else:
             txt = ln.strip()
-            if txt.lower().startswith(("[picture", "[image")):
-                svg = pic_svg(txt)
-                if svg:
-                    out.append(f'<figure class="pic">{svg}<figcaption>{inline(txt)}</figcaption></figure>')
-                else:
-                    out.append(f'<div class="placeholder">{inline(txt)}</div>')
-            elif txt.lower().startswith(("[graph", "[qr")):
+            kind = slot_kind(txt)
+            if kind == "pic":
+                out.append(f'<figure class="pic">{pic_svg(txt)}<figcaption>{inline(txt)}</figcaption></figure>')
+            elif kind == "box":
                 out.append(f'<div class="placeholder">{inline(txt)}</div>')
             else:
                 out.append(f"<p>{inline(txt)}</p>")
