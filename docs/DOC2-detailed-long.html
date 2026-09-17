@@ -150,25 +150,32 @@ function load(k){try{return JSON.parse(localStorage.getItem(k))||{}}catch(e){ret
 var R=load(RK),Q=load(QK);
 function save(){try{localStorage.setItem(RK,JSON.stringify(R));localStorage.setItem(QK,JSON.stringify(Q))}catch(e){}}
 function paint(){
- document.querySelectorAll("[data-check]").forEach(function(el){el.checked=!!R[el.getAttribute("data-check")]});
- var all=document.querySelectorAll("[data-check]").length;
- var done=Object.keys(R).filter(function(k){return R[k]}).length;
+ var boxes=document.querySelectorAll("[data-check]");
+ boxes.forEach(function(el){el.checked=!!R[el.getAttribute("data-check")]});
+ var done=0;boxes.forEach(function(el){if(R[el.getAttribute("data-check")])done++});
  var qs={};document.querySelectorAll("[data-opt]").forEach(function(o){qs[o.getAttribute("data-q")]=1});
- var qt=Object.keys(qs).length,qd=Object.keys(Q).length;
- Object.keys(Q).forEach(function(qid){restore(qid)});
+ var qids=Object.keys(qs);
+ var qd=qids.filter(function(k){return Q[k]!==undefined}).length;
+ qids.forEach(function(qid){restore(qid)});
  var p=document.getElementById("progress");
- if(p)p.innerHTML="<b>My progress</b> — routines "+done+"/"+all+" · quiz "+qd+"/"+qt;
+ if(p)p.innerHTML="<b>My progress</b> — routines "+done+"/"+boxes.length+" · quiz "+qd+"/"+qids.length;
 }
 function restore(qid){
  var box=document.querySelector('[data-qbox="'+qid+'"]');if(!box)return;
- var pick=Q[qid];
+ var pick=Q[qid];if(pick===undefined)return;
+ var chosen=null;
  box.querySelectorAll("[data-opt]").forEach(function(o){
   o.disabled=true;
   if(o.getAttribute("data-ok")==="1")o.classList.add("right");
-  else if(o.getAttribute("data-pick")===String(pick))o.classList.add("wrong");
+  if(o.getAttribute("data-pick")===String(pick))chosen=o;
  });
+ if(chosen&&chosen.getAttribute("data-ok")!=="1")chosen.classList.add("wrong");
  var m=box.querySelector("[data-msg]");
- if(m&&pick!==undefined){m.textContent=box.getAttribute("data-verdict");m.style.display="block"}
+ if(m&&chosen){
+  var ok=chosen.getAttribute("data-ok")==="1";
+  m.textContent=(ok?"Correct. ":"Not quite. ")+chosen.getAttribute("data-why");
+  m.style.display="block";
+ }
 }
 document.addEventListener("change",function(e){
  var el=e.target;
@@ -181,9 +188,7 @@ document.addEventListener("change",function(e){
 document.addEventListener("click",function(e){
  var b=e.target.closest?e.target.closest("[data-opt]"):null;
  if(b&&!b.disabled){
-  var qid=b.getAttribute("data-q"),ok=b.getAttribute("data-ok")==="1";
-  var box=b.closest("[data-qbox]");
-  box.setAttribute("data-verdict",(ok?"Correct. ":"Not quite. ")+b.getAttribute("data-why"));
+  var qid=b.getAttribute("data-q");
   Q[qid]=b.getAttribute("data-pick");save();paint();return;
  }
  var t=e.target.closest?e.target.closest(".toc a"):null;
@@ -192,9 +197,23 @@ document.addEventListener("click",function(e){
    if(d){var det=d.closest("details");if(det)det.open=true}}
  }
 });
+function openHash(){
+ var id=location.hash;
+ if(id&&id.length>1){var d=document.getElementById(id.slice(1));
+  if(d){var det=d.closest?d.closest("details"):null;
+   if(det){det.open=true;det.scrollIntoView()}}
+ }
+}
+var snapshot=[];
 window.addEventListener("beforeprint",function(){
- document.querySelectorAll("details.chapter").forEach(function(d){d.open=true});
+ snapshot=[];
+ document.querySelectorAll("details.chapter").forEach(function(d){snapshot.push(d.open);d.open=true});
 });
+window.addEventListener("afterprint",function(){
+ document.querySelectorAll("details.chapter").forEach(function(d,i){d.open=!!snapshot[i]});
+});
+window.addEventListener("hashchange",openHash);
+openHash();
 paint();
 })();
 </script>
