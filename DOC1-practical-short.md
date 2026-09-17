@@ -21,7 +21,7 @@ Example: "Finish LMS Unit 3 quiz (20 questions) before 9pm tomorrow, score 70%+.
 
 **Why it works (3 lines):** Self-regulated learners plan, monitor, and adjust in a cycle (Zimmerman). Specific goals beat vague intentions (SMART). Short spaced sessions with recall beat re-reading (Roediger 2006; Dunlosky 2013).
 
-[Graph: Week 1 survey — % of class currently using a study plan]
+[Graph: Week 1 survey — barriers by agree % (n=40)]
 [Picture: desk timer next to a ticked checklist]
 
 ---
@@ -60,17 +60,16 @@ Then: (1) peer-check with one classmate, (2) post it in the class channel / foru
 
 ---
 
-## One-Page Class Guide (fill after Week 1 survey — Top 3–5 findings only)
+## One-Page Class Guide (Week 1 survey, n=40 — Top 4 findings)
 
 | # | Survey finding | Do this |
 |---|---------------|---------|
-| 1 | [FINDING-1: e.g. 68% study with phone on desk] | [Routine from Ch2] |
-| 2 | [FINDING-2] | [Routine from Ch1/3/4] |
-| 3 | [FINDING-3] | [Routine from Ch1/3/4] |
-| 4 | [FINDING-4, if strong] | [Routine] |
-| 5 | [FINDING-5, if strong] | [Routine] |
+| 1 | 55% report screen/Zoom fatigue (4–5/5) | Ch4: 50-10 rhythm + 20-20-20 + meeting pre-check |
+| 2 | 53% easily distracted by other apps | Ch2: phone in drawer + 1 tab + notifications off |
+| 3 | 40% struggle with self-discipline unsupervised | Ch1: SMART tonight + ALPEN tomorrow + 25-5x2 |
+| 4 | 25% find asking questions harder online | Ch3: 15-min question template + peer check + post |
 
-*Rule: every row must link to a real Top 3–5 survey finding. Nothing pre-chosen.*
+*Source: Week-1 class survey, n=40. Rule kept: every row links to a real Top finding. Nothing pre-chosen.*
 
 ---
 

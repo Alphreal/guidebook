@@ -111,12 +111,14 @@ def pic_svg(txt):
 
 
 def slot_kind(txt):
-    """Shared classifier: pic (illustrate), box (honest placeholder), text."""
+    """Shared classifier: pic/chart/table (render), box (honest placeholder), text."""
     low = txt.lower()
     if low.startswith(("[picture", "[image")):
         return "pic" if pic_svg(txt) else "box"
+    if low.startswith("[table"):
+        return "table" if table_chart(txt) else "box"
     if low.startswith(("[graph", "[qr")):
-        return "box"
+        return "chart" if graph_chart(txt) else "box"
     return "text"
 
 
@@ -124,9 +126,72 @@ def list_item(txt):
     kind = slot_kind(txt)
     if kind == "pic":
         return f'<li class="pic">{pic_svg(txt)}<div class="cap">{inline(txt)}</div></li>'
+    if kind == "chart":
+        return f'<li class="pic">{graph_chart(txt)}<div class="cap">{inline(txt)} · real survey data</div></li>'
+    if kind == "table":
+        return f"<li>{table_chart(txt)}</li>"
     if kind == "box":
         return f'<li class="placeholder">{inline(txt)}</li>'
     return f"<li>{inline(txt)}</li>"
+
+
+def hbars(title, rows, note=""):
+    """Horizontal SVG bar chart. rows: [(label, value)]. Values shown as-is."""
+    top, bh, gap = 46, 22, 12
+    H = top + len(rows) * (bh + gap) + (30 if note else 14)
+    maxv = max(v for _, v in rows) or 1
+    p = [f'<svg viewBox="0 0 400 {H}" role="img" aria-label="{esc(title)}">',
+         f'<text x="8" y="22" font-size="14" font-weight="bold" fill="#1a1a1a">{esc(title)}</text>']
+    y = top
+    for lab, v in rows:
+        w = 150 * v / maxv
+        p.append(f'<text x="8" y="{y + 15}" font-size="12" fill="#1a1a1a">{esc(lab)}</text>')
+        p.append(f'<rect x="150" y="{y}" width="{w:.0f}" height="{bh}" rx="5" fill="#0f62fe"/>')
+        p.append(f'<text x="{165 + w:.0f}" y="{y + 15}" font-size="12" fill="#57534e">{v:g}</text>')
+        y += bh + gap
+    if note:
+        p.append(f'<text x="8" y="{H - 10}" font-size="11" fill="#57534e">{esc(note)}</text>')
+    p.append("</svg>")
+    return "".join(p)
+
+
+# Real Week-1 survey aggregates (n=40). % agree = score 4–5/5.
+BARRIERS = [("Screen / Zoom fatigue", 55), ("Distracted by apps", 53),
+            ("Self-discipline", 40), ("Asking harder", 25)]
+
+GRAPH_CHARTS = [
+    (("barriers by agree",), ("Barriers by agree % (4-5/5)", BARRIERS, "Week-1 survey, n=40")),
+    (("graph 1", "sessions per week", "frequency"), ("Online frequency (sessions/week)", [("2-4", 43), ("Course-dependent", 40), ("6+", 8), ("4-6", 5), ("1", 5)], "Week-1 survey, n=40 (% rounded)")),
+    (("graph 2", "barrier ranking"), ("Barrier ranking (agree %)", BARRIERS, "Week-1 survey, n=40")),
+    (("graph 3", "perceived benefits", "likert averages"), ("Benefits (Likert avg, 1-5)", [("Remember all content", 3.5), ("Prefer online", 3.0)], "n=40 - agree (4-5): 55% / 28%")),
+    (("written plan",), ("Struggle with self-discipline", [("Score 4-5", 40)], "Week-1 survey, n=40")),
+    (("focus with/without",), ("Easily distracted by apps", [("Score 4-5", 53)], "Week-1 survey, n=40")),
+    (("help-seeking",), ("Asking harder online", [("Score 4-5", 25)], "Week-1 survey, n=40")),
+    (("fatigue level",), ("Screen / Zoom fatigue", [("Score 4-5", 55)], "Week-1 survey, n=40")),
+]
+
+
+def graph_chart(txt):
+    """SVG chart HTML or None. Never invents data: unmapped slots stay placeholders."""
+    t = txt.lower()
+    for keys, (title, rows, note) in GRAPH_CHARTS:
+        if any(k in t for k in keys):
+            return hbars(title, rows, note)
+    return None
+
+
+THEMES = [("Distraction, noise, social media & games", "~21"),
+          ("Screen time & Zoom fatigue", "~8"),
+          ("Interaction with teachers / peers", "~6"),
+          ("Network, mic & devices", "~5")]
+
+
+def table_chart(txt):
+    if "theme" not in txt.lower():
+        return None
+    rows = "".join(f"<tr><td>{esc(a)}</td><td>{esc(b)}</td></tr>" for a, b in THEMES)
+    return ('<div class="card"><table><tr><th>Theme (primary per response)</th><th>Responses</th></tr>'
+            + rows + '</table><div class="muted">Group-coded from open answers, n=40.</div></div>')
 
 
 def md_to_html(text):
@@ -192,6 +257,10 @@ def md_to_html(text):
             kind = slot_kind(txt)
             if kind == "pic":
                 out.append(f'<figure class="pic">{pic_svg(txt)}<figcaption>{inline(txt)}</figcaption></figure>')
+            elif kind == "chart":
+                out.append(f'<figure class="pic">{graph_chart(txt)}<figcaption>{inline(txt)} · real survey data</figcaption></figure>')
+            elif kind == "table":
+                out.append(table_chart(txt))
             elif kind == "box":
                 out.append(f'<div class="placeholder">{inline(txt)}</div>')
             else:
