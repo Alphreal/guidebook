@@ -18,7 +18,7 @@ DOCS = [
     ("DOC1-practical-short.md", "Practical Short — Student Guide",
      "Routines first: 5-minute fixes for time, distraction, interaction and fatigue."),
     ("DOC2-detailed-long.md", "Detailed Long — Evidence Report",
-     "Survey results, theories and linked recommendations (n=40)."),
+     "Survey results, theories and linked recommendations."),
     ("DOC3-mix-textbook.md", "Mix Textbook — Teacher Lessons",
      "15-minute lesson scripts, activities and class norms."),
 ]
@@ -260,19 +260,6 @@ def slot_kind(txt):
     return "text"
 
 
-def list_item(txt):
-    kind = slot_kind(txt)
-    if kind == "pic":
-        return f'<li class="pic">{pic_svg(txt)}<div class="cap">{inline(txt)}</div></li>'
-    if kind == "chart":
-        return f'<li class="pic">{graph_chart(txt)}<div class="cap">{inline(txt)}</div></li>'
-    if kind == "table":
-        return f"<li>{table_chart(txt)}</li>"
-    if kind == "box":
-        return f'<li class="placeholder">{inline(txt)}</li>'
-    return f"<li>{inline(txt)}</li>"
-
-
 def hbars(title, rows):
     """Horizontal SVG bar chart. rows: [(label, value)]. Sample (n=40) stated in Methods."""
     top, bh, gap = 46, 22, 12
@@ -303,7 +290,7 @@ GRAPH_CHARTS = [  # most-specific keys first: first match wins
     (("asking difficulty",), ("Asking harder online", [("Score 4-5", 25)])),
     (("fatigue level",), ("Screen / Zoom fatigue", [("Score 4-5", 55)])),
     (("barriers by agree",), ("Barriers by agree % (4-5/5)", BARRIERS)),
-    (("graph 1", "sessions per week", "current use"), ("Current use (% of n=40)", [("Still online", 70), ("2-4 sessions/week", 43), ("Course-dependent", 40), ("6+ / week", 8), ("4-6 / week", 5), ("1 / week", 5)])),
+    (("graph 1", "sessions per week", "current use"), ("Current use", [("Still online", 70), ("2-4 sessions/week", 43), ("Course-dependent", 40), ("6+ / week", 8), ("4-6 / week", 5), ("1 / week", 5)])),
     (("graph 2", "barrier ranking"), ("Barrier ranking (agree %)", BARRIERS)),
     (("graph 3", "perceived benefits", "likert averages"), ("Benefits (Likert avg, 1-5)", [("Remember all content", 3.5), ("Prefer online", 3.0)])),
 ]
@@ -329,7 +316,7 @@ def table_chart(txt):
         return None
     rows = "".join(f"<tr><td>{esc(a)}</td><td>{esc(b)}</td></tr>" for a, b in THEMES)
     return ('<div class="card"><table><tr><th>Theme (primary per response)</th><th>Responses</th></tr>'
-            + rows + '</table><div class="muted">Group-coded from open answers, n=40.</div></div>')
+            + rows + '</table><div class="muted">Group-coded from open answers.</div></div>')
 
 
 def md_to_html(text, extras=None, toc_keep=None):
@@ -377,7 +364,7 @@ def md_to_html(text, extras=None, toc_keep=None):
                         f'<div class="step"><span class="n">{n + 1}</span>{inline(s)}</div>'
                         for n, s in enumerate(steps)
                     )
-                    out.append(f"<p><b>{inline(quotes[0])}</b></p>" + f'<div class="steps">{cells}</div>')
+                    out.append(f"<p>{inline(quotes[0])}</p>" + f'<div class="steps">{cells}</div>')
                     continue
             out.append('<div class="tldr">' + "<br>".join(inline(q) for q in quotes) + "</div>")
             continue
@@ -402,7 +389,8 @@ def md_to_html(text, extras=None, toc_keep=None):
                 kind = slot_kind(txt)
                 if kind in ("pic", "chart", "table"):
                     if items:
-                        out.append("<ul class='card'>" + "\n".join(items) + "</ul>")
+                        ftag = "<ul>" if len(items) <= 3 else "<ul class='card'>"
+                        out.append(ftag + "\n".join(items) + "</ul>")
                         items = []
                     if kind == "pic":
                         out.append(f'<figure class="pic">{pic_svg(txt)}<figcaption>{inline(txt)}</figcaption></figure>')
@@ -421,10 +409,25 @@ def md_to_html(text, extras=None, toc_keep=None):
         elif re.match(r"\d+\. ", ln.strip()):
             items = []
             while i < len(lines) and re.match(r"\d+\. ", lines[i].strip()):
-                items.append(list_item(re.sub(r"^\d+\.\s*", "", lines[i].strip())))
+                txt = re.sub(r"^\d+\.\s*", "", lines[i].strip())
+                kind = slot_kind(txt)
+                if kind in ("pic", "chart", "table"):
+                    if items:
+                        ftag = "<ol>" if len(items) <= 3 else "<ol class='card'>"
+                        out.append(ftag + "\n".join(items) + "</ol>")
+                        items = []
+                    if kind == "pic":
+                        out.append(f'<figure class="pic">{pic_svg(txt)}<figcaption>{inline(txt)}</figcaption></figure>')
+                    elif kind == "chart":
+                        out.append(f'<figure class="pic">{graph_chart(txt)}<figcaption>{inline(txt)}</figcaption></figure>')
+                    else:
+                        out.append(table_chart(txt))
+                else:
+                    items.append(f"<li>{inline(txt)}</li>")
                 i += 1
-            otag = "<ol>" if len(items) <= 3 else "<ol class='card'>"
-            out.append(otag + "\n".join(items) + "</ol>")
+            if items:
+                otag = "<ol>" if len(items) <= 3 else "<ol class='card'>"
+                out.append(otag + "\n".join(items) + "</ol>")
             continue
         else:
             txt = ln.strip()
