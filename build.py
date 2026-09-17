@@ -51,6 +51,10 @@ table{{width:100%;border-collapse:collapse;font-size:14px}}
 th,td{{text-align:left;padding:8px 10px;border-bottom:1px solid #e7e5e4;vertical-align:top}}
 th{{background:#f7f7f5;font-weight:600}}
 .placeholder{{border:1.5px dashed #a8a29e;border-radius:12px;padding:14px 16px;margin:12px 0;background:#fafaf9;color:#57534e;font-size:14px;list-style:none}}
+.pic{{margin:12px 0;text-align:center}}
+.pic svg{{max-width:100%;height:auto;background:#fff;border:1px solid #e7e5e4;border-radius:12px}}
+.pic figcaption,.pic .cap{{color:#57534e;font-size:13px;margin-top:6px}}
+li.pic{{list-style:none}}
 .toc{{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px;position:sticky;top:0;z-index:5;background:#f7f7f5;padding:8px 0}}
 .hero{{text-align:center}}
 .hero h1{{font-size:30px}}
@@ -80,6 +84,41 @@ def inline(s):
 
 def slug(t):
     return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
+
+
+SVG_TIMER = """<svg viewBox="0 0 400 240" role="img" aria-label="Desk timer and checklist"><rect x="20" y="212" width="360" height="8" rx="4" fill="#e7e5e4"/><circle cx="115" cy="112" r="58" fill="#fff" stroke="#1a1a1a" stroke-width="4"/><circle cx="115" cy="112" r="6" fill="#1a1a1a"/><line x1="115" y1="112" x2="115" y2="70" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="115" y1="112" x2="145" y2="126" stroke="#0f62fe" stroke-width="4" stroke-linecap="round"/><text x="115" y="198" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a1a">25:00</text><rect x="215" y="42" width="155" height="140" rx="10" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><rect x="231" y="62" width="16" height="16" rx="3" fill="none" stroke="#1a1a1a" stroke-width="2"/><polyline points="233,70 238,75 246,65" fill="none" stroke="#0f62fe" stroke-width="3"/><text x="255" y="75" font-size="13" fill="#1a1a1a">LMS quiz</text><rect x="231" y="98" width="16" height="16" rx="3" fill="none" stroke="#1a1a1a" stroke-width="2"/><polyline points="233,106 238,111 246,101" fill="none" stroke="#0f62fe" stroke-width="3"/><text x="255" y="111" font-size="13" fill="#1a1a1a">Videos</text><rect x="231" y="134" width="16" height="16" rx="3" fill="none" stroke="#a8a29e" stroke-width="2"/><text x="255" y="147" font-size="13" fill="#57534e">Review</text></svg>"""
+
+SVG_PHONE = """<svg viewBox="0 0 400 240" role="img" aria-label="Phone in drawer versus on desk"><text x="100" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">IN DRAWER</text><rect x="40" y="55" width="120" height="105" rx="10" fill="#f7f7f5" stroke="#1a1a1a" stroke-width="3"/><rect x="72" y="72" width="56" height="88" rx="8" fill="#1a1a1a"/><rect x="79" y="82" width="42" height="60" rx="4" fill="#57534e"/><text x="100" y="200" text-anchor="middle" font-size="30" font-weight="bold" fill="#0f62fe">✓</text><text x="300" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">ON DESK</text><rect x="240" y="152" width="120" height="8" rx="4" fill="#e7e5e4"/><rect x="283" y="82" width="44" height="70" rx="6" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><path d="M270 70 Q260 100 268 130" fill="none" stroke="#a8a29e" stroke-width="2"/><path d="M340 70 Q350 100 342 130" fill="none" stroke="#a8a29e" stroke-width="2"/><text x="300" y="200" text-anchor="middle" font-size="30" font-weight="bold" fill="#57534e">✗</text></svg>"""
+
+SVG_CHAT = """<svg viewBox="0 0 400 250" role="img" aria-label="Good help post example"><rect x="30" y="12" width="340" height="226" rx="12" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><text x="48" y="40" font-size="14" font-weight="bold" fill="#1a1a1a">Class channel</text><line x1="30" y1="52" x2="370" y2="52" stroke="#e7e5e4" stroke-width="2"/><rect x="46" y="64" width="252" height="96" rx="10" fill="#f1f0ee"/><text x="60" y="90" font-size="12" fill="#1a1a1a">Tried: Unit 3 quiz Q5</text><text x="60" y="112" font-size="12" fill="#1a1a1a">Expected 70%, got 40%</text><text x="60" y="134" font-size="12" fill="#1a1a1a">Question: which formula?</text><rect x="140" y="170" width="214" height="56" rx="10" fill="#0f62fe"/><text x="156" y="193" font-size="12" fill="#fff">Good question — see</text><text x="156" y="211" font-size="12" fill="#fff">Unit 3.2, example 2</text></svg>"""
+
+SVG_STRETCH = """<svg viewBox="0 0 400 240" role="img" aria-label="Screen distance and stretching"><rect x="36" y="66" width="124" height="84" rx="8" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><rect x="48" y="78" width="100" height="60" rx="4" fill="#dbeafe"/><line x1="98" y1="150" x2="98" y2="176" stroke="#1a1a1a" stroke-width="4"/><line x1="70" y1="176" x2="126" y2="176" stroke="#1a1a1a" stroke-width="4"/><line x1="168" y1="196" x2="262" y2="196" stroke="#57534e" stroke-width="2"/><polygon points="168,196 178,191 178,201" fill="#57534e"/><polygon points="262,196 252,191 252,201" fill="#57534e"/><text x="215" y="186" text-anchor="middle" font-size="13" fill="#57534e">50 cm</text><circle cx="310" cy="60" r="14" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><line x1="310" y1="74" x2="310" y2="140" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="310" y1="92" x2="284" y2="112" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="310" y1="92" x2="336" y2="112" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="310" y1="140" x2="294" y2="196" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="310" y1="140" x2="326" y2="196" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><text x="310" y="222" text-anchor="middle" font-size="13" fill="#57534e">20-20-20</text></svg>"""
+
+PICS = [
+    (("timer", "checklist"), SVG_TIMER),
+    (("phone", "drawer", "desk", "focus"), SVG_PHONE),
+    (("chat", "good vs vague", "help post"), SVG_CHAT),
+    (("stretch", "screen", "distance", "fatigue"), SVG_STRETCH),
+]
+
+
+def pic_svg(txt):
+    t = txt.lower()
+    for keys, svg in PICS:
+        if any(k in t for k in keys):
+            return svg
+    return None
+
+
+def list_item(txt):
+    low = txt.lower()
+    if low.startswith(("[picture", "[image")):
+        svg = pic_svg(txt)
+        if svg:
+            return f'<li class="pic">{svg}<div class="cap">{inline(txt)}</div></li>'
+    if low.startswith(("[graph", "[picture", "[qr", "[image")):
+        return f'<li class="placeholder">{inline(txt)}</li>'
+    return f"<li>{inline(txt)}</li>"
 
 
 def md_to_html(text):
@@ -129,28 +168,26 @@ def md_to_html(text):
         elif ln.startswith(("- ", "* ")):
             items = []
             while i < len(lines) and lines[i].strip().startswith(("- ", "* ")):
-                txt = lines[i].strip()[2:].strip()
-                if txt.lower().startswith(("[graph", "[picture", "[qr", "[image")):
-                    items.append(f'<li class="placeholder">{inline(txt)}</li>')
-                else:
-                    items.append(f"<li>{inline(txt)}</li>")
+                items.append(list_item(lines[i].strip()[2:].strip()))
                 i += 1
             out.append("<ul class='card'>" + "\n".join(items) + "</ul>")
             continue
         elif re.match(r"\d+\. ", ln.strip()):
             items = []
             while i < len(lines) and re.match(r"\d+\. ", lines[i].strip()):
-                txt = re.sub(r"^\d+\.\s*", "", lines[i].strip())
-                if txt.lower().startswith(("[graph", "[picture", "[qr", "[image")):
-                    items.append(f'<li class="placeholder">{inline(txt)}</li>')
-                else:
-                    items.append(f"<li>{inline(txt)}</li>")
+                items.append(list_item(re.sub(r"^\d+\.\s*", "", lines[i].strip())))
                 i += 1
             out.append("<ol class='card'>" + "\n".join(items) + "</ol>")
             continue
         else:
             txt = ln.strip()
-            if txt.lower().startswith(("[graph", "[picture", "[qr", "[image")):
+            if txt.lower().startswith(("[picture", "[image")):
+                svg = pic_svg(txt)
+                if svg:
+                    out.append(f'<figure class="pic">{svg}<figcaption>{inline(txt)}</figcaption></figure>')
+                else:
+                    out.append(f'<div class="placeholder">{inline(txt)}</div>')
+            elif txt.lower().startswith(("[graph", "[qr")):
                 out.append(f'<div class="placeholder">{inline(txt)}</div>')
             else:
                 out.append(f"<p>{inline(txt)}</p>")
