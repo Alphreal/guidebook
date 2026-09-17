@@ -66,15 +66,3 @@ Class does a 2-minute stretch + 20-20-20 demo; everyone runs the meeting pre-che
 "3-hour marathon before deadline" → split into 50-10 blocks across days.
 - [Graph: fatigue level — 55% score 4-5 (n=40)]
 - [Picture demo: stretch + screen-distance diagram]
-
-## Norms (survey + distribution)
-
-- Lecturer/class-rep permission before posting any form link.
-- Survey takes 5–7 minutes; 2 reminders maximum; backup link ready; test the link first.
-- Voluntary + anonymous always; no names/IDs; report aggregates only.
-
-## Closing + Feedback Collection
-
-- Week 2: share the one-page Class Guide table (Top 3–5 findings → routines).
-- Collect feedback form (target 25): clarity / relevance / kept routine.
-- Indicators of success: 40 valid Week-1 responses, 25 feedback responses, proof shared with class.
