@@ -218,9 +218,8 @@ document.addEventListener("click",function(e){{
  var ex=e.target.closest?e.target.closest("[data-exp]"):null;
  if(ex){{var k4=ex.getAttribute("data-exp");var out=document.querySelector("[data-expout]");
   if(k4==="saveuser"){{var inp=document.querySelector("[data-user]");user=inp&&inp.value?inp.value.trim():"";try{{localStorage.setItem(UKEY,user)}}catch(err){{}}R=loadJ(kk("gb-routines-v3"),{{}});W=loadJ(kk("gb-week-v3"),{{}});N=loadJ(kk("gb-notes-v3"),{{}});if(hasK(kk("gb-days-v3")))D=loadJ(kk("gb-days-v3"),{{}});else D={{"0":1,"1":1,"2":1,"3":1,"4":1}};save();paint();return}}
-  if(k4==="copy"){{var s=summary();var done=function(){{if(out){{out.hidden=false;out.textContent=s+"\\n\\nCopied. Paste into the Week-2 feedback form."}}}};if(navigator.clipboard&&navigator.clipboard.writeText){{navigator.clipboard.writeText(s).then(done,function(){{if(out){{out.hidden=false;out.textContent=s}}}})}}else if(out){{out.hidden=false;out.textContent=s}}paint();return}}
   if(k4==="download"){{var s2=summary();try{{var b=new Blob([s2],{{type:"text/plain"}});var a2=document.createElement("a");a2.href=URL.createObjectURL(b);a2.download="guidebook-progress"+(user?"-"+user:"")+".txt";a2.click();setTimeout(function(){{URL.revokeObjectURL(a2.href)}},2000)}}catch(err){{}}return}}
-  if(k4==="send"){{if(!TEACHER_URL){{if(out){{out.hidden=false;out.textContent="Teacher link not set yet. Tap Copy and paste into the Week-2 form for now."}}return}}var payload={{user:user||"(no code)",summary:summary(),routines:R,week:W,notes:N,days:D,at:new Date().toISOString()}};if(out){{out.hidden=false;out.textContent="Sending..."}}try{{fetch(TEACHER_URL,{{method:"POST",mode:"no-cors",headers:{{"Content-Type":"text/plain"}},body:JSON.stringify(payload)}}).then(function(){{if(out)out.textContent="Sent. Thank you."}},function(){{if(out)out.textContent="Sent (if offline, use Copy instead)."}})}}catch(err){{if(out)out.textContent="Send failed. Use Copy instead."}}return}}
+  if(k4==="send"){{if(!TEACHER_URL){{if(out){{out.hidden=false;out.textContent="Teacher link not set yet. Tap Download to save your progress for now."}}return}}var payload={{user:user||"(no code)",summary:summary(),routines:R,week:W,notes:N,days:D,at:new Date().toISOString()}};if(out){{out.hidden=false;out.textContent="Sending..."}}try{{fetch(TEACHER_URL,{{method:"POST",mode:"no-cors",headers:{{"Content-Type":"text/plain"}},body:JSON.stringify(payload)}}).then(function(){{if(out)out.textContent="Sent. Thank you."}},function(){{if(out)out.textContent="Sent (if offline, use Download instead)."}})}}catch(err){{if(out)out.textContent="Send failed. Use Download instead."}}return}}
   if(k4==="reset"){{if(confirm("Reset progress on this device"+(user?" for "+user:"")+"?")){{R={{}};W={{}};N={{}};save();paint()}}return}}
  }}
  var w=e.target.closest?e.target.closest("[data-w]"):null;
@@ -681,11 +680,10 @@ def planner_html():
             '<button type="button" class="q" data-dayact="all">All</button>'
             '<button type="button" class="q" data-dayact="clear">Clear</button></div>'
             '<div class="planner">' + "".join(rows) + "</div>"
-            '<div><button type="button" class="mini" data-exp="copy">Copy my progress</button>'
-            '<button type="button" class="mini" data-exp="send">Send to teacher</button>'
+            '<div><button type="button" class="mini" data-exp="send">Send to teacher</button>'
             '<button type="button" class="mini" data-exp="download">Download</button>'
             '<button type="button" class="mini" data-exp="reset">Reset</button></div>'
-            '<div class="muted">Copy + paste into the Week-2 feedback form so your teacher can see it. Data stays on your device until you share it.</div>'
+            '<div class="muted">Tap Send to teacher when done. Your code + progress go straight to the teacher sheet. Data stays on your device until you send it.</div>'
             '<div class="expout" data-expout hidden></div></div>')
 
 
