@@ -15,9 +15,12 @@ OUT_DIR = os.path.join(BASE_DIR, "out")
 DOCS_DIR = os.path.join(BASE_DIR, "docs")
 
 DOCS = [
-    ("DOC1-practical-short.md", "Practical Short — Student Guide"),
-    ("DOC2-detailed-long.md", "Detailed Long — Evidence Report"),
-    ("DOC3-mix-textbook.md", "Mix Textbook — Teacher Lessons"),
+    ("DOC1-practical-short.md", "Practical Short — Student Guide",
+     "Routines first: 5-minute fixes for time, distraction, interaction and fatigue."),
+    ("DOC2-detailed-long.md", "Detailed Long — Evidence Report",
+     "Survey results, theories and linked recommendations (n=40)."),
+    ("DOC3-mix-textbook.md", "Mix Textbook — Teacher Lessons",
+     "15-minute lesson scripts, activities and class norms."),
 ]
 
 
@@ -34,7 +37,8 @@ def shell(title, body_inner):
 <title>{esc(title)}</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-body{{background:#f7f7f5;color:#1a1a1a;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0}}
+body{{background:#f7f7f5;color:#1a1a1a;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;line-height:1.65}}
+p{{margin:10px 0}}
 .wrap{{max-width:880px;margin:0 auto;padding:24px 16px 64px}}
 .topbar{{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}}
 .topbar a{{color:#555;text-decoration:none;font-size:14px}}
@@ -60,7 +64,14 @@ li.pic{{list-style:none}}
 .hero h1{{font-size:30px}}
 .chapter{{background:#fff;border:1px solid #e7e5e4;border-radius:14px;padding:4px 20px 16px;margin:20px 0}}
 .chapter h2{{margin-top:14px}}
-.toc a{{background:#fff;border:1px solid #e7e5e4;border-radius:999px;padding:4px 12px;font-size:13px;color:#1a1a1a;text-decoration:none}}
+.toc a{{background:#fff;border:1px solid #e7e5e4;border-radius:999px;padding:4px 12px;font-size:13px;color:#1a1a1a;text-decoration:none;transition:background .15s}}
+.toc a:hover{{background:#1a1a1a;color:#fff;border-color:#1a1a1a}}
+.card,ul.card,ol.card{{line-height:1.7}}
+ul.card,ol.card{{box-shadow:0 1px 3px rgba(0,0,0,.05)}}
+.chapter{{box-shadow:0 1px 4px rgba(0,0,0,.06);border-top:3px solid #0f62fe}}
+.hero{{background:linear-gradient(180deg,#ffffff,#f1efe9);box-shadow:0 1px 4px rgba(0,0,0,.06)}}
+.pic svg{{box-shadow:0 1px 4px rgba(0,0,0,.08)}}
+.sub{{color:#57534e;font-size:14px;margin:2px 0 0}}
 @media(min-width:1100px){{.wrap{{max-width:1100px}}.grid2{{grid-template-columns:1fr 1fr 1fr}}}}
 @media print{{.topbar{{display:none}}.toc{{position:static;background:#fff}}.wrap{{max-width:100%;padding:0}}body{{background:#fff}}.card,.tldr{{break-inside:avoid}}}}
 </style>
@@ -147,6 +158,7 @@ def hbars(title, rows, note=""):
         w = 150 * v / maxv
         num = f"{v:.2f}" if isinstance(v, float) else f"{v:d}"
         p.append(f'<text x="8" y="{y + 15}" font-size="12" fill="#1a1a1a">{esc(lab)}</text>')
+        p.append(f'<rect x="150" y="{y}" width="150" height="{bh}" rx="5" fill="#e7e5e4"/>')
         p.append(f'<rect x="150" y="{y}" width="{w:.0f}" height="{bh}" rx="5" fill="#0f62fe"/>')
         p.append(f'<text x="{165 + w:.0f}" y="{y + 15}" font-size="12" fill="#57534e">{num}</text>')
         y += bh + gap
@@ -294,7 +306,7 @@ def group_sections(blocks):
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     os.makedirs(DOCS_DIR, exist_ok=True)
-    for fn, label in DOCS:
+    for fn, label, _desc in DOCS:
         with open(os.path.join(BASE_DIR, fn), encoding="utf-8") as f:
             html = shell(label, md_to_html(f.read()))
         name = fn.replace(".md", ".html")
@@ -303,8 +315,9 @@ def main():
         shutil.copy(os.path.join(OUT_DIR, name), os.path.join(DOCS_DIR, name))
         print(f"Built: {name}")
     idx_body = "<h1>Guidebook</h1>" + "".join(
-        f'<div class="card"><a href="{fn.replace(".md", ".html")}"><b>{esc(label)}</b></a></div>'
-        for fn, label in DOCS
+        f'<div class="card"><a href="{fn.replace(".md", ".html")}"><b>{esc(label)}</b></a>'
+        f'<div class="sub">{esc(desc)}</div></div>'
+        for fn, label, desc in DOCS
     )
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(shell("Guidebook", idx_body))
