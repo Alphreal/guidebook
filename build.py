@@ -671,10 +671,10 @@ def planner_html():
         rows.append(f"<span>{esc(label)}</span>{cells}")
     daybtns = "".join(f'<button type="button" data-day="{di}">{d}</button>' for di, d in enumerate(DAYS))
     return ('<div class="card"><b>My study week - tap each day you kept the routine</b>'
-            '<div class="prof"><span class="muted">Your Name:</span>'
-            '<input data-user placeholder="e.g. Tung">'
+            '<div class="prof"><span class="muted">My code:</span>'
+            '<input data-user placeholder="e.g. A01 - saved on this device">'
             '<button type="button" class="mini" data-exp="saveuser">Save</button></div>'
-            '<div class="muted">Type your name once and tap Save. Use the same name every time so your progress and teacher-sheet rows stay together.</div>'
+            '<div class="muted">Pick any code (e.g. your group + number). It labels your progress on this device and in the teacher sheet - use the same code every time. No names needed.</div>'
             '<div class="muted">1) Choose your online days - other days turn grey and are skipped in your score.</div>'
             f'<div class="daypick">{daybtns}'
             '<button type="button" class="q" data-dayact="weekdays">Weekdays</button>'
