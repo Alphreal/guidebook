@@ -75,24 +75,24 @@ Each recommendation above links to exactly one Top 3–5 survey finding — no p
 
 ## 8. References (starter set — groups extend)
 
-1. Class survey 2026 (primary data, n≈50).
-2. Broadbent & Poon 2015 (self-regulated learning).
-3. Martin & Bolliger 2018 (engagement strategies).
-4. Fauville et al. 2021 (Zoom fatigue scale).
-5. García & Weiss 2020 (COVID-19 & performance).
-6. Bailenson (Zoom meeting overload).
-7. Dunlosky 2013 (learning techniques).
-8. Garrison (Community of Inquiry).
-9. Huberman (sleep, light & focus).
-10. Jordan 2026 (extrinsic-load ceiling).
-11. Moore (transactional distance).
-12. Ophir et al. 2009 (media multitasking).
-13. Roediger 2006 (retrieval practice).
-14. Saleem 2024 (technostress creators).
-15. Sweller (cognitive load theory).
-16. Uncapher 2018 (switching costs).
-17. Ward 2017 (phone presence effect).
-18. Zimmerman (self-regulation cycle).
+1. Class survey 2026 — primary project data (Week 1, n≈50).
+2. Broadbent, J., & Poon, W. L. (2015). Self-regulated learning strategies & academic achievement in online higher education learning environments: A systematic review. The Internet and Higher Education, 27, 1–13. [doi:10.1016/j.iheduc.2015.04.007](https://doi.org/10.1016/j.iheduc.2015.04.007)
+3. Martin, F., & Bolliger, D. U. (2018). Engagement matters: Student perceptions on the importance of engagement strategies in the online learning environment. Online Learning, 22(1). [doi:10.24059/olj.v22i1.1092](https://doi.org/10.24059/olj.v22i1.1092)
+4. Fauville, G., Luo, M., Queiroz, A. C. M., Bailenson, J. N., & Hancock, J. T. (2021). Zoom exhaustion & fatigue scale. Computers in Human Behavior Reports, 4, 100119. [doi:10.1016/j.chbr.2021.100119](https://doi.org/10.1016/j.chbr.2021.100119)
+5. García, E., & Weiss, E. (2020). COVID-19 and student performance, equity, and U.S. education policy: Lessons from pre-pandemic research to inform relief, recovery, and rebuilding. Economic Policy Institute.
+6. Bailenson, J. N. (2021). Nonverbal overload: A theoretical argument for the causes of Zoom fatigue. Technology, Mind, and Behavior, 2(1). [doi:10.1037/tmb0000030](https://doi.org/10.1037/tmb0000030)
+7. Dunlosky, J., Rawson, K. A., Marsh, E. J., Nathan, M. J., & Willingham, D. T. (2013). Improving students' learning with effective learning techniques. Psychological Science in the Public Interest, 14(1), 4–58. [doi:10.1177/1529100612453266](https://doi.org/10.1177/1529100612453266)
+8. Garrison, D. R., Anderson, T., & Archer, W. (2000). Critical inquiry in a text-based environment: Computer conferencing in higher education. The Internet and Higher Education, 2(2–3), 87–105.
+9. Huberman, A. D. Huberman Lab (Stanford School of Medicine) — science communication on sleep, light & focus.
+10. Jordan 2026 (extrinsic-load ceiling) — citation to be confirmed by the group.
+11. Moore, M. G. (1993). Theory of transactional distance. In D. Keegan (Ed.), Theoretical principles of distance education (pp. 22–38). Routledge.
+12. Ophir, E., Nass, C., & Wagner, A. D. (2009). Cognitive control in media multitaskers. PNAS, 106(37), 15583–15587. [doi:10.1073/pnas.0903620106](https://doi.org/10.1073/pnas.0903620106)
+13. Roediger, H. L., & Karpicke, J. D. (2006). Test-enhanced learning: Taking memory tests improves long-term retention. Psychological Science, 17(4), 249–255.
+14. Saleem 2024 (technostress creators) — citation to be confirmed by the group.
+15. Sweller, J., Ayres, P., & Kalyuga, S. (2011). Cognitive load theory. Springer.
+16. Uncapher, M. R., & Wagner, A. D. (2018). Minds and brains of media multitaskers: Current findings and future directions. PNAS, 115(40), 9889–9896. [doi:10.1073/pnas.1611612115](https://doi.org/10.1073/pnas.1611612115)
+17. Ward, A. F., Duke, K., Gneezy, A., & Bos, M. W. (2017). Brain drain: The mere presence of one's own smartphone reduces available cognitive capacity. Journal of the Association for Consumer Research, 2(2), 140–154. [doi:10.1086/691462](https://doi.org/10.1086/691462)
+18. Zimmerman, B. J. (2000). Attaining self-regulation: A social cognitive perspective. In M. Boekaerts, P. R. Pintrich, & M. Zeidner (Eds.), Handbook of self-regulation (pp. 13–39). Academic Press.
 
 ## Appendix
 
