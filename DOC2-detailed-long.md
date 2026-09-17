@@ -40,24 +40,32 @@ Top findings used below:
 ## 6. Chapters — Finding → Theory → Practice
 
 ### Ch1 Self-Regulation & Time (Group 1)
-- **Finding:** FINDING-3 — 40% struggle to keep discipline/motivation without supervision (avg 3.35/5).
-- **Theory:** Zimmerman self-regulation cycle (plan–monitor–reflect); SMART goals; ALPEN daily planning; Pomodoro intervals; retrieval practice (Roediger 2006); effective techniques review (Dunlosky 2013); OSLQ questionnaire constructs.
-- **Practice:** SMART-tonight + ALPEN-tomorrow + 25-5x2 routine (see Doc1 Ch1).
+**Finding:** FINDING-3 — 40% struggle to keep discipline/motivation without supervision (avg 3.35/5).
+
+**Theory:** Zimmerman self-regulation cycle (plan–monitor–reflect); SMART goals; ALPEN daily planning; Pomodoro intervals; retrieval practice (Roediger 2006); effective techniques review (Dunlosky 2013); OSLQ questionnaire constructs.
+
+**Practice:** SMART-tonight + ALPEN-tomorrow + 25-5x2 routine (see Doc1 Ch1).
 
 ### Ch2 Distraction & Concentration (Group 2)
-- **Finding:** FINDING-2 — 53% are easily distracted by other apps during study (avg 3.50/5).
-- **Theory:** Brain Drain — mere phone presence cuts capacity (Ward 2017); heavy media multitaskers switch worse (Ophir, Nass & Wagner 2009); frequent switching costs (Uncapher 2018); attention residue; extraneous cognitive load (Sweller CLT).
-- **Practice:** Phone-in-drawer + 1-tab + notifications-off routine (see Doc1 Ch2).
+**Finding:** FINDING-2 — 53% are easily distracted by other apps during study (avg 3.50/5).
+
+**Theory:** Brain Drain — mere phone presence cuts capacity (Ward 2017; note: a 2022 pre-registered replication did not reproduce the effect, so treat as suggestive); heavy media multitaskers switch worse (Ophir, Nass & Wagner 2009); frequent switching costs (Uncapher 2018); attention residue; extraneous cognitive load (Sweller CLT).
+
+**Practice:** Phone-in-drawer + 1-tab + notifications-off routine (see Doc1 Ch2).
 
 ### Ch3 Interaction & Support (Group 3)
-- **Finding:** FINDING-5 — 25% find asking/exchanging with lecturers harder online (avg 2.78/5).
-- **Theory:** Community of Inquiry — teaching/social/cognitive presence (Garrison); transactional distance (Moore); engagement strategies that predict outcomes (Martin & Bolliger 2018); peer feedback and help-seeking.
-- **Practice:** 15-minute question template + peer check + channel post (see Doc1 Ch3).
+**Finding:** FINDING-5 — 25% find asking/exchanging with lecturers harder online (avg 2.78/5).
+
+**Theory:** Community of Inquiry — teaching/social/cognitive presence (Garrison); transactional distance (Moore); engagement strategies that predict outcomes (Martin & Bolliger 2018); peer feedback and help-seeking.
+
+**Practice:** 15-minute question template + peer check + channel post (see Doc1 Ch3).
 
 ### Ch4 Fatigue & Technology (Group 4)
-- **Finding:** FINDING-1 — 55% report screen/Zoom fatigue (avg 3.53/5), the top barrier.
-- **Theory:** Video-meeting overload mechanisms (Bailenson); technostress creators (Saleem 2024); extrinsic-load ceiling (Jordan 2026); light/sleep/focus behaviors (Huberman); 20-20-20 rule; segmenting principle.
-- **Practice:** 50-10 rhythm + 20-20-20 + meeting pre-check (see Doc1 Ch4).
+**Finding:** FINDING-1 — 55% report screen/Zoom fatigue (avg 3.53/5), the top barrier.
+
+**Theory:** Video-meeting overload mechanisms (Bailenson); technostress creators (Saleem 2024); extrinsic-load ceiling (Jordan 2026); light/sleep/focus behaviors (Huberman); 20-20-20 rule; segmenting principle.
+
+**Practice:** 50-10 rhythm + 20-20-20 + meeting pre-check (see Doc1 Ch4).
 
 ## 7. Discussion
 

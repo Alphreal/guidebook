@@ -9,41 +9,61 @@
 
 ## Lesson 1 — Plan Your Study (Group 1)
 
-- **Student routine (Doc1 Ch1):** write a SMART goal for tonight + ALPEN plan for tomorrow.
-- **Reason box:** planned self-monitored study outperforms good intentions; recall beats re-reading.
-- **Teacher script (2 min):** "Vague plans fail quietly. Write one sentence so specific that tomorrow-you can check it off without thinking."
-- **Activity (5 min):** everyone writes tonight's SMART goal on paper; neighbor checks Specific + Time-bound.
-- **Mistake to correct:** "Study LMS 2 hours" → rewrite as task + time + score target.
+### Routine
+Write a SMART goal for tonight + ALPEN plan for tomorrow (Doc1 Ch1).
+### Why it works
+Planned self-monitored study outperforms good intentions; recall beats re-reading.
+### Script · 2 min
+> "Vague plans fail quietly. Write one sentence so specific that tomorrow-you can check it off without thinking."
+### Activity · 5 min
+Everyone writes tonight's SMART goal on paper; neighbor checks Specific + Time-bound.
+### Watch out
+"Study LMS 2 hours" → rewrite as task + time + score target.
 - [Graph: discipline difficulty — 40% score 4-5 (n=40)]
 - [Picture demo: timer + checklist on projector]
 
 ## Lesson 2 — Remove Distraction (Group 2)
 
-- **Student routine (Doc1 Ch2):** phone in bag/drawer, 1 tab, notifications off — do it now, in class.
-- **Reason box:** nearby phones drain capacity untouched; multitaskers switch worse; residue lingers.
-- **Teacher script (2 min):** "Your phone on the desk is a small tax on every minute. Put it away and feel the difference in this lesson."
-- **Activity (5 min):** 3-minute silent read, phones away vs previous habit — quick show of hands on focus difference.
-- **Mistake to correct:** "Face-down is fine" → drawer/bag only; "music with lyrics is fine" → no-lyrics or silence.
+### Routine
+Phone in bag/drawer, 1 tab, notifications off — do it now, in class (Doc1 Ch2).
+### Why it works
+Nearby phones drain capacity untouched; multitaskers switch worse; residue lingers.
+### Script · 2 min
+> "Your phone on the desk is a small tax on every minute. Put it away and feel the difference in this lesson."
+### Activity · 5 min
+3-minute silent read, phones away vs previous habit — quick show of hands on focus difference.
+### Watch out
+"Face-down is fine" → drawer/bag only; "music with lyrics is fine" → no-lyrics or silence.
 - [Graph: distraction level — 53% score 4-5 (n=40)]
 - [Picture demo: phone-out vs on-desk photo]
 
 ## Lesson 3 — Ask for Help Early (Group 3)
 
-- **Student routine (Doc1 Ch3):** the 15-minute question template + peer check + channel post.
-- **Reason box:** good questions get fast help; asking early shrinks online distance.
-- **Teacher script (2 min):** "Stuck 15 minutes? That is the rule. Post tried/expected/got/question — I answer templates fastest."
-- **Activity (5 min):** pairs turn a vague "I don't understand Unit 3" into the template on paper.
-- **Mistake to correct:** "I'll ask at the end of term" → ask within the study session; "DM a friend only" → post publicly so all benefit.
+### Routine
+The 15-minute question template + peer check + channel post (Doc1 Ch3).
+### Why it works
+Good questions get fast help; asking early shrinks online distance.
+### Script · 2 min
+> "Stuck 15 minutes? That is the rule. Post tried/expected/got/question — I answer templates fastest."
+### Activity · 5 min
+Pairs turn a vague "I don't understand Unit 3" into the template on paper.
+### Watch out
+"I'll ask at the end of term" → ask within the study session; "DM a friend only" → post publicly so all benefit.
 - [Graph: asking difficulty — 25% score 4-5 (n=40)]
 - [Picture demo: good vs vague chat post]
 
 ## Lesson 4 — Study Without Burning Out (Group 4)
 
-- **Student routine (Doc1 Ch4):** 50-10 rhythm, 20-20-20, meeting pre-check.
-- **Reason box:** back-to-back video overloads; tech stress grows when tools surprise you; sleep/light/breaks protect focus.
-- **Teacher script (2 min):** "Breaks are part of studying, not a reward after. Stand, look far, test your mic before meetings."
-- **Activity (5 min):** class does a 2-minute stretch + 20-20-20 demo; everyone runs the meeting pre-check on their device.
-- **Mistake to correct:** "3-hour marathon before deadline" → split into 50-10 blocks across days.
+### Routine
+50-10 rhythm, 20-20-20, meeting pre-check (Doc1 Ch4).
+### Why it works
+Back-to-back video overloads; tech stress grows when tools surprise you; sleep/light/breaks protect focus.
+### Script · 2 min
+> "Breaks are part of studying, not a reward after. Stand, look far, test your mic before meetings."
+### Activity · 5 min
+Class does a 2-minute stretch + 20-20-20 demo; everyone runs the meeting pre-check on their device.
+### Watch out
+"3-hour marathon before deadline" → split into 50-10 blocks across days.
 - [Graph: fatigue level — 55% score 4-5 (n=40)]
 - [Picture demo: stretch + screen-distance diagram]
 

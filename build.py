@@ -89,6 +89,8 @@ details.chapter:nth-of-type(4n+3){{border-top-color:#fbbf24}}
 details.chapter:nth-of-type(4n){{border-top-color:#fb7185}}
 .chapter p,.chapter li,.hero p{{max-width:70ch}}
 .chapter h2{{margin-top:14px}}
+.chapter h3{{color:#c7d2fe}}
+.chapter h3.warn{{color:#fda4af}}
 details.chapter summary{{cursor:pointer;list-style:none}}
 details.chapter summary::-webkit-details-marker{{display:none}}
 details.chapter summary h2{{display:inline}}
@@ -332,7 +334,7 @@ def table_chart(txt):
             + rows + '</table><div class="muted">Group-coded from open answers, n=40.</div></div>')
 
 
-def md_to_html(text, extras=None):
+def md_to_html(text, extras=None, toc_keep=None):
     out, toc, seen, lines, i = [], [], set(), text.split("\n"), 0
     while i < len(lines):
         ln = lines[i].rstrip()
@@ -340,7 +342,11 @@ def md_to_html(text, extras=None):
             i += 1
             continue
         if ln.startswith("### "):
-            out.append(f"<h3>{inline(ln[4:])}</h3>")
+            ht = ln[4:].strip()
+            if ht.lower().startswith("watch out"):
+                out.append(f'<h3 class="warn">{inline(ln[4:])}</h3>')
+            else:
+                out.append(f"<h3>{inline(ln[4:])}</h3>")
         elif ln.startswith("## "):
             sid = slug(ln[3:]) or "sec"
             base, n = sid, 1
@@ -394,9 +400,23 @@ def md_to_html(text, extras=None):
         elif ln.startswith(("- ", "* ")):
             items = []
             while i < len(lines) and lines[i].strip().startswith(("- ", "* ")):
-                items.append(list_item(lines[i].strip()[2:].strip()))
+                txt = lines[i].strip()[2:].strip()
+                kind = slot_kind(txt)
+                if kind in ("pic", "chart", "table"):
+                    if items:
+                        out.append("<ul class='card'>" + "\n".join(items) + "</ul>")
+                        items = []
+                    if kind == "pic":
+                        out.append(f'<figure class="pic">{pic_svg(txt)}<figcaption>{inline(txt)}</figcaption></figure>')
+                    elif kind == "chart":
+                        out.append(f'<figure class="pic">{graph_chart(txt)}<figcaption>{inline(txt)} · real survey data</figcaption></figure>')
+                    else:
+                        out.append(table_chart(txt))
+                else:
+                    items.append(f"<li>{inline(txt)}</li>")
                 i += 1
-            out.append("<ul class='card'>" + "\n".join(items) + "</ul>")
+            if items:
+                out.append("<ul class='card'>" + "\n".join(items) + "</ul>")
             continue
         elif re.match(r"\d+\. ", ln.strip()):
             items = []
@@ -419,6 +439,8 @@ def md_to_html(text, extras=None):
             else:
                 out.append(f"<p>{inline(txt)}</p>")
         i += 1
+    if toc_keep:
+        toc = [e for e in toc if any(k in e[0] for k in toc_keep)]
     return md_assemble(out, toc, extras)
 
 
@@ -516,7 +538,8 @@ def main():
     for fn, label, _desc in DOCS:
         with open(os.path.join(BASE_DIR, fn), encoding="utf-8") as f:
             extras = doc1_extras() if fn.startswith("DOC1") else None
-            body = md_to_html(f.read(), extras)
+            keep = ["results", "chapters", "discussion", "appendix"] if fn.startswith("DOC2") else None
+            body = md_to_html(f.read(), extras, keep)
             if extras:
                 nc = sum(len(v) for v in CHECKLISTS.values())
                 body += planner_html()
