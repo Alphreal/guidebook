@@ -106,6 +106,7 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 .dbody-in{{overflow:hidden}}
 .steps{{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0}}
 @media(min-width:720px){{.steps{{grid-template-columns:repeat(4,1fr)}}}}
+@media(min-width:720px){{.steps.smart5{{grid-template-columns:repeat(5,1fr)}}}}
 .step{{background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.3);border-radius:14px;padding:12px;text-align:center;font-size:14px}}
 .step .n{{display:flex;width:26px;height:26px;border-radius:50%;background:#818cf8;color:#020617;align-items:center;justify-content:center;margin:0 auto 6px;font-size:14px;flex:none}}
 .check{{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer}}
@@ -276,6 +277,14 @@ def inline(s):
 
 def slug(t):
     return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
+
+
+SMART_WORDS = ["Specific", "Measurable", "Achievable", "Relevant", "Time-bound"]
+
+
+def _is_smart_line(txt):
+    low = txt.lower().strip("* ").strip()
+    return low.startswith("specific") and "measurable" in low and "time-bound" in low
 
 
 SVG_TIMER = """<svg viewBox="0 0 600 210" role="img" aria-label="Three steps: set timer, focus one tab, tick checklist"><rect x="8" y="8" width="187" height="194" rx="14" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><circle cx="34" cy="34" r="14" fill="#818cf8"/><text x="34" y="39" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">1</text><circle cx="101" cy="100" r="36" fill="#fff" stroke="#1a1a1a" stroke-width="4"/><circle cx="101" cy="100" r="5" fill="#1a1a1a"/><line x1="101" y1="100" x2="101" y2="72" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="101" y1="100" x2="122" y2="110" stroke="#0f62fe" stroke-width="4" stroke-linecap="round"/><text x="101" y="176" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">Set 25-5</text><rect x="203" y="8" width="187" height="194" rx="14" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><circle cx="229" cy="34" r="14" fill="#818cf8"/><text x="229" y="39" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">2</text><rect x="243" y="66" width="110" height="66" rx="8" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><rect x="243" y="66" width="110" height="20" rx="8" fill="#e7e5e4"/><rect x="249" y="70" width="42" height="12" rx="4" fill="#0f62fe"/><line x1="253" y1="104" x2="343" y2="104" stroke="#e7e5e4" stroke-width="5" stroke-linecap="round"/><line x1="253" y1="118" x2="315" y2="118" stroke="#e7e5e4" stroke-width="5" stroke-linecap="round"/><text x="296" y="176" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">One tab</text><rect x="398" y="8" width="187" height="194" rx="14" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><circle cx="424" cy="34" r="14" fill="#818cf8"/><text x="424" y="39" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">3</text><rect x="433" y="72" width="17" height="17" rx="4" fill="none" stroke="#1a1a1a" stroke-width="2"/><polyline points="435,80 440,85 448,75" fill="none" stroke="#0f62fe" stroke-width="3"/><line x1="458" y1="80" x2="545" y2="80" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><rect x="433" y="100" width="17" height="17" rx="4" fill="none" stroke="#1a1a1a" stroke-width="2"/><polyline points="435,108 440,113 448,103" fill="none" stroke="#0f62fe" stroke-width="3"/><line x1="458" y1="108" x2="520" y2="108" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><text x="491" y="176" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">Tick it</text></svg>"""
@@ -494,6 +503,11 @@ def md_to_html(text, extras=None, toc_keep=None):
                 out.append(table_chart(txt))
             elif kind == "box":
                 out.append(f'<div class="placeholder">{inline(txt)}</div>')
+            elif _is_smart_line(txt):
+                cells = "".join(
+                    f'<div class="step"><span class="n">{w[0]}</span>{inline(w)}</div>'
+                    for w in SMART_WORDS)
+                out.append(f'<div class="steps smart5">{cells}</div>')
             else:
                 out.append(f"<p>{inline(txt)}</p>")
         i += 1

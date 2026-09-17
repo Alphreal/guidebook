@@ -68,6 +68,7 @@ details[open]>.dbody{grid-template-rows:1fr}
 .dbody-in{overflow:hidden}
 .steps{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0}
 @media(min-width:720px){.steps{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:720px){.steps.smart5{grid-template-columns:repeat(5,1fr)}}
 .step{background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.3);border-radius:14px;padding:12px;text-align:center;font-size:14px}
 .step .n{display:flex;width:26px;height:26px;border-radius:50%;background:#818cf8;color:#020617;align-items:center;justify-content:center;margin:0 auto 6px;font-size:14px;flex:none}
 .check{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer}
@@ -122,7 +123,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 <summary><h2 id="chapter-1-self-regulation-time">Chapter 1 — Self-Regulation &amp; Time</h2></summary>
 <div class="dbody"><div class="dbody-in">
 <p><b>Tonight (5 min): SMART tonight.</b> Write ONE study goal for tomorrow in this shape:</p>
-<p><i>Specific — Measurable — Achievable — Relevant — Time-bound.</i></p>
+<div class="steps smart5"><div class="step"><span class="n">S</span>Specific</div><div class="step"><span class="n">M</span>Measurable</div><div class="step"><span class="n">A</span>Achievable</div><div class="step"><span class="n">R</span>Relevant</div><div class="step"><span class="n">T</span>Time-bound</div></div>
 <p>Example: &quot;Finish LMS Unit 3 quiz (20 questions) before 9pm tomorrow, score 70%+.&quot;</p>
 <p><b>Tomorrow morning (5 min): ALPEN plan.</b> List tasks, estimate minutes, add buffer, decide order, check off at night.</p>
 <p><b>Study block: 25-5 x2.</b> 25 minutes focused work, 5 minutes break, repeat once. Then a longer 15-minute break.</p>
