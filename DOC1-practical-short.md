@@ -1,5 +1,5 @@
 # Online Learning Effectiveness Guide for Our Class
-### Asia University — First-Year Students (Practical Short Version)
+### Asia University — Students (Practical Short Version)
 
 > **How to use this guide (2 minutes):**
 > 1. Find your biggest difficulty below — time, distraction, interaction, or fatigue.

@@ -557,7 +557,7 @@ def main():
         print(f"Built: {name}")
     roles = [("I'm a student — give me routines", 0), ("I teach — give me lessons", 2),
              ("I want the evidence", 1)]
-    idx_body = ('<div class="hero card"><div class="eyebrow">Asia University · First-Years</div>'
+    idx_body = ('<div class="hero card"><div class="eyebrow">Asia University · Students</div>'
                 '<h1 class="grad">Study Smarter Online</h1>'
                 '<div class="sub">Pick the version you need — same research, three doors.</div></div>'
                 '<div class="grid2">' + "".join(

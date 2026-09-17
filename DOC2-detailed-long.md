@@ -1,9 +1,9 @@
-# Online Learning Effectiveness for Asia First-Years: Evidence & Guide
+# Online Learning Effectiveness for Students: Evidence & Guide
 ### Detailed Long Version (Group Research Report + Full Guide)
 
 ## 1. Title, Goal & SMART Targets
 
-**Goal:** Improve online/digital self-study effectiveness (LMS, recorded videos, live meetings, study platforms) for Asia University first-year students through group-curated routines grounded in our class survey.
+**Goal:** Improve online/digital self-study effectiveness (LMS, recorded videos, live meetings, study platforms) for Asia University students through group-curated routines grounded in our class survey.
 
 **SMART targets:**
 - Week 1: 40 responses collected (target met); Top 5 findings ranked.
@@ -11,11 +11,11 @@
 
 ## 2. Context
 
-First-year students shifting to online/digital self-study face self-regulation gaps more than content gaps (Broadbent & Poon 2015). Engagement in online settings depends on interaction design, not just materials (Martin & Bolliger 2018). This report turns four evidence areas into tested class routines.
+Students shifting to online/digital self-study face self-regulation gaps more than content gaps (Broadbent & Poon 2015). Engagement in online settings depends on interaction design, not just materials (Martin & Bolliger 2018). This report turns four evidence areas into tested class routines.
 
 ## 3. Revised Research Questions
 
-- **RQ1 (Benefits):** What benefits do Asia first-years report from online/digital self-study tools (LMS, recordings, videos, meetings, platforms)?
+- **RQ1 (Benefits):** What benefits do students report from online/digital self-study tools (LMS, recordings, videos, meetings, platforms)?
 - **RQ2 (Barriers):** What barriers do they report across four dimensions — time/self-regulation, distraction, interaction, fatigue/technology?
 - **RQ3 (Factors):** Which factors most influence their self-study effectiveness?
 
@@ -71,7 +71,7 @@ Top findings used below:
 
 Each recommendation above links to exactly one Top 3–5 survey finding — no pre-chosen advice. Where findings were weak, the routine is marked optional.
 
-**Limitations:** one class, self-report, descriptive stats only, two-week window; results describe our class, not all first-years.
+**Limitations:** one class, self-report, descriptive stats only, two-week window; results describe our class, not all students.
 
 ## 8. References (starter set — groups extend)
 
