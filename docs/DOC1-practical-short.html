@@ -4,17 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Practical Short — Student Guide</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<meta name="description" content="Study guide: routines, evidence and lessons for effective online learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
 <style>
-body{background:#f7f7f5;color:#1a1a1a;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;line-height:1.65}
+body{background:radial-gradient(circle at top right,#0f172a,#020617);background-color:#020617;color:#f1f5f9;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;margin:0;line-height:1.65;counter-reset:fig}
+body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(rgba(129,140,248,.13) 1px,transparent 1px);background-size:26px 26px;pointer-events:none}
+h1,h2,h3{font-family:'Outfit','Inter',sans-serif}
 p{margin:10px 0}
-.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+.wrap{max-width:960px;margin:0 auto;padding:24px 16px 64px;position:relative}
 .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.topbar a{color:#555;text-decoration:none;font-size:14px}
-.card{background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:16px;margin:12px 0}
-.tldr{background:#fff;border:1px solid #e7e5e4;border-left:4px solid #1a1a1a;border-radius:12px;padding:16px;margin:16px 0}
-.badge{display:inline-block;background:#f1f0ee;border-radius:999px;padding:2px 10px;font-size:12px;margin-right:6px}
-.muted{color:#6b7280;font-size:13px}
+.topbar a{color:#94a3b8;text-decoration:none;font-size:14px}
+.eyebrow{color:#818cf8;font-weight:600;letter-spacing:.18em;text-transform:uppercase;font-size:12px}
+.grad{background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.card,.glass{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:20px;margin:14px 0;transition:transform .2s ease-out,border-color .2s}
+.card:hover{transform:translateY(-3px);border-color:rgba(129,140,248,.5)}
+.tldr{background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.3);border-left:4px solid #818cf8;border-radius:14px;padding:16px;margin:14px 0}
+.badge{display:inline-block;background:rgba(129,140,248,.15);color:#c7d2fe;border-radius:999px;padding:2px 10px;font-size:12px;margin-right:6px}
+.muted{color:#94a3b8;font-size:13px}
 .grid2{display:grid;grid-template-columns:1fr;gap:0}
 @media(min-width:720px){.grid2{grid-template-columns:1fr 1fr;gap:12px}.grid2 .card{margin:0}}
 .sec{margin-top:28px}
@@ -23,39 +31,62 @@ h1{font-size:26px;margin:8px 0}h2{font-size:19px;margin:0 0 8px}h3{font-size:16p
 table{width:100%;border-collapse:collapse;font-size:14px}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #e7e5e4;vertical-align:top}
 th{background:#f7f7f5;font-weight:600}
-.placeholder{border:1.5px dashed #a8a29e;border-radius:12px;padding:14px 16px;margin:12px 0;background:#fafaf9;color:#57534e;font-size:14px;list-style:none}
-.pic{margin:12px 0;text-align:center}
-.pic svg{max-width:100%;height:auto;background:#fff;border:1px solid #e7e5e4;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
-.pic figcaption,.pic .cap{color:#57534e;font-size:13px;margin-top:6px}
+.grid2{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:720px){.grid2{grid-template-columns:1fr 1fr}}
+a{color:#a5b4fc}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.1);vertical-align:top}
+th{color:#c7d2fe;font-weight:600}
+.placeholder{border:1.5px dashed #64748b;border-radius:14px;padding:14px 16px;margin:12px 0;background:rgba(255,255,255,.03);color:#94a3b8;font-size:14px;list-style:none}
+.pic{margin:14px auto;text-align:center;max-width:560px}
+.pic svg{max-width:100%;height:auto;background:linear-gradient(180deg,#ffffff,#eef2ff);border:1px solid rgba(255,255,255,.15);border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.45);counter-increment:fig}
+.pic figcaption,.pic .cap{color:#94a3b8;font-size:13px;margin-top:8px}
+.pic figcaption::before{content:"Figure " counter(fig) " — "}
 li.pic{list-style:none}
 .toc{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
-@media(min-width:720px){.toc{position:sticky;top:0;z-index:5;background:#f7f7f5;padding:8px 0}}
-.hero{text-align:center;background:linear-gradient(180deg,#ffffff,#f1efe9);box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.hero h1{font-size:30px}
-.chapter{background:#fff;border:1px solid #e7e5e4;border-top:3px solid #0f62fe;border-radius:14px;padding:4px 20px 16px;margin:20px 0;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+@media(min-width:720px){.toc{position:sticky;top:0;z-index:5;background:rgba(2,6,23,.85);backdrop-filter:blur(12px);padding:10px 0}.toc.scrolled{box-shadow:0 8px 24px rgba(0,0,0,.4)}}
+.toc a{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:5px 14px;font-size:13px;color:#e2e8f0;text-decoration:none;transition:all .15s}
+.toc a:hover{border-color:rgba(129,140,248,.6);transform:translateY(-2px)}
+.toc a.s{font-size:12px;color:#94a3b8;padding:3px 10px}
+.hero{text-align:center;padding:40px 20px}
+.hero h1{font-size:clamp(30px,5vw,46px);margin:10px 0;background:linear-gradient(135deg,#a5b4fc,#e9d5ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:16px}
+.chapter{border-top:3px solid #818cf8}
+details.chapter:nth-of-type(4n+1){border-top-color:#818cf8}
+details.chapter:nth-of-type(4n+2){border-top-color:#34d399}
+details.chapter:nth-of-type(4n+3){border-top-color:#fbbf24}
+details.chapter:nth-of-type(4n){border-top-color:#fb7185}
 .chapter p,.chapter li,.hero p{max-width:70ch}
 .chapter h2{margin-top:14px}
-.toc a{background:#fff;border:1px solid #e7e5e4;border-radius:999px;padding:4px 12px;font-size:13px;color:#1a1a1a;text-decoration:none;transition:background .15s}
-.toc a:hover{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
-.card,ul.card,ol.card{line-height:1.7}
-ul.card,ol.card{box-shadow:0 1px 3px rgba(0,0,0,.05)}
-.sub{color:#57534e;font-size:14px;margin:2px 0 0}
-details.chapter summary{cursor:pointer}
+details.chapter summary{cursor:pointer;list-style:none}
+details.chapter summary::-webkit-details-marker{display:none}
 details.chapter summary h2{display:inline}
-details.chapter summary::-webkit-details-marker{color:#0f62fe}
-.check{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #f1f0ee;cursor:pointer}
+details.chapter summary::after{content:"+";float:right;color:#818cf8;font-weight:800;font-size:20px}
+details.chapter[open] summary::after{content:"–"}
+.dbody{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease-out}
+details[open]>.dbody{grid-template-rows:1fr}
+.dbody-in{overflow:hidden}
+.steps{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0}
+@media(min-width:720px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.3);border-radius:14px;padding:12px;text-align:center;font-size:14px}
+.step b{display:flex;width:26px;height:26px;border-radius:50%;background:#818cf8;color:#020617;align-items:center;justify-content:center;margin:0 auto 6px;font-size:14px}
+.check{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer}
 .check:last-child{border-bottom:none}
-.check input{width:18px;height:18px;margin-top:3px;accent-color:#0f62fe;flex:none}
-.opts{display:flex;flex-direction:column;gap:8px;margin:8px 0}
-.opts button{text-align:left;background:#fff;border:1px solid #e7e5e4;border-radius:10px;padding:8px 12px;font-size:14px;cursor:pointer}
-.opts button:hover:not(:disabled){border-color:#0f62fe}
-.opts button.right{background:#dcfce7;border-color:#16a34a}
-.opts button.wrong{background:#fee2e2;border-color:#dc2626}
-.opts button:disabled{cursor:default}
-.msg{display:none;background:#f7f7f5;border-radius:10px;padding:8px 12px;font-size:13px;color:#57534e}
-.progress{background:#1a1a1a;color:#fff;border-radius:12px;padding:12px 16px;margin:12px 0;font-size:14px}
+.check input{width:19px;height:19px;margin-top:2px;accent-color:#818cf8;flex:none}
+.planner{display:grid;grid-template-columns:1.4fr repeat(7,30px);gap:6px;align-items:center;margin:10px 0;font-size:13px}
+.planner .dh{text-align:center;color:#94a3b8;font-size:11px}
+.planner button.dot{width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:transparent;cursor:pointer;padding:0;transition:all .15s}
+.planner button.dot:hover{border-color:#818cf8;transform:scale(1.12)}
+.planner button.dot.on{background:linear-gradient(135deg,#818cf8,#c084fc);border-color:transparent}
+.progress{background:linear-gradient(135deg,rgba(129,140,248,.25),rgba(192,132,252,.18));border:1px solid rgba(129,140,248,.4);border-radius:14px;padding:12px 16px;margin:12px 0;font-size:14px}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .5s ease-out,transform .5s ease-out}
+.rv.on{opacity:1;transform:none}
+.bar{transform:scaleX(0);transform-box:fill-box;transform-origin:left;animation:grow .7s ease-out forwards}
+@keyframes grow{to{transform:scaleX(1)}}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid #818cf8;outline-offset:2px}
 @media(min-width:1100px){.wrap{max-width:1100px}.grid2{grid-template-columns:1fr 1fr 1fr}}
-@media print{.topbar{display:none}.toc{position:static;background:#fff}.wrap{max-width:100%;padding:0}body{background:#fff}.card,.tldr{break-inside:avoid}}
+@media print{body{background:#fff;color:#111}body::before{display:none}.topbar,.toc,.progress{display:none}.wrap{max-width:100%;padding:0}.card,.tldr,.chapter,figure{background:#fff!important;color:#111!important;border:1px solid #ccc!important;box-shadow:none!important;backdrop-filter:none!important}.tldr{border-left:4px solid #111!important}.muted,.cap,.pic figcaption,.sub{color:#444!important}a{color:#111}.rv{opacity:1!important;transform:none!important}.bar{animation:none;transform:none}.grad{color:#111;-webkit-text-fill-color:#111}.chapter{break-inside:avoid}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.bar{transform:none}}
 </style>
 </head>
 <body>
@@ -64,9 +95,9 @@ details.chapter summary::-webkit-details-marker{color:#0f62fe}
 <div class="hero card">
 <h1>Online Learning Effectiveness Guide for Our Class</h1>
 <h3>Asia University — First-Year Students (Practical Short Version)</h3>
-<div class="tldr"><b>How to use this guide (2 minutes):</b><br>1. Find your biggest difficulty below — time, distraction, interaction, or fatigue.<br>2. Go straight to that chapter. Do the <b>5-minute routine first</b>.<br>3. Read the short &quot;Why it works&quot; only after you try it.<br>4. At the end of Week 2, answer the 3 feedback questions (QR code on the last page).</div>
+<p><b><b>How to use this guide (2 minutes):</b></b></p><div class="steps"><div class="step"><b>1</b>Find your biggest difficulty below — time, distraction, interaction, or fatigue.</div><div class="step"><b>2</b>Go straight to that chapter. Do the <b>5-minute routine first</b>.</div><div class="step"><b>3</b>Read the short &quot;Why it works&quot; only after you try it.</div><div class="step"><b>4</b>At the end of Week 2, answer the 3 feedback questions (QR code on the last page).</div></div>
 </div>
-<div class="toc"><a href="#chapter-1-self-regulation-time">Chapter 1 — Self-Regulation &amp; Time</a><a href="#chapter-2-distraction-concentration">Chapter 2 — Distraction &amp; Concentration</a><a href="#chapter-3-interaction-support">Chapter 3 — Interaction &amp; Support</a><a href="#chapter-4-fatigue-technology">Chapter 4 — Fatigue &amp; Technology</a><a href="#one-page-class-guide-week-1-survey-n-40-top-4-findings">One-Page Class Guide (Week 1 survey, n=40 — Top 4 findings)</a><a href="#feedback-week-2-target-25-responses">Feedback (Week 2 — target 25 responses)</a></div><details class="chapter" open>
+<div class="toc"><a href="#chapter-1-self-regulation-time" class="m">Chapter 1 — Self-Regulation &amp; Time</a><a href="#chapter-2-distraction-concentration" class="m">Chapter 2 — Distraction &amp; Concentration</a><a href="#chapter-3-interaction-support" class="m">Chapter 3 — Interaction &amp; Support</a><a href="#chapter-4-fatigue-technology" class="m">Chapter 4 — Fatigue &amp; Technology</a><a href="#one-page-class-guide-week-1-survey-n-40-top-4-findings" class="s">One-Page Class Guide (Week 1 survey, n=40 — Top 4 findings)</a><a href="#feedback-week-2-target-25-responses" class="s">Feedback (Week 2 — target 25 responses)</a></div><details class="chapter" open>
 <summary><h2 id="chapter-1-self-regulation-time">Chapter 1 — Self-Regulation &amp; Time</h2></summary>
 <p><b>Tonight (5 min): SMART tonight.</b> Write ONE study goal for tomorrow in this shape:</p>
 <p><i>Specific — Measurable — Achievable — Relevant — Time-bound.</i></p>
@@ -76,46 +107,14 @@ details.chapter summary::-webkit-details-marker{color:#0f62fe}
 <p><b>Why it works (3 lines):</b> Self-regulated learners plan, monitor, and adjust in a cycle (Zimmerman). Specific goals beat vague intentions (SMART). Short spaced sessions with recall beat re-reading (Roediger 2006; Dunlosky 2013).</p>
 <figure class="pic"><svg viewBox="0 0 400 212" role="img" aria-label="Barriers by agree % (4-5/5)"><text x="8" y="22" font-size="14" font-weight="bold" fill="#1a1a1a">Barriers by agree % (4-5/5)</text><text x="8" y="61" font-size="12" fill="#1a1a1a">Screen / Zoom fatigue</text><rect x="150" y="46" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="46" width="150" height="22" rx="5" fill="#0f62fe"><title>Screen / Zoom fatigue: 55</title></rect><text x="315" y="61" font-size="12" fill="#57534e">55</text><text x="8" y="95" font-size="12" fill="#1a1a1a">Distracted by apps</text><rect x="150" y="80" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="80" width="145" height="22" rx="5" fill="#0f62fe"><title>Distracted by apps: 53</title></rect><text x="310" y="95" font-size="12" fill="#57534e">53</text><text x="8" y="129" font-size="12" fill="#1a1a1a">Self-discipline</text><rect x="150" y="114" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="114" width="109" height="22" rx="5" fill="#0f62fe"><title>Self-discipline: 40</title></rect><text x="274" y="129" font-size="12" fill="#57534e">40</text><text x="8" y="163" font-size="12" fill="#1a1a1a">Asking harder</text><rect x="150" y="148" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="148" width="68" height="22" rx="5" fill="#0f62fe"><title>Asking harder: 25</title></rect><text x="233" y="163" font-size="12" fill="#57534e">25</text><text x="8" y="202" font-size="11" fill="#57534e">Week-1 survey, n=40</text></svg><figcaption>[Graph: Week 1 survey — barriers by agree % (n=40)] · real survey data</figcaption></figure>
 <figure class="pic"><svg viewBox="0 0 400 240" role="img" aria-label="Desk timer and checklist"><rect x="20" y="212" width="360" height="8" rx="4" fill="#e7e5e4"/><circle cx="115" cy="112" r="58" fill="#fff" stroke="#1a1a1a" stroke-width="4"/><circle cx="115" cy="112" r="6" fill="#1a1a1a"/><line x1="115" y1="112" x2="115" y2="70" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="115" y1="112" x2="145" y2="126" stroke="#0f62fe" stroke-width="4" stroke-linecap="round"/><text x="115" y="198" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a1a1a">25:00</text><rect x="215" y="42" width="155" height="140" rx="10" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><rect x="231" y="62" width="16" height="16" rx="3" fill="none" stroke="#1a1a1a" stroke-width="2"/><polyline points="233,70 238,75 246,65" fill="none" stroke="#0f62fe" stroke-width="3"/><text x="255" y="75" font-size="13" fill="#1a1a1a">LMS quiz</text><rect x="231" y="98" width="16" height="16" rx="3" fill="none" stroke="#1a1a1a" stroke-width="2"/><polyline points="233,106 238,111 246,101" fill="none" stroke="#0f62fe" stroke-width="3"/><text x="255" y="111" font-size="13" fill="#1a1a1a">Videos</text><rect x="231" y="134" width="16" height="16" rx="3" fill="none" stroke="#a8a29e" stroke-width="2"/><text x="255" y="147" font-size="13" fill="#57534e">Review</text></svg><figcaption>[Picture: desk timer next to a ticked checklist]</figcaption></figure>
-<div class="card"><b>Try it this week — tick when done</b><label class="check"><input type="checkbox" data-check="doc1-chapter-1-self-regulation-time-0"> Wrote one SMART goal for tonight</label><label class="check"><input type="checkbox" data-check="doc1-chapter-1-self-regulation-time-1"> Made tomorrow&#x27;s ALPEN plan</label><label class="check"><input type="checkbox" data-check="doc1-chapter-1-self-regulation-time-2"> Finished a 25-5 x2 study block</label></div><div class="card"><b>Quick check — pick one</b>
-<div data-qbox="doc1-chapter-1-self-regulation-time-q0"><p><b>In SMART, the M stands for…</b></p><div class="opts">
-<button type="button" data-q="doc1-chapter-1-self-regulation-time-q0" data-opt data-pick="0" data-ok="0" data-why="Goals must be measurable so tomorrow-you can check them off.">Manageable</button>
-<button type="button" data-q="doc1-chapter-1-self-regulation-time-q0" data-opt data-pick="1" data-ok="1" data-why="Goals must be measurable so tomorrow-you can check them off.">Measurable</button>
-<button type="button" data-q="doc1-chapter-1-self-regulation-time-q0" data-opt data-pick="2" data-ok="0" data-why="Goals must be measurable so tomorrow-you can check them off.">Morning</button>
-</div><p class="msg" data-msg></p></div>
-<div data-qbox="doc1-chapter-1-self-regulation-time-q1"><p><b>One focus block in our routine is…</b></p><div class="opts">
-<button type="button" data-q="doc1-chapter-1-self-regulation-time-q1" data-opt data-pick="0" data-ok="1" data-why="Short spaced sessions with recall beat re-reading.">25 min work, 5 rest</button>
-<button type="button" data-q="doc1-chapter-1-self-regulation-time-q1" data-opt data-pick="1" data-ok="0" data-why="Short spaced sessions with recall beat re-reading.">50 min work, 10 rest</button>
-<button type="button" data-q="doc1-chapter-1-self-regulation-time-q1" data-opt data-pick="2" data-ok="0" data-why="Short spaced sessions with recall beat re-reading.">2 hours flat</button>
-</div><p class="msg" data-msg></p></div>
-<div data-qbox="doc1-chapter-1-self-regulation-time-q2"><p><b>An ALPEN plan starts with…</b></p><div class="opts">
-<button type="button" data-q="doc1-chapter-1-self-regulation-time-q2" data-opt data-pick="0" data-ok="1" data-why="List first, then estimate, buffer, order, review at night.">Listing tasks</button>
-<button type="button" data-q="doc1-chapter-1-self-regulation-time-q2" data-opt data-pick="1" data-ok="0" data-why="List first, then estimate, buffer, order, review at night.">Adding buffer</button>
-<button type="button" data-q="doc1-chapter-1-self-regulation-time-q2" data-opt data-pick="2" data-ok="0" data-why="List first, then estimate, buffer, order, review at night.">Checking off</button>
-</div><p class="msg" data-msg></p></div>
-</div>
+<div class="card"><b>Try it this week — tick when done</b><label class="check"><input type="checkbox" data-check="doc1-chapter-1-self-regulation-time-0"> Wrote one SMART goal for tonight</label><label class="check"><input type="checkbox" data-check="doc1-chapter-1-self-regulation-time-1"> Made tomorrow&#x27;s ALPEN plan</label><label class="check"><input type="checkbox" data-check="doc1-chapter-1-self-regulation-time-2"> Finished a 25-5 x2 study block</label></div>
 </details>
 <details class="chapter">
 <summary><h2 id="chapter-2-distraction-concentration">Chapter 2 — Distraction &amp; Concentration</h2></summary>
 <p><b>Routine (5 min setup, use all week):</b> Phone in a drawer (not face-down on desk), ONE browser tab open, all notifications OFF during study blocks.</p>
 <p><b>Why it works (3 lines):</b> A phone nearby drains thinking power even when untouched (Brain Drain, Ward 2017). Heavy multitaskers perform worse at switching (Ophir, Nass &amp; Wagner 2009). Every glance back at messages leaves &quot;attention residue&quot; that slows you down.</p>
 <figure class="pic"><svg viewBox="0 0 400 240" role="img" aria-label="Phone in drawer versus on desk"><text x="100" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">IN DRAWER</text><rect x="40" y="55" width="120" height="105" rx="10" fill="#f7f7f5" stroke="#1a1a1a" stroke-width="3"/><rect x="72" y="72" width="56" height="88" rx="8" fill="#1a1a1a"/><rect x="79" y="82" width="42" height="60" rx="4" fill="#57534e"/><text x="100" y="200" text-anchor="middle" font-size="30" font-weight="bold" fill="#0f62fe">✓</text><text x="300" y="30" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">ON DESK</text><rect x="240" y="152" width="120" height="8" rx="4" fill="#e7e5e4"/><rect x="283" y="82" width="44" height="70" rx="6" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><path d="M270 70 Q260 100 268 130" fill="none" stroke="#a8a29e" stroke-width="2"/><path d="M340 70 Q350 100 342 130" fill="none" stroke="#a8a29e" stroke-width="2"/><text x="300" y="200" text-anchor="middle" font-size="30" font-weight="bold" fill="#57534e">✗</text></svg><figcaption>[Picture: phone-in-drawer vs phone-on-desk, side by side]</figcaption></figure>
-<div class="card"><b>Try it this week — tick when done</b><label class="check"><input type="checkbox" data-check="doc1-chapter-2-distraction-concentration-0"> Phone in drawer during study</label><label class="check"><input type="checkbox" data-check="doc1-chapter-2-distraction-concentration-1"> Kept to one browser tab</label><label class="check"><input type="checkbox" data-check="doc1-chapter-2-distraction-concentration-2"> Turned notifications off</label></div><div class="card"><b>Quick check — pick one</b>
-<div data-qbox="doc1-chapter-2-distraction-concentration-q0"><p><b>During study blocks your phone should be…</b></p><div class="opts">
-<button type="button" data-q="doc1-chapter-2-distraction-concentration-q0" data-opt data-pick="0" data-ok="0" data-why="A nearby phone drains thinking power even untouched (Brain Drain).">Face-down on desk</button>
-<button type="button" data-q="doc1-chapter-2-distraction-concentration-q0" data-opt data-pick="1" data-ok="1" data-why="A nearby phone drains thinking power even untouched (Brain Drain).">In a drawer or bag</button>
-<button type="button" data-q="doc1-chapter-2-distraction-concentration-q0" data-opt data-pick="2" data-ok="0" data-why="A nearby phone drains thinking power even untouched (Brain Drain).">In hand, on silent</button>
-</div><p class="msg" data-msg></p></div>
-<div data-qbox="doc1-chapter-2-distraction-concentration-q1"><p><b>Why one browser tab?</b></p><div class="opts">
-<button type="button" data-q="doc1-chapter-2-distraction-concentration-q1" data-opt data-pick="0" data-ok="0" data-why="Every glance elsewhere leaves residue that slows you down.">Saves battery</button>
-<button type="button" data-q="doc1-chapter-2-distraction-concentration-q1" data-opt data-pick="1" data-ok="1" data-why="Every glance elsewhere leaves residue that slows you down.">Avoids attention residue</button>
-<button type="button" data-q="doc1-chapter-2-distraction-concentration-q1" data-opt data-pick="2" data-ok="0" data-why="Every glance elsewhere leaves residue that slows you down.">Loads pages faster</button>
-</div><p class="msg" data-msg></p></div>
-<div data-qbox="doc1-chapter-2-distraction-concentration-q2"><p><b>Heavy multitaskers…</b></p><div class="opts">
-<button type="button" data-q="doc1-chapter-2-distraction-concentration-q2" data-opt data-pick="0" data-ok="0" data-why="Ophir, Nass &amp; Wagner (2009): they perform worse at switching.">Switch tasks better</button>
-<button type="button" data-q="doc1-chapter-2-distraction-concentration-q2" data-opt data-pick="1" data-ok="1" data-why="Ophir, Nass &amp; Wagner (2009): they perform worse at switching.">Switch tasks worse</button>
-<button type="button" data-q="doc1-chapter-2-distraction-concentration-q2" data-opt data-pick="2" data-ok="0" data-why="Ophir, Nass &amp; Wagner (2009): they perform worse at switching.">Are unaffected</button>
-</div><p class="msg" data-msg></p></div>
-</div>
+<div class="card"><b>Try it this week — tick when done</b><label class="check"><input type="checkbox" data-check="doc1-chapter-2-distraction-concentration-0"> Phone in drawer during study</label><label class="check"><input type="checkbox" data-check="doc1-chapter-2-distraction-concentration-1"> Kept to one browser tab</label><label class="check"><input type="checkbox" data-check="doc1-chapter-2-distraction-concentration-2"> Turned notifications off</label></div>
 </details>
 <details class="chapter">
 <summary><h2 id="chapter-3-interaction-support">Chapter 3 — Interaction &amp; Support</h2></summary>
@@ -124,46 +123,14 @@ details.chapter summary::-webkit-details-marker{color:#0f62fe}
 <p>Then: (1) peer-check with one classmate, (2) post it in the class channel / forum.</p>
 <p><b>Why it works (3 lines):</b> Learning works best when teaching, social, and thinking presence meet (Community of Inquiry, Garrison). Asking early shrinks the distance in online study (Moore). Clear questions get faster, better help (Martin &amp; Bolliger 2018).</p>
 <figure class="pic"><svg viewBox="0 0 400 250" role="img" aria-label="Good help post example"><rect x="30" y="12" width="340" height="226" rx="12" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><text x="48" y="40" font-size="14" font-weight="bold" fill="#1a1a1a">Class channel</text><line x1="30" y1="52" x2="370" y2="52" stroke="#e7e5e4" stroke-width="2"/><rect x="46" y="64" width="252" height="96" rx="10" fill="#f1f0ee"/><text x="60" y="90" font-size="12" fill="#1a1a1a">Tried: Unit 3 quiz Q5</text><text x="60" y="112" font-size="12" fill="#1a1a1a">Expected 70%, got 40%</text><text x="60" y="134" font-size="12" fill="#1a1a1a">Question: which formula?</text><rect x="140" y="170" width="214" height="56" rx="10" fill="#0f62fe"/><text x="156" y="193" font-size="12" fill="#fff">Good question — see</text><text x="156" y="211" font-size="12" fill="#fff">Unit 3.2, example 2</text></svg><figcaption>[Picture: example of a good help post in the class chat]</figcaption></figure>
-<div class="card"><b>Try it this week — tick when done</b><label class="check"><input type="checkbox" data-check="doc1-chapter-3-interaction-support-0"> Used the question template once</label><label class="check"><input type="checkbox" data-check="doc1-chapter-3-interaction-support-1"> Peer-checked with a classmate</label><label class="check"><input type="checkbox" data-check="doc1-chapter-3-interaction-support-2"> Posted in the class channel</label></div><div class="card"><b>Quick check — pick one</b>
-<div data-qbox="doc1-chapter-3-interaction-support-q0"><p><b>Ask for help after being stuck…</b></p><div class="opts">
-<button type="button" data-q="doc1-chapter-3-interaction-support-q0" data-opt data-pick="0" data-ok="1" data-why="15 minutes is the rule — then template, peer, post.">15 minutes</button>
-<button type="button" data-q="doc1-chapter-3-interaction-support-q0" data-opt data-pick="1" data-ok="0" data-why="15 minutes is the rule — then template, peer, post.">2 hours</button>
-<button type="button" data-q="doc1-chapter-3-interaction-support-q0" data-opt data-pick="2" data-ok="0" data-why="15 minutes is the rule — then template, peer, post.">Next week</button>
-</div><p class="msg" data-msg></p></div>
-<div data-qbox="doc1-chapter-3-interaction-support-q1"><p><b>A good question states…</b></p><div class="opts">
-<button type="button" data-q="doc1-chapter-3-interaction-support-q1" data-opt data-pick="0" data-ok="1" data-why="Clear questions get faster, better help.">Tried / expected / got / question</button>
-<button type="button" data-q="doc1-chapter-3-interaction-support-q1" data-opt data-pick="1" data-ok="0" data-why="Clear questions get faster, better help.">Only the error message</button>
-<button type="button" data-q="doc1-chapter-3-interaction-support-q1" data-opt data-pick="2" data-ok="0" data-why="Clear questions get faster, better help.">Your grade goal</button>
-</div><p class="msg" data-msg></p></div>
-<div data-qbox="doc1-chapter-3-interaction-support-q2"><p><b>After writing it, first…</b></p><div class="opts">
-<button type="button" data-q="doc1-chapter-3-interaction-support-q2" data-opt data-pick="0" data-ok="0" data-why="Peer-check first, then post so the whole class benefits.">DM anyone online</button>
-<button type="button" data-q="doc1-chapter-3-interaction-support-q2" data-opt data-pick="1" data-ok="1" data-why="Peer-check first, then post so the whole class benefits.">Peer-check, then post publicly</button>
-<button type="button" data-q="doc1-chapter-3-interaction-support-q2" data-opt data-pick="2" data-ok="0" data-why="Peer-check first, then post so the whole class benefits.">Wait for the teacher</button>
-</div><p class="msg" data-msg></p></div>
-</div>
+<div class="card"><b>Try it this week — tick when done</b><label class="check"><input type="checkbox" data-check="doc1-chapter-3-interaction-support-0"> Used the question template once</label><label class="check"><input type="checkbox" data-check="doc1-chapter-3-interaction-support-1"> Peer-checked with a classmate</label><label class="check"><input type="checkbox" data-check="doc1-chapter-3-interaction-support-2"> Posted in the class channel</label></div>
 </details>
 <details class="chapter">
 <summary><h2 id="chapter-4-fatigue-technology">Chapter 4 — Fatigue &amp; Technology</h2></summary>
 <p><b>Routine:</b> Study 50 minutes, move 10. Every 20 minutes, look 20 feet (~6 meters) away for 20 seconds (20-20-20). Before each online meeting: test internet, mic, camera (2-minute pre-check).</p>
 <p><b>Why it works (3 lines):</b> Back-to-back video calls overload the brain (Zoom fatigue, Bailenson). Tech stress builds when tools feel out of control (Saleem 2024). Light, sleep, and breaks protect focus (Huberman); short segments beat marathons (segmenting principle).</p>
 <figure class="pic"><svg viewBox="0 0 400 240" role="img" aria-label="Screen distance and stretching"><rect x="36" y="66" width="124" height="84" rx="8" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><rect x="48" y="78" width="100" height="60" rx="4" fill="#dbeafe"/><line x1="98" y1="150" x2="98" y2="176" stroke="#1a1a1a" stroke-width="4"/><line x1="70" y1="176" x2="126" y2="176" stroke="#1a1a1a" stroke-width="4"/><line x1="168" y1="196" x2="262" y2="196" stroke="#57534e" stroke-width="2"/><polygon points="168,196 178,191 178,201" fill="#57534e"/><polygon points="262,196 252,191 252,201" fill="#57534e"/><text x="215" y="186" text-anchor="middle" font-size="13" fill="#57534e">50 cm</text><circle cx="310" cy="60" r="14" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><line x1="310" y1="74" x2="310" y2="140" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="310" y1="92" x2="284" y2="112" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="310" y1="92" x2="336" y2="112" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="310" y1="140" x2="294" y2="196" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="310" y1="140" x2="326" y2="196" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><text x="310" y="222" text-anchor="middle" font-size="13" fill="#57534e">20-20-20</text></svg><figcaption>[Picture: stretching + correct screen distance diagram]</figcaption></figure>
-<div class="card"><b>Try it this week — tick when done</b><label class="check"><input type="checkbox" data-check="doc1-chapter-4-fatigue-technology-0"> Studied 50 minutes, moved 10</label><label class="check"><input type="checkbox" data-check="doc1-chapter-4-fatigue-technology-1"> Did 20-20-20 twice today</label><label class="check"><input type="checkbox" data-check="doc1-chapter-4-fatigue-technology-2"> Ran the pre-check before a meeting</label></div><div class="card"><b>Quick check — pick one</b>
-<div data-qbox="doc1-chapter-4-fatigue-technology-q0"><p><b>20-20-20 means…</b></p><div class="opts">
-<button type="button" data-q="doc1-chapter-4-fatigue-technology-q0" data-opt data-pick="0" data-ok="0" data-why="It rests your eyes during screen time.">20 min study, 20 rest, 20 snacks</button>
-<button type="button" data-q="doc1-chapter-4-fatigue-technology-q0" data-opt data-pick="1" data-ok="1" data-why="It rests your eyes during screen time.">Every 20 min, look 20 feet away for 20 s</button>
-<button type="button" data-q="doc1-chapter-4-fatigue-technology-q0" data-opt data-pick="2" data-ok="0" data-why="It rests your eyes during screen time.">20 pages in 20 minutes</button>
-</div><p class="msg" data-msg></p></div>
-<div data-qbox="doc1-chapter-4-fatigue-technology-q1"><p><b>Our study rhythm is…</b></p><div class="opts">
-<button type="button" data-q="doc1-chapter-4-fatigue-technology-q1" data-opt data-pick="0" data-ok="1" data-why="Breaks are part of studying, not a reward after.">Study 50, move 10</button>
-<button type="button" data-q="doc1-chapter-4-fatigue-technology-q1" data-opt data-pick="1" data-ok="0" data-why="Breaks are part of studying, not a reward after.">One 3-hour marathon</button>
-<button type="button" data-q="doc1-chapter-4-fatigue-technology-q1" data-opt data-pick="2" data-ok="0" data-why="Breaks are part of studying, not a reward after.">Back-to-back meetings</button>
-</div><p class="msg" data-msg></p></div>
-<div data-qbox="doc1-chapter-4-fatigue-technology-q2"><p><b>Before each online meeting…</b></p><div class="opts">
-<button type="button" data-q="doc1-chapter-4-fatigue-technology-q2" data-opt data-pick="0" data-ok="1" data-why="The 2-minute pre-check kills most tech stress.">Test net, mic and camera</button>
-<button type="button" data-q="doc1-chapter-4-fatigue-technology-q2" data-opt data-pick="1" data-ok="0" data-why="The 2-minute pre-check kills most tech stress.">Charge overnight</button>
-<button type="button" data-q="doc1-chapter-4-fatigue-technology-q2" data-opt data-pick="2" data-ok="0" data-why="The 2-minute pre-check kills most tech stress.">Nothing needed</button>
-</div><p class="msg" data-msg></p></div>
-</div>
+<div class="card"><b>Try it this week — tick when done</b><label class="check"><input type="checkbox" data-check="doc1-chapter-4-fatigue-technology-0"> Studied 50 minutes, moved 10</label><label class="check"><input type="checkbox" data-check="doc1-chapter-4-fatigue-technology-1"> Did 20-20-20 twice today</label><label class="check"><input type="checkbox" data-check="doc1-chapter-4-fatigue-technology-2"> Ran the pre-check before a meeting</label></div>
 </details>
 <details class="chapter">
 <summary><h2 id="one-page-class-guide-week-1-survey-n-40-top-4-findings">One-Page Class Guide (Week 1 survey, n=40 — Top 4 findings)</h2></summary>
@@ -186,41 +153,33 @@ details.chapter summary::-webkit-details-marker{color:#0f62fe}
 <div class="tldr"><b>Teacher box:</b> This guide was curated by the 4 student groups from research + our class survey; the teacher facilitated. Participation in all surveys is voluntary and anonymous; results are reported only in aggregate.</div>
 <p><i>Ethics: voluntary, anonymous, no names/IDs, aggregated results, channel permission obtained.</i></p>
 
-</details><div class="progress" id="progress"><b>My progress</b> — routines 0/12 · quiz 0/12</div>
+</details><div class="card"><b>My study week — tap each day you kept the routine</b><div class="planner"><span></span><span class="dh">Mon</span><span class="dh">Tue</span><span class="dh">Wed</span><span class="dh">Thu</span><span class="dh">Fri</span><span class="dh">Sat</span><span class="dh">Sun</span><span>Planned &amp; timed</span><button type="button" class="dot" data-w="doc1-chapter-1-self-regulation-time|0" aria-label="Planned &amp; timed Mon"></button><button type="button" class="dot" data-w="doc1-chapter-1-self-regulation-time|1" aria-label="Planned &amp; timed Tue"></button><button type="button" class="dot" data-w="doc1-chapter-1-self-regulation-time|2" aria-label="Planned &amp; timed Wed"></button><button type="button" class="dot" data-w="doc1-chapter-1-self-regulation-time|3" aria-label="Planned &amp; timed Thu"></button><button type="button" class="dot" data-w="doc1-chapter-1-self-regulation-time|4" aria-label="Planned &amp; timed Fri"></button><button type="button" class="dot" data-w="doc1-chapter-1-self-regulation-time|5" aria-label="Planned &amp; timed Sat"></button><button type="button" class="dot" data-w="doc1-chapter-1-self-regulation-time|6" aria-label="Planned &amp; timed Sun"></button><span>Distraction-free</span><button type="button" class="dot" data-w="doc1-chapter-2-distraction-concentration|0" aria-label="Distraction-free Mon"></button><button type="button" class="dot" data-w="doc1-chapter-2-distraction-concentration|1" aria-label="Distraction-free Tue"></button><button type="button" class="dot" data-w="doc1-chapter-2-distraction-concentration|2" aria-label="Distraction-free Wed"></button><button type="button" class="dot" data-w="doc1-chapter-2-distraction-concentration|3" aria-label="Distraction-free Thu"></button><button type="button" class="dot" data-w="doc1-chapter-2-distraction-concentration|4" aria-label="Distraction-free Fri"></button><button type="button" class="dot" data-w="doc1-chapter-2-distraction-concentration|5" aria-label="Distraction-free Sat"></button><button type="button" class="dot" data-w="doc1-chapter-2-distraction-concentration|6" aria-label="Distraction-free Sun"></button><span>Asked &amp; shared</span><button type="button" class="dot" data-w="doc1-chapter-3-interaction-support|0" aria-label="Asked &amp; shared Mon"></button><button type="button" class="dot" data-w="doc1-chapter-3-interaction-support|1" aria-label="Asked &amp; shared Tue"></button><button type="button" class="dot" data-w="doc1-chapter-3-interaction-support|2" aria-label="Asked &amp; shared Wed"></button><button type="button" class="dot" data-w="doc1-chapter-3-interaction-support|3" aria-label="Asked &amp; shared Thu"></button><button type="button" class="dot" data-w="doc1-chapter-3-interaction-support|4" aria-label="Asked &amp; shared Fri"></button><button type="button" class="dot" data-w="doc1-chapter-3-interaction-support|5" aria-label="Asked &amp; shared Sat"></button><button type="button" class="dot" data-w="doc1-chapter-3-interaction-support|6" aria-label="Asked &amp; shared Sun"></button><span>Rested &amp; reset</span><button type="button" class="dot" data-w="doc1-chapter-4-fatigue-technology|0" aria-label="Rested &amp; reset Mon"></button><button type="button" class="dot" data-w="doc1-chapter-4-fatigue-technology|1" aria-label="Rested &amp; reset Tue"></button><button type="button" class="dot" data-w="doc1-chapter-4-fatigue-technology|2" aria-label="Rested &amp; reset Wed"></button><button type="button" class="dot" data-w="doc1-chapter-4-fatigue-technology|3" aria-label="Rested &amp; reset Thu"></button><button type="button" class="dot" data-w="doc1-chapter-4-fatigue-technology|4" aria-label="Rested &amp; reset Fri"></button><button type="button" class="dot" data-w="doc1-chapter-4-fatigue-technology|5" aria-label="Rested &amp; reset Sat"></button><button type="button" class="dot" data-w="doc1-chapter-4-fatigue-technology|6" aria-label="Rested &amp; reset Sun"></button></div></div><div class="progress" id="progress"><b>My progress</b> — routines 0/12 · week 0/28 · streak 0d</div>
 </div>
 <script>
 (function(){
-var RK="gb-routines-v1",QK="gb-quiz-v1";
+var RK="gb-routines-v2",WK="gb-week-v2";
 function load(k){try{return JSON.parse(localStorage.getItem(k))||{}}catch(e){return{}}}
-var R=load(RK),Q=load(QK);
-function save(){try{localStorage.setItem(RK,JSON.stringify(R));localStorage.setItem(QK,JSON.stringify(Q))}catch(e){}}
+var R=load(RK),W=load(WK);
+function save(){try{localStorage.setItem(RK,JSON.stringify(R));localStorage.setItem(WK,JSON.stringify(W))}catch(e){}}
+function iso(d){return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)}
+function dayCount(key){var b=W[key]||{};return Object.keys(b).length}
+function monday(){var d=new Date();d.setDate(d.getDate()-((d.getDay()+6)%7));return d}
+function weekMarks(){var m=iso(monday()),n=0;Object.keys(W).forEach(function(k){if(k>=m)n+=Object.keys(W[k]).length});return n}
+function streak(){var d=new Date(),s=0;if(dayCount(iso(d))<2)d.setDate(d.getDate()-1);while(dayCount(iso(d))>=2){s++;d.setDate(d.getDate()-1)}return s}
 function paint(){
  var boxes=document.querySelectorAll("[data-check]");
  boxes.forEach(function(el){el.checked=!!R[el.getAttribute("data-check")]});
  var done=0;boxes.forEach(function(el){if(R[el.getAttribute("data-check")])done++});
- var qs={};document.querySelectorAll("[data-opt]").forEach(function(o){qs[o.getAttribute("data-q")]=1});
- var qids=Object.keys(qs);
- var qd=qids.filter(function(k){return Q[k]!==undefined}).length;
- qids.forEach(function(qid){restore(qid)});
- var p=document.getElementById("progress");
- if(p)p.innerHTML="<b>My progress</b> — routines "+done+"/"+boxes.length+" · quiz "+qd+"/"+qids.length;
-}
-function restore(qid){
- var box=document.querySelector('[data-qbox="'+qid+'"]');if(!box)return;
- var pick=Q[qid];if(pick===undefined)return;
- var chosen=null;
- box.querySelectorAll("[data-opt]").forEach(function(o){
-  o.disabled=true;
-  if(o.getAttribute("data-ok")==="1")o.classList.add("right");
-  if(o.getAttribute("data-pick")===String(pick))chosen=o;
+ var mon=monday();
+ document.querySelectorAll("[data-w]").forEach(function(el){
+  var parts=el.getAttribute("data-w").split("|");
+  var dt=new Date(mon);dt.setDate(mon.getDate()+parseInt(parts[1],10));
+  var day=W[iso(dt)]||{},on=!!day[parts[0]];
+  if(on)el.classList.add("on");else el.classList.remove("on");
+  el.setAttribute("aria-pressed",on?"true":"false");
  });
- if(chosen&&chosen.getAttribute("data-ok")!=="1")chosen.classList.add("wrong");
- var m=box.querySelector("[data-msg]");
- if(m&&chosen){
-  var ok=chosen.getAttribute("data-ok")==="1";
-  m.textContent=(ok?"Correct. ":"Not quite. ")+chosen.getAttribute("data-why");
-  m.style.display="block";
- }
+ var p=document.getElementById("progress");
+ if(p)p.innerHTML="<b>My progress</b> — routines "+done+"/"+boxes.length+" · week "+weekMarks()+"/28 · streak "+streak()+"d";
 }
 document.addEventListener("change",function(e){
  var el=e.target;
@@ -231,10 +190,13 @@ document.addEventListener("change",function(e){
  }
 });
 document.addEventListener("click",function(e){
- var b=e.target.closest?e.target.closest("[data-opt]"):null;
- if(b&&!b.disabled){
-  var qid=b.getAttribute("data-q");
-  Q[qid]=b.getAttribute("data-pick");save();paint();return;
+ var w=e.target.closest?e.target.closest("[data-w]"):null;
+ if(w){
+  var parts=w.getAttribute("data-w").split("|");
+  var mon=monday(),dt=new Date(mon);dt.setDate(mon.getDate()+parseInt(parts[1],10));
+  var key=iso(dt);W[key]=W[key]||{};
+  if(W[key][parts[0]])delete W[key][parts[0]];else W[key][parts[0]]=1;
+  save();paint();return;
  }
  var t=e.target.closest?e.target.closest(".toc a"):null;
  if(t){var id=t.getAttribute("href");
@@ -258,7 +220,19 @@ window.addEventListener("afterprint",function(){
  document.querySelectorAll("details.chapter").forEach(function(d,i){d.open=!!snapshot[i]});
 });
 window.addEventListener("hashchange",openHash);
-openHash();
+function reveal(){
+ var els=document.querySelectorAll("details.chapter,.card,figure.pic");
+ els.forEach(function(el){el.classList.add("rv")});
+ if(!("IntersectionObserver" in window)){els.forEach(function(el){el.classList.add("on")});return}
+ var o=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("on");o.unobserve(en.target)}})},{threshold:.08});
+ els.forEach(function(el){o.observe(el)});
+}
+function shadow(){
+ var t=document.querySelector(".toc");if(!t)return;
+ t.classList.toggle("scrolled",window.scrollY>4);
+}
+window.addEventListener("scroll",shadow,{passive:true});
+reveal();shadow();openHash();
 paint();
 })();
 </script>

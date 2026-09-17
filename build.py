@@ -28,6 +28,9 @@ def esc(s):
     return html.escape(s or "", quote=True)
 
 
+REVEAL_JS = """var o=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("on");o.unobserve(en.target)}})},{threshold:.08});"""
+
+
 def shell(title, body_inner):
     return f"""<!doctype html>
 <html lang="en">
@@ -35,17 +38,25 @@ def shell(title, body_inner):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<meta name="description" content="Study guide: routines, evidence and lessons for effective online learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
 <style>
-body{{background:#f7f7f5;color:#1a1a1a;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;line-height:1.65}}
+body{{background:radial-gradient(circle at top right,#0f172a,#020617);background-color:#020617;color:#f1f5f9;font-family:'Inter',ui-sans-serif,system-ui,sans-serif;margin:0;line-height:1.65;counter-reset:fig}}
+body::before{{content:"";position:fixed;inset:0;background-image:radial-gradient(rgba(129,140,248,.13) 1px,transparent 1px);background-size:26px 26px;pointer-events:none}}
+h1,h2,h3{{font-family:'Outfit','Inter',sans-serif}}
 p{{margin:10px 0}}
-.wrap{{max-width:880px;margin:0 auto;padding:24px 16px 64px}}
+.wrap{{max-width:960px;margin:0 auto;padding:24px 16px 64px;position:relative}}
 .topbar{{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}}
-.topbar a{{color:#555;text-decoration:none;font-size:14px}}
-.card{{background:#fff;border:1px solid #e7e5e4;border-radius:12px;padding:16px;margin:12px 0}}
-.tldr{{background:#fff;border:1px solid #e7e5e4;border-left:4px solid #1a1a1a;border-radius:12px;padding:16px;margin:16px 0}}
-.badge{{display:inline-block;background:#f1f0ee;border-radius:999px;padding:2px 10px;font-size:12px;margin-right:6px}}
-.muted{{color:#6b7280;font-size:13px}}
+.topbar a{{color:#94a3b8;text-decoration:none;font-size:14px}}
+.eyebrow{{color:#818cf8;font-weight:600;letter-spacing:.18em;text-transform:uppercase;font-size:12px}}
+.grad{{background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}}
+.card,.glass{{background:rgba(255,255,255,.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:20px;margin:14px 0;transition:transform .2s ease-out,border-color .2s}}
+.card:hover{{transform:translateY(-3px);border-color:rgba(129,140,248,.5)}}
+.tldr{{background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.3);border-left:4px solid #818cf8;border-radius:14px;padding:16px;margin:14px 0}}
+.badge{{display:inline-block;background:rgba(129,140,248,.15);color:#c7d2fe;border-radius:999px;padding:2px 10px;font-size:12px;margin-right:6px}}
+.muted{{color:#94a3b8;font-size:13px}}
 .grid2{{display:grid;grid-template-columns:1fr;gap:0}}
 @media(min-width:720px){{.grid2{{grid-template-columns:1fr 1fr;gap:12px}}.grid2 .card{{margin:0}}}}
 .sec{{margin-top:28px}}
@@ -54,39 +65,62 @@ h1{{font-size:26px;margin:8px 0}}h2{{font-size:19px;margin:0 0 8px}}h3{{font-siz
 table{{width:100%;border-collapse:collapse;font-size:14px}}
 th,td{{text-align:left;padding:8px 10px;border-bottom:1px solid #e7e5e4;vertical-align:top}}
 th{{background:#f7f7f5;font-weight:600}}
-.placeholder{{border:1.5px dashed #a8a29e;border-radius:12px;padding:14px 16px;margin:12px 0;background:#fafaf9;color:#57534e;font-size:14px;list-style:none}}
-.pic{{margin:12px 0;text-align:center}}
-.pic svg{{max-width:100%;height:auto;background:#fff;border:1px solid #e7e5e4;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.08)}}
-.pic figcaption,.pic .cap{{color:#57534e;font-size:13px;margin-top:6px}}
+.grid2{{display:grid;grid-template-columns:1fr;gap:14px}}
+@media(min-width:720px){{.grid2{{grid-template-columns:1fr 1fr}}}}
+a{{color:#a5b4fc}}
+table{{width:100%;border-collapse:collapse;font-size:14px}}
+th,td{{text-align:left;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.1);vertical-align:top}}
+th{{color:#c7d2fe;font-weight:600}}
+.placeholder{{border:1.5px dashed #64748b;border-radius:14px;padding:14px 16px;margin:12px 0;background:rgba(255,255,255,.03);color:#94a3b8;font-size:14px;list-style:none}}
+.pic{{margin:14px auto;text-align:center;max-width:560px}}
+.pic svg{{max-width:100%;height:auto;background:linear-gradient(180deg,#ffffff,#eef2ff);border:1px solid rgba(255,255,255,.15);border-radius:16px;box-shadow:0 8px 30px rgba(0,0,0,.45);counter-increment:fig}}
+.pic figcaption,.pic .cap{{color:#94a3b8;font-size:13px;margin-top:8px}}
+.pic figcaption::before{{content:"Figure " counter(fig) " — "}}
 li.pic{{list-style:none}}
 .toc{{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}}
-@media(min-width:720px){{.toc{{position:sticky;top:0;z-index:5;background:#f7f7f5;padding:8px 0}}}}
-.hero{{text-align:center;background:linear-gradient(180deg,#ffffff,#f1efe9);box-shadow:0 1px 4px rgba(0,0,0,.06)}}
-.hero h1{{font-size:30px}}
-.chapter{{background:#fff;border:1px solid #e7e5e4;border-top:3px solid #0f62fe;border-radius:14px;padding:4px 20px 16px;margin:20px 0;box-shadow:0 1px 4px rgba(0,0,0,.06)}}
+@media(min-width:720px){{.toc{{position:sticky;top:0;z-index:5;background:rgba(2,6,23,.85);backdrop-filter:blur(12px);padding:10px 0}}.toc.scrolled{{box-shadow:0 8px 24px rgba(0,0,0,.4)}}}}
+.toc a{{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:5px 14px;font-size:13px;color:#e2e8f0;text-decoration:none;transition:all .15s}}
+.toc a:hover{{border-color:rgba(129,140,248,.6);transform:translateY(-2px)}}
+.toc a.s{{font-size:12px;color:#94a3b8;padding:3px 10px}}
+.hero{{text-align:center;padding:40px 20px}}
+.hero h1{{font-size:clamp(30px,5vw,46px);margin:10px 0;background:linear-gradient(135deg,#a5b4fc,#e9d5ff);-webkit-background-clip:text;background-clip:text;color:transparent}}
+.hero .sub{{font-size:16px}}
+.chapter{{border-top:3px solid #818cf8}}
+details.chapter:nth-of-type(4n+1){{border-top-color:#818cf8}}
+details.chapter:nth-of-type(4n+2){{border-top-color:#34d399}}
+details.chapter:nth-of-type(4n+3){{border-top-color:#fbbf24}}
+details.chapter:nth-of-type(4n){{border-top-color:#fb7185}}
 .chapter p,.chapter li,.hero p{{max-width:70ch}}
 .chapter h2{{margin-top:14px}}
-.toc a{{background:#fff;border:1px solid #e7e5e4;border-radius:999px;padding:4px 12px;font-size:13px;color:#1a1a1a;text-decoration:none;transition:background .15s}}
-.toc a:hover{{background:#1a1a1a;color:#fff;border-color:#1a1a1a}}
-.card,ul.card,ol.card{{line-height:1.7}}
-ul.card,ol.card{{box-shadow:0 1px 3px rgba(0,0,0,.05)}}
-.sub{{color:#57534e;font-size:14px;margin:2px 0 0}}
-details.chapter summary{{cursor:pointer}}
+details.chapter summary{{cursor:pointer;list-style:none}}
+details.chapter summary::-webkit-details-marker{{display:none}}
 details.chapter summary h2{{display:inline}}
-details.chapter summary::-webkit-details-marker{{color:#0f62fe}}
-.check{{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #f1f0ee;cursor:pointer}}
+details.chapter summary::after{{content:"+";float:right;color:#818cf8;font-weight:800;font-size:20px}}
+details.chapter[open] summary::after{{content:"–"}}
+.dbody{{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease-out}}
+details[open]>.dbody{{grid-template-rows:1fr}}
+.dbody-in{{overflow:hidden}}
+.steps{{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0}}
+@media(min-width:720px){{.steps{{grid-template-columns:repeat(4,1fr)}}}}
+.step{{background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.3);border-radius:14px;padding:12px;text-align:center;font-size:14px}}
+.step b{{display:flex;width:26px;height:26px;border-radius:50%;background:#818cf8;color:#020617;align-items:center;justify-content:center;margin:0 auto 6px;font-size:14px}}
+.check{{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer}}
 .check:last-child{{border-bottom:none}}
-.check input{{width:18px;height:18px;margin-top:3px;accent-color:#0f62fe;flex:none}}
-.opts{{display:flex;flex-direction:column;gap:8px;margin:8px 0}}
-.opts button{{text-align:left;background:#fff;border:1px solid #e7e5e4;border-radius:10px;padding:8px 12px;font-size:14px;cursor:pointer}}
-.opts button:hover:not(:disabled){{border-color:#0f62fe}}
-.opts button.right{{background:#dcfce7;border-color:#16a34a}}
-.opts button.wrong{{background:#fee2e2;border-color:#dc2626}}
-.opts button:disabled{{cursor:default}}
-.msg{{display:none;background:#f7f7f5;border-radius:10px;padding:8px 12px;font-size:13px;color:#57534e}}
-.progress{{background:#1a1a1a;color:#fff;border-radius:12px;padding:12px 16px;margin:12px 0;font-size:14px}}
+.check input{{width:19px;height:19px;margin-top:2px;accent-color:#818cf8;flex:none}}
+.planner{{display:grid;grid-template-columns:1.4fr repeat(7,30px);gap:6px;align-items:center;margin:10px 0;font-size:13px}}
+.planner .dh{{text-align:center;color:#94a3b8;font-size:11px}}
+.planner button.dot{{width:26px;height:26px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:transparent;cursor:pointer;padding:0;transition:all .15s}}
+.planner button.dot:hover{{border-color:#818cf8;transform:scale(1.12)}}
+.planner button.dot.on{{background:linear-gradient(135deg,#818cf8,#c084fc);border-color:transparent}}
+.progress{{background:linear-gradient(135deg,rgba(129,140,248,.25),rgba(192,132,252,.18));border:1px solid rgba(129,140,248,.4);border-radius:14px;padding:12px 16px;margin:12px 0;font-size:14px}}
+.rv{{opacity:0;transform:translateY(14px);transition:opacity .5s ease-out,transform .5s ease-out}}
+.rv.on{{opacity:1;transform:none}}
+.bar{{transform:scaleX(0);transform-box:fill-box;transform-origin:left;animation:grow .7s ease-out forwards}}
+@keyframes grow{{to{{transform:scaleX(1)}}}}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{{outline:2px solid #818cf8;outline-offset:2px}}
 @media(min-width:1100px){{.wrap{{max-width:1100px}}.grid2{{grid-template-columns:1fr 1fr 1fr}}}}
-@media print{{.topbar{{display:none}}.toc{{position:static;background:#fff}}.wrap{{max-width:100%;padding:0}}body{{background:#fff}}.card,.tldr{{break-inside:avoid}}}}
+@media print{{body{{background:#fff;color:#111}}body::before{{display:none}}.topbar,.toc,.progress{{display:none}}.wrap{{max-width:100%;padding:0}}.card,.tldr,.chapter,figure{{background:#fff!important;color:#111!important;border:1px solid #ccc!important;box-shadow:none!important;backdrop-filter:none!important}}.tldr{{border-left:4px solid #111!important}}.muted,.cap,.pic figcaption,.sub{{color:#444!important}}a{{color:#111}}.rv{{opacity:1!important;transform:none!important}}.bar{{animation:none;transform:none}}.grad{{color:#111;-webkit-text-fill-color:#111}}.chapter{{break-inside:avoid}}}}
+@media (prefers-reduced-motion:reduce){{*,*::before,*::after{{animation:none!important;transition:none!important}}.rv{{opacity:1;transform:none}}.bar{{transform:none}}}}
 </style>
 </head>
 <body>
@@ -96,37 +130,29 @@ details.chapter summary::-webkit-details-marker{{color:#0f62fe}}
 </div>
 <script>
 (function(){{
-var RK="gb-routines-v1",QK="gb-quiz-v1";
+var RK="gb-routines-v2",WK="gb-week-v2";
 function load(k){{try{{return JSON.parse(localStorage.getItem(k))||{{}}}}catch(e){{return{{}}}}}}
-var R=load(RK),Q=load(QK);
-function save(){{try{{localStorage.setItem(RK,JSON.stringify(R));localStorage.setItem(QK,JSON.stringify(Q))}}catch(e){{}}}}
+var R=load(RK),W=load(WK);
+function save(){{try{{localStorage.setItem(RK,JSON.stringify(R));localStorage.setItem(WK,JSON.stringify(W))}}catch(e){{}}}}
+function iso(d){{return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)}}
+function dayCount(key){{var b=W[key]||{{}};return Object.keys(b).length}}
+function monday(){{var d=new Date();d.setDate(d.getDate()-((d.getDay()+6)%7));return d}}
+function weekMarks(){{var m=iso(monday()),n=0;Object.keys(W).forEach(function(k){{if(k>=m)n+=Object.keys(W[k]).length}});return n}}
+function streak(){{var d=new Date(),s=0;if(dayCount(iso(d))<2)d.setDate(d.getDate()-1);while(dayCount(iso(d))>=2){{s++;d.setDate(d.getDate()-1)}}return s}}
 function paint(){{
  var boxes=document.querySelectorAll("[data-check]");
  boxes.forEach(function(el){{el.checked=!!R[el.getAttribute("data-check")]}});
  var done=0;boxes.forEach(function(el){{if(R[el.getAttribute("data-check")])done++}});
- var qs={{}};document.querySelectorAll("[data-opt]").forEach(function(o){{qs[o.getAttribute("data-q")]=1}});
- var qids=Object.keys(qs);
- var qd=qids.filter(function(k){{return Q[k]!==undefined}}).length;
- qids.forEach(function(qid){{restore(qid)}});
- var p=document.getElementById("progress");
- if(p)p.innerHTML="<b>My progress</b> — routines "+done+"/"+boxes.length+" · quiz "+qd+"/"+qids.length;
-}}
-function restore(qid){{
- var box=document.querySelector('[data-qbox="'+qid+'"]');if(!box)return;
- var pick=Q[qid];if(pick===undefined)return;
- var chosen=null;
- box.querySelectorAll("[data-opt]").forEach(function(o){{
-  o.disabled=true;
-  if(o.getAttribute("data-ok")==="1")o.classList.add("right");
-  if(o.getAttribute("data-pick")===String(pick))chosen=o;
+ var mon=monday();
+ document.querySelectorAll("[data-w]").forEach(function(el){{
+  var parts=el.getAttribute("data-w").split("|");
+  var dt=new Date(mon);dt.setDate(mon.getDate()+parseInt(parts[1],10));
+  var day=W[iso(dt)]||{{}},on=!!day[parts[0]];
+  if(on)el.classList.add("on");else el.classList.remove("on");
+  el.setAttribute("aria-pressed",on?"true":"false");
  }});
- if(chosen&&chosen.getAttribute("data-ok")!=="1")chosen.classList.add("wrong");
- var m=box.querySelector("[data-msg]");
- if(m&&chosen){{
-  var ok=chosen.getAttribute("data-ok")==="1";
-  m.textContent=(ok?"Correct. ":"Not quite. ")+chosen.getAttribute("data-why");
-  m.style.display="block";
- }}
+ var p=document.getElementById("progress");
+ if(p)p.innerHTML="<b>My progress</b> — routines "+done+"/"+boxes.length+" · week "+weekMarks()+"/28 · streak "+streak()+"d";
 }}
 document.addEventListener("change",function(e){{
  var el=e.target;
@@ -137,10 +163,13 @@ document.addEventListener("change",function(e){{
  }}
 }});
 document.addEventListener("click",function(e){{
- var b=e.target.closest?e.target.closest("[data-opt]"):null;
- if(b&&!b.disabled){{
-  var qid=b.getAttribute("data-q");
-  Q[qid]=b.getAttribute("data-pick");save();paint();return;
+ var w=e.target.closest?e.target.closest("[data-w]"):null;
+ if(w){{
+  var parts=w.getAttribute("data-w").split("|");
+  var mon=monday(),dt=new Date(mon);dt.setDate(mon.getDate()+parseInt(parts[1],10));
+  var key=iso(dt);W[key]=W[key]||{{}};
+  if(W[key][parts[0]])delete W[key][parts[0]];else W[key][parts[0]]=1;
+  save();paint();return;
  }}
  var t=e.target.closest?e.target.closest(".toc a"):null;
  if(t){{var id=t.getAttribute("href");
@@ -164,12 +193,24 @@ window.addEventListener("afterprint",function(){{
  document.querySelectorAll("details.chapter").forEach(function(d,i){{d.open=!!snapshot[i]}});
 }});
 window.addEventListener("hashchange",openHash);
-openHash();
+function reveal(){{
+ var els=document.querySelectorAll("details.chapter,.card,figure.pic");
+ els.forEach(function(el){{el.classList.add("rv")}});
+ if(!("IntersectionObserver" in window)){{els.forEach(function(el){{el.classList.add("on")}});return}}
+ /*__REVEAL__*/
+ els.forEach(function(el){{o.observe(el)}});
+}}
+function shadow(){{
+ var t=document.querySelector(".toc");if(!t)return;
+ t.classList.toggle("scrolled",window.scrollY>4);
+}}
+window.addEventListener("scroll",shadow,{{passive:true}});
+reveal();shadow();openHash();
 paint();
 }})();
 </script>
 </body>
-</html>"""
+</html>""".replace("/*__REVEAL__*/", REVEAL_JS)
 
 
 def inline(s):
@@ -310,7 +351,9 @@ def md_to_html(text, extras=None):
                 n += 1
                 sid = f"{base}-{n}"
             seen.add(sid)
-            toc.append((sid, ln[3:].strip()))
+            title = ln[3:].strip()
+            main = bool(re.match(r"^(Chapter|Lesson|0\.)", title))
+            toc.append((sid, title, main))
             out.append(f'<h2 id="{sid}">{inline(ln[3:])}</h2>')
         elif ln.startswith("# "):
             out.append(f"<h1>{inline(ln[2:])}</h1>")
@@ -320,9 +363,22 @@ def md_to_html(text, extras=None):
         elif ln.startswith("> "):
             quotes = []
             while i < len(lines) and lines[i].strip().startswith("> "):
-                quotes.append(inline(lines[i].strip()[2:]))
+                quotes.append(lines[i].strip()[2:].strip())
                 i += 1
-            out.append('<div class="tldr">' + "<br>".join(quotes) + "</div>")
+            if quotes and "how to use" in quotes[0].lower():
+                steps = []
+                for q in quotes[1:]:
+                    q = re.sub(r"^\d+\.\s*", "", q)
+                    if q:
+                        steps.append(q)
+                if steps:
+                    cells = "".join(
+                        f'<div class="step"><b>{n + 1}</b>{inline(s)}</div>'
+                        for n, s in enumerate(steps)
+                    )
+                    out.append(f"<p><b>{inline(quotes[0])}</b></p>" + f'<div class="steps">{cells}</div>')
+                    continue
+            out.append('<div class="tldr">' + "<br>".join(inline(q) for q in quotes) + "</div>")
             continue
         elif ln.strip().startswith("|"):
             tbl, hdr = ["<div class='card'><table>"], True
@@ -373,7 +429,7 @@ def md_assemble(out, toc, extras):
     hero, rest = group_sections(out, extras)
     if toc:
         nav = '<div class="toc">' + "".join(
-            f'<a href="#{esc(sid)}">{esc(t)}</a>' for sid, t in toc
+            f'<a href="#{esc(sid)}" class="{chr(109) if main else chr(115)}">{esc(t)}</a>' for sid, t, main in toc
         ) + "</div>"
         return hero + nav + rest
     return hero + rest
@@ -423,40 +479,13 @@ CHECKLISTS = {
     ],
 }
 
-QUIZZES = {
-    "chapter-1-self-regulation-time": [
-        ("In SMART, the M stands for…", ["Manageable", "Measurable", "Morning"], 1,
-         "Goals must be measurable so tomorrow-you can check them off."),
-        ("One focus block in our routine is…", ["25 min work, 5 rest", "50 min work, 10 rest", "2 hours flat"], 0,
-         "Short spaced sessions with recall beat re-reading."),
-        ("An ALPEN plan starts with…", ["Listing tasks", "Adding buffer", "Checking off"], 0,
-         "List first, then estimate, buffer, order, review at night."),
-    ],
-    "chapter-2-distraction-concentration": [
-        ("During study blocks your phone should be…", ["Face-down on desk", "In a drawer or bag", "In hand, on silent"], 1,
-         "A nearby phone drains thinking power even untouched (Brain Drain)."),
-        ("Why one browser tab?", ["Saves battery", "Avoids attention residue", "Loads pages faster"], 1,
-         "Every glance elsewhere leaves residue that slows you down."),
-        ("Heavy multitaskers…", ["Switch tasks better", "Switch tasks worse", "Are unaffected"], 1,
-         "Ophir, Nass & Wagner (2009): they perform worse at switching."),
-    ],
-    "chapter-3-interaction-support": [
-        ("Ask for help after being stuck…", ["15 minutes", "2 hours", "Next week"], 0,
-         "15 minutes is the rule — then template, peer, post."),
-        ("A good question states…", ["Tried / expected / got / question", "Only the error message", "Your grade goal"], 0,
-         "Clear questions get faster, better help."),
-        ("After writing it, first…", ["DM anyone online", "Peer-check, then post publicly", "Wait for the teacher"], 1,
-         "Peer-check first, then post so the whole class benefits."),
-    ],
-    "chapter-4-fatigue-technology": [
-        ("20-20-20 means…", ["20 min study, 20 rest, 20 snacks", "Every 20 min, look 20 feet away for 20 s", "20 pages in 20 minutes"], 1,
-         "It rests your eyes during screen time."),
-        ("Our study rhythm is…", ["Study 50, move 10", "One 3-hour marathon", "Back-to-back meetings"], 0,
-         "Breaks are part of studying, not a reward after."),
-        ("Before each online meeting…", ["Test net, mic and camera", "Charge overnight", "Nothing needed"], 0,
-         "The 2-minute pre-check kills most tech stress."),
-    ],
-}
+PLANNER = [
+    ("chapter-1-self-regulation-time", "Planned & timed"),
+    ("chapter-2-distraction-concentration", "Distraction-free"),
+    ("chapter-3-interaction-support", "Asked & shared"),
+    ("chapter-4-fatigue-technology", "Rested & reset"),
+]
+DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 
 def checklist_html(doc, sid, items):
@@ -467,26 +496,21 @@ def checklist_html(doc, sid, items):
     return f'<div class="card"><b>Try it this week — tick when done</b>{lis}</div>'
 
 
-def quiz_html(doc, sid, questions):
-    out = ['<div class="card"><b>Quick check — pick one</b>']
-    for qi, (q, opts, _a, _why) in enumerate(questions):
-        qid = f"{doc}-{sid}-q{qi}"
-        out.append(f'<div data-qbox="{qid}"><p><b>{inline(q)}</b></p><div class="opts">')
-        for oi, opt in enumerate(opts):
-            ok = "1" if oi == _a else "0"
-            out.append(f'<button type="button" data-q="{qid}" data-opt data-pick="{oi}" data-ok="{ok}" data-why="{esc(_why)}">{inline(opt)}</button>')
-        out.append('</div><p class="msg" data-msg></p></div>')
-    out.append("</div>")
-    return "\n".join(out)
+def planner_html():
+    head = '<span></span>' + "".join(f'<span class="dh">{d}</span>' for d in DAYS)
+    rows = [head]
+    for sid, label in PLANNER:
+        cells = "".join(
+            f'<button type="button" class="dot" data-w="doc1-{sid}|{di}" aria-label="{esc(label)} {d}"></button>'
+            for di, d in enumerate(DAYS)
+        )
+        rows.append(f"<span>{esc(label)}</span>{cells}")
+    return ('<div class="card"><b>My study week — tap each day you kept the routine</b>'
+            '<div class="planner">' + "".join(rows) + "</div></div>")
 
 
 def doc1_extras():
-    extras = {}
-    for sid, items in CHECKLISTS.items():
-        extras[sid] = checklist_html("doc1", sid, items)
-    for sid, questions in QUIZZES.items():
-        extras[sid] = extras.get(sid, "") + quiz_html("doc1", sid, questions)
-    return extras
+    return {sid: checklist_html("doc1", sid, items) for sid, items in CHECKLISTS.items()}
 
 
 def main():
@@ -497,20 +521,25 @@ def main():
             extras = doc1_extras() if fn.startswith("DOC1") else None
             body = md_to_html(f.read(), extras)
             if extras:
-                nq = sum(len(v) for v in QUIZZES.values())
                 nc = sum(len(v) for v in CHECKLISTS.values())
-                body += f'<div class="progress" id="progress"><b>My progress</b> — routines 0/{nc} · quiz 0/{nq}</div>'
+                body += planner_html()
+                body += f'<div class="progress" id="progress"><b>My progress</b> — routines 0/{nc} · week 0/28 · streak 0d</div>'
             html = shell(label, body)
         name = fn.replace(".md", ".html")
         with open(os.path.join(OUT_DIR, name), "w", encoding="utf-8") as f:
             f.write(html)
         shutil.copy(os.path.join(OUT_DIR, name), os.path.join(DOCS_DIR, name))
         print(f"Built: {name}")
-    idx_body = "<h1>Guidebook</h1>" + "".join(
-        f'<div class="card"><a href="{fn.replace(".md", ".html")}"><b>{esc(label)}</b></a>'
-        f'<div class="sub">{esc(desc)}</div></div>'
-        for fn, label, desc in DOCS
-    )
+    roles = [("I'm a student — give me routines", 0), ("I teach — give me lessons", 2),
+             ("I want the evidence", 1)]
+    idx_body = ('<div class="hero card"><div class="eyebrow">Asia University · First-Years</div>'
+                '<h1 class="grad">Study Smarter Online</h1>'
+                '<div class="sub">Pick the version you need — same research, three doors.</div></div>'
+                '<div class="grid2">' + "".join(
+        f'<div class="card"><b>{role}</b><div class="sub">{esc(DOCS[i][2])}</div>'
+        f'<p><a href="{DOCS[i][0].replace(".md", ".html")}">Start →</a></p></div>'
+        for role, i in roles
+    ) + "</div>")
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(shell("Guidebook", idx_body))
     shutil.copy(os.path.join(OUT_DIR, "index.html"), os.path.join(DOCS_DIR, "index.html"))
