@@ -57,14 +57,8 @@ p{{margin:10px 0}}
 .tldr{{background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.3);border-left:4px solid #818cf8;border-radius:14px;padding:16px;margin:14px 0}}
 .badge{{display:inline-block;background:rgba(129,140,248,.15);color:#c7d2fe;border-radius:999px;padding:2px 10px;font-size:12px;margin-right:6px}}
 .muted{{color:#94a3b8;font-size:13px}}
-.grid2{{display:grid;grid-template-columns:1fr;gap:0}}
-@media(min-width:720px){{.grid2{{grid-template-columns:1fr 1fr;gap:12px}}.grid2 .card{{margin:0}}}}
 .sec{{margin-top:28px}}
-a{{color:#0f62fe}}
 h1{{font-size:26px;margin:8px 0}}h2{{font-size:19px;margin:0 0 8px}}h3{{font-size:16px;margin:14px 0 6px}}
-table{{width:100%;border-collapse:collapse;font-size:14px}}
-th,td{{text-align:left;padding:8px 10px;border-bottom:1px solid #e7e5e4;vertical-align:top}}
-th{{background:#f7f7f5;font-weight:600}}
 .grid2{{display:grid;grid-template-columns:1fr;gap:14px}}
 @media(min-width:720px){{.grid2{{grid-template-columns:1fr 1fr}}}}
 a{{color:#a5b4fc}}
@@ -82,6 +76,9 @@ li.pic{{list-style:none}}
 .toc a{{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:5px 14px;font-size:13px;color:#e2e8f0;text-decoration:none;transition:all .15s}}
 .toc a:hover{{border-color:rgba(129,140,248,.6);transform:translateY(-2px)}}
 .toc a.s{{font-size:12px;color:#94a3b8;padding:3px 10px}}
+.dbody{{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease-out}}
+details[open]>.dbody{{grid-template-rows:1fr}}
+.dbody-in{{overflow:hidden;min-height:0}}
 .hero{{text-align:center;padding:40px 20px}}
 .hero h1{{font-size:clamp(30px,5vw,46px);margin:10px 0;background:linear-gradient(135deg,#a5b4fc,#e9d5ff);-webkit-background-clip:text;background-clip:text;color:transparent}}
 .hero .sub{{font-size:16px}}
@@ -119,7 +116,7 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 @keyframes grow{{to{{transform:scaleX(1)}}}}
 a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{{outline:2px solid #818cf8;outline-offset:2px}}
 @media(min-width:1100px){{.wrap{{max-width:1100px}}.grid2{{grid-template-columns:1fr 1fr 1fr}}}}
-@media print{{body{{background:#fff;color:#111}}body::before{{display:none}}.topbar,.toc,.progress{{display:none}}.wrap{{max-width:100%;padding:0}}.card,.tldr,.chapter,figure{{background:#fff!important;color:#111!important;border:1px solid #ccc!important;box-shadow:none!important;backdrop-filter:none!important}}.tldr{{border-left:4px solid #111!important}}.muted,.cap,.pic figcaption,.sub{{color:#444!important}}a{{color:#111}}.rv{{opacity:1!important;transform:none!important}}.bar{{animation:none;transform:none}}.grad{{color:#111;-webkit-text-fill-color:#111}}.chapter{{break-inside:avoid}}}}
+@media print{{body{{background:#fff;color:#111}}body::before{{display:none}}.hero h1{{color:#111!important;background:none!important;-webkit-text-fill-color:#111!important}}.topbar,.toc,.progress{{display:none}}.wrap{{max-width:100%;padding:0}}.card,.tldr,.chapter,figure{{background:#fff!important;color:#111!important;border:1px solid #ccc!important;box-shadow:none!important;backdrop-filter:none!important}}.tldr{{border-left:4px solid #111!important}}.muted,.cap,.pic figcaption,.sub{{color:#444!important}}a{{color:#111}}.rv{{opacity:1!important;transform:none!important}}.bar{{animation:none;transform:none}}.grad{{color:#111;-webkit-text-fill-color:#111}}.chapter{{break-inside:avoid}}}}
 @media (prefers-reduced-motion:reduce){{*,*::before,*::after{{animation:none!important;transition:none!important}}.rv{{opacity:1;transform:none}}.bar{{transform:none}}}}
 </style>
 </head>
@@ -287,7 +284,7 @@ def hbars(title, rows, note=""):
         num = f"{v:.2f}" if isinstance(v, float) else f"{v:d}"
         p.append(f'<text x="8" y="{y + 15}" font-size="12" fill="#1a1a1a">{esc(lab)}</text>')
         p.append(f'<rect x="150" y="{y}" width="150" height="{bh}" rx="5" fill="#e7e5e4"/>')
-        p.append(f'<rect x="150" y="{y}" width="{w:.0f}" height="{bh}" rx="5" fill="#0f62fe"><title>{esc(lab)}: {num}</title></rect>')
+        p.append(f'<rect class="bar" x="150" y="{y}" width="{w:.0f}" height="{bh}" rx="5" fill="#0f62fe"><title>{esc(lab)}: {num}</title></rect>')
         p.append(f'<text x="{165 + w:.0f}" y="{y + 15}" font-size="12" fill="#57534e">{num}</text>')
         y += bh + gap
     if note:
@@ -429,7 +426,7 @@ def md_assemble(out, toc, extras):
     hero, rest = group_sections(out, extras)
     if toc:
         nav = '<div class="toc">' + "".join(
-            f'<a href="#{esc(sid)}" class="{chr(109) if main else chr(115)}">{esc(t)}</a>' for sid, t, main in toc
+            f'<a href="#{esc(sid)}" class="{"m" if main else "s"}">{esc(t)}</a>' for sid, t, main in toc
         ) + "</div>"
         return hero + nav + rest
     return hero + rest
@@ -451,8 +448,8 @@ def group_sections(blocks, extras=None):
         sid = m.group(1) if m else ""
         extra = extras.get(sid, "")
         o = " open" if k == 0 else ""
-        rest.append(f'<details class="chapter"{o}>\n<summary>{blocks[s]}</summary>\n'
-                    + "\n".join(blocks[s + 1:e]) + "\n" + extra + "\n</details>")
+        rest.append(f'<details class="chapter"{o}>\n<summary>{blocks[s]}</summary>\n<div class="dbody"><div class="dbody-in">\n'
+                    + "\n".join(blocks[s + 1:e]) + "\n" + extra + "\n</div></div>\n</details>")
     return hero, "\n".join(rest)
 
 
