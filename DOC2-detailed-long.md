@@ -75,11 +75,11 @@ Each recommendation above links to exactly one Top 3–5 survey finding — no p
 
 ## 8. References (starter set — groups extend)
 
-1. Primary data source (project): Anonymous survey of approximately 50 students in our class on recent online/digital learning experiences, barriers, and strategies (to be collected in 2026).
-2. Broadbent, J., & Poon, W. L. (2015). Self-regulated learning strategies & academic achievement in online higher education learning environments: A systematic review. The Internet and Higher Education, 27, 1–13. [https://doi.org/10.1016/j.iheduc.2015.04.007](https://doi.org/10.1016/j.iheduc.2015.04.007)
-3. Martin, F., & Bolliger, D. U. (2018). Engagement Matters: Student Perceptions on the Importance of Engagement Strategies in the Online Learning Environment. Online Learning, 22(1). [https://doi.org/10.24059/olj.v22i1.1092](https://doi.org/10.24059/olj.v22i1.1092)
-4. Fauville, G., Luo, M., Queiroz, A. C. M., & Bailenson, J. N. (2021). Zoom Exhaustion & Fatigue Scale. Computers in Human Behavior Reports, 4, 100119. [https://doi.org/10.1016/j.chbr.2021.100119](https://doi.org/10.1016/j.chbr.2021.100119)
-5. García, E., & Weiss, E. (2020). COVID-19 and student performance, equity, and U.S. education policy: Lessons from pre-pandemic research to inform relief, recovery, and rebuilding. Economic Policy Institute.
+1. Class survey (primary data, n≈50, 2026).
+2. Broadbent & Poon 2015 (self-regulated learning review).
+3. Martin & Bolliger 2018 (engagement strategies).
+4. Fauville et al. 2021 (Zoom fatigue scale).
+5. García & Weiss 2020 (COVID-19 & student performance).
 6. Bailenson (Zoom overload).
 7. Dunlosky 2013 (effective learning techniques review).
 8. Garrison (Community of Inquiry).
