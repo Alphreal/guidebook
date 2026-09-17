@@ -40,6 +40,20 @@ li.pic{list-style:none}
 .card,ul.card,ol.card{line-height:1.7}
 ul.card,ol.card{box-shadow:0 1px 3px rgba(0,0,0,.05)}
 .sub{color:#57534e;font-size:14px;margin:2px 0 0}
+details.chapter summary{cursor:pointer}
+details.chapter summary h2{display:inline}
+details.chapter summary::-webkit-details-marker{color:#0f62fe}
+.check{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #f1f0ee;cursor:pointer}
+.check:last-child{border-bottom:none}
+.check input{width:18px;height:18px;margin-top:3px;accent-color:#0f62fe;flex:none}
+.opts{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.opts button{text-align:left;background:#fff;border:1px solid #e7e5e4;border-radius:10px;padding:8px 12px;font-size:14px;cursor:pointer}
+.opts button:hover:not(:disabled){border-color:#0f62fe}
+.opts button.right{background:#dcfce7;border-color:#16a34a}
+.opts button.wrong{background:#fee2e2;border-color:#dc2626}
+.opts button:disabled{cursor:default}
+.msg{display:none;background:#f7f7f5;border-radius:10px;padding:8px 12px;font-size:13px;color:#57534e}
+.progress{background:#1a1a1a;color:#fff;border-radius:12px;padding:12px 16px;margin:12px 0;font-size:14px}
 @media(min-width:1100px){.wrap{max-width:1100px}.grid2{grid-template-columns:1fr 1fr 1fr}}
 @media print{.topbar{display:none}.toc{position:static;background:#fff}.wrap{max-width:100%;padding:0}body{background:#fff}.card,.tldr{break-inside:avoid}}
 </style>
@@ -51,32 +65,36 @@ ul.card,ol.card{box-shadow:0 1px 3px rgba(0,0,0,.05)}
 <h1>Online Learning Effectiveness for Asia First-Years: Evidence &amp; Guide</h1>
 <h3>Detailed Long Version (Group Research Report + Full Guide)</h3>
 </div>
-<div class="toc"><a href="#1-title-goal-smart-targets">1. Title, Goal &amp; SMART Targets</a><a href="#2-context">2. Context</a><a href="#3-revised-research-questions">3. Revised Research Questions</a><a href="#4-methods">4. Methods</a><a href="#5-results-week-1-survey-n-40">5. Results (Week 1 survey, n=40)</a><a href="#6-chapters-finding-theory-practice">6. Chapters — Finding → Theory → Practice</a><a href="#7-discussion">7. Discussion</a><a href="#8-references-starter-set-groups-extend">8. References (starter set — groups extend)</a><a href="#appendix">Appendix</a></div><section class="chapter">
-<h2 id="1-title-goal-smart-targets">1. Title, Goal &amp; SMART Targets</h2>
+<div class="toc"><a href="#1-title-goal-smart-targets">1. Title, Goal &amp; SMART Targets</a><a href="#2-context">2. Context</a><a href="#3-revised-research-questions">3. Revised Research Questions</a><a href="#4-methods">4. Methods</a><a href="#5-results-week-1-survey-n-40">5. Results (Week 1 survey, n=40)</a><a href="#6-chapters-finding-theory-practice">6. Chapters — Finding → Theory → Practice</a><a href="#7-discussion">7. Discussion</a><a href="#8-references-starter-set-groups-extend">8. References (starter set — groups extend)</a><a href="#appendix">Appendix</a></div><details class="chapter" open>
+<summary><h2 id="1-title-goal-smart-targets">1. Title, Goal &amp; SMART Targets</h2></summary>
 <p><b>Goal:</b> Improve online/digital self-study effectiveness (LMS, recorded videos, live meetings, study platforms) for Asia University first-year students through group-curated routines grounded in our class survey.</p>
 <p><b>SMART targets:</b></p>
 <ul class='card'><li>Week 1: 40 responses collected (target met); Top 5 findings ranked.</li>
 <li>Week 2: distribute guide, collect 25 feedback responses.</li></ul>
-</section>
-<section class="chapter">
-<h2 id="2-context">2. Context</h2>
+
+</details>
+<details class="chapter">
+<summary><h2 id="2-context">2. Context</h2></summary>
 <p>First-year students shifting to online/digital self-study face self-regulation gaps more than content gaps (Broadbent &amp; Poon 2015). Engagement in online settings depends on interaction design, not just materials (Martin &amp; Bolliger 2018). This report turns four evidence areas into tested class routines.</p>
-</section>
-<section class="chapter">
-<h2 id="3-revised-research-questions">3. Revised Research Questions</h2>
+
+</details>
+<details class="chapter">
+<summary><h2 id="3-revised-research-questions">3. Revised Research Questions</h2></summary>
 <ul class='card'><li><b>RQ1 (Benefits):</b> What benefits do Asia first-years report from online/digital self-study tools (LMS, recordings, videos, meetings, platforms)?</li>
 <li><b>RQ2 (Barriers):</b> What barriers do they report across four dimensions — time/self-regulation, distraction, interaction, fatigue/technology?</li>
 <li><b>RQ3 (Factors):</b> Which factors most influence their self-study effectiveness?</li></ul>
-</section>
-<section class="chapter">
-<h2 id="4-methods">4. Methods</h2>
+
+</details>
+<details class="chapter">
+<summary><h2 id="4-methods">4. Methods</h2></summary>
 <p>Anonymous online form (15 questions: multiple choice + 5-point Likert + open). Distributed in class channels with permission; 5–7 minutes. Analysis: descriptive stats only — percentages, averages, rankings. Sample: 40 class-survey responses (subgroups too small to report separately). Feedback form target 25 (Week 2). Ethics: voluntary, anonymous, no names/IDs, aggregated reporting.</p>
-</section>
-<section class="chapter">
-<h2 id="5-results-week-1-survey-n-40">5. Results (Week 1 survey, n=40)</h2>
-<figure class="pic"><svg viewBox="0 0 400 246" role="img" aria-label="Online frequency (sessions/week)"><text x="8" y="22" font-size="14" font-weight="bold" fill="#1a1a1a">Online frequency (sessions/week)</text><text x="8" y="61" font-size="12" fill="#1a1a1a">2-4 / week</text><rect x="150" y="46" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="46" width="150" height="22" rx="5" fill="#0f62fe"/><text x="315" y="61" font-size="12" fill="#57534e">43</text><text x="8" y="95" font-size="12" fill="#1a1a1a">Course-dependent</text><rect x="150" y="80" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="80" width="140" height="22" rx="5" fill="#0f62fe"/><text x="305" y="95" font-size="12" fill="#57534e">40</text><text x="8" y="129" font-size="12" fill="#1a1a1a">6+ / week</text><rect x="150" y="114" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="114" width="28" height="22" rx="5" fill="#0f62fe"/><text x="193" y="129" font-size="12" fill="#57534e">8</text><text x="8" y="163" font-size="12" fill="#1a1a1a">4-6 / week</text><rect x="150" y="148" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="148" width="17" height="22" rx="5" fill="#0f62fe"/><text x="182" y="163" font-size="12" fill="#57534e">5</text><text x="8" y="197" font-size="12" fill="#1a1a1a">1 / week</text><rect x="150" y="182" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="182" width="17" height="22" rx="5" fill="#0f62fe"/><text x="182" y="197" font-size="12" fill="#57534e">5</text><text x="8" y="236" font-size="11" fill="#57534e">Options as surveyed · % rounded, sums to 101%</text></svg><figcaption>[Graph 1: online frequency — sessions per week] · real survey data</figcaption></figure>
-<figure class="pic"><svg viewBox="0 0 400 212" role="img" aria-label="Barrier ranking (agree %)"><text x="8" y="22" font-size="14" font-weight="bold" fill="#1a1a1a">Barrier ranking (agree %)</text><text x="8" y="61" font-size="12" fill="#1a1a1a">Screen / Zoom fatigue</text><rect x="150" y="46" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="46" width="150" height="22" rx="5" fill="#0f62fe"/><text x="315" y="61" font-size="12" fill="#57534e">55</text><text x="8" y="95" font-size="12" fill="#1a1a1a">Distracted by apps</text><rect x="150" y="80" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="80" width="145" height="22" rx="5" fill="#0f62fe"/><text x="310" y="95" font-size="12" fill="#57534e">53</text><text x="8" y="129" font-size="12" fill="#1a1a1a">Self-discipline</text><rect x="150" y="114" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="114" width="109" height="22" rx="5" fill="#0f62fe"/><text x="274" y="129" font-size="12" fill="#57534e">40</text><text x="8" y="163" font-size="12" fill="#1a1a1a">Asking harder</text><rect x="150" y="148" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="148" width="68" height="22" rx="5" fill="#0f62fe"/><text x="233" y="163" font-size="12" fill="#57534e">25</text><text x="8" y="202" font-size="11" fill="#57534e">Week-1 survey, n=40</text></svg><figcaption>[Graph 2: barrier ranking across the 4 dimensions] · real survey data</figcaption></figure>
-<figure class="pic"><svg viewBox="0 0 400 144" role="img" aria-label="Benefits (Likert avg, 1-5)"><text x="8" y="22" font-size="14" font-weight="bold" fill="#1a1a1a">Benefits (Likert avg, 1-5)</text><text x="8" y="61" font-size="12" fill="#1a1a1a">Remember all content</text><rect x="150" y="46" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="46" width="150" height="22" rx="5" fill="#0f62fe"/><text x="315" y="61" font-size="12" fill="#57534e">3.50</text><text x="8" y="95" font-size="12" fill="#1a1a1a">Prefer online</text><rect x="150" y="80" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="80" width="129" height="22" rx="5" fill="#0f62fe"/><text x="294" y="95" font-size="12" fill="#57534e">3.00</text><text x="8" y="134" font-size="11" fill="#57534e">Remember avg 3.50 (55% agree) · Prefer avg 3.00 (28% agree), n=40</text></svg><figcaption>[Graph 3: Likert averages — perceived benefits] · real survey data</figcaption></figure>
+
+</details>
+<details class="chapter">
+<summary><h2 id="5-results-week-1-survey-n-40">5. Results (Week 1 survey, n=40)</h2></summary>
+<figure class="pic"><svg viewBox="0 0 400 246" role="img" aria-label="Online frequency (sessions/week)"><text x="8" y="22" font-size="14" font-weight="bold" fill="#1a1a1a">Online frequency (sessions/week)</text><text x="8" y="61" font-size="12" fill="#1a1a1a">2-4 / week</text><rect x="150" y="46" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="46" width="150" height="22" rx="5" fill="#0f62fe"><title>2-4 / week: 43</title></rect><text x="315" y="61" font-size="12" fill="#57534e">43</text><text x="8" y="95" font-size="12" fill="#1a1a1a">Course-dependent</text><rect x="150" y="80" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="80" width="140" height="22" rx="5" fill="#0f62fe"><title>Course-dependent: 40</title></rect><text x="305" y="95" font-size="12" fill="#57534e">40</text><text x="8" y="129" font-size="12" fill="#1a1a1a">6+ / week</text><rect x="150" y="114" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="114" width="28" height="22" rx="5" fill="#0f62fe"><title>6+ / week: 8</title></rect><text x="193" y="129" font-size="12" fill="#57534e">8</text><text x="8" y="163" font-size="12" fill="#1a1a1a">4-6 / week</text><rect x="150" y="148" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="148" width="17" height="22" rx="5" fill="#0f62fe"><title>4-6 / week: 5</title></rect><text x="182" y="163" font-size="12" fill="#57534e">5</text><text x="8" y="197" font-size="12" fill="#1a1a1a">1 / week</text><rect x="150" y="182" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="182" width="17" height="22" rx="5" fill="#0f62fe"><title>1 / week: 5</title></rect><text x="182" y="197" font-size="12" fill="#57534e">5</text><text x="8" y="236" font-size="11" fill="#57534e">Options as surveyed · % rounded, sums to 101%</text></svg><figcaption>[Graph 1: online frequency — sessions per week] · real survey data</figcaption></figure>
+<figure class="pic"><svg viewBox="0 0 400 212" role="img" aria-label="Barrier ranking (agree %)"><text x="8" y="22" font-size="14" font-weight="bold" fill="#1a1a1a">Barrier ranking (agree %)</text><text x="8" y="61" font-size="12" fill="#1a1a1a">Screen / Zoom fatigue</text><rect x="150" y="46" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="46" width="150" height="22" rx="5" fill="#0f62fe"><title>Screen / Zoom fatigue: 55</title></rect><text x="315" y="61" font-size="12" fill="#57534e">55</text><text x="8" y="95" font-size="12" fill="#1a1a1a">Distracted by apps</text><rect x="150" y="80" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="80" width="145" height="22" rx="5" fill="#0f62fe"><title>Distracted by apps: 53</title></rect><text x="310" y="95" font-size="12" fill="#57534e">53</text><text x="8" y="129" font-size="12" fill="#1a1a1a">Self-discipline</text><rect x="150" y="114" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="114" width="109" height="22" rx="5" fill="#0f62fe"><title>Self-discipline: 40</title></rect><text x="274" y="129" font-size="12" fill="#57534e">40</text><text x="8" y="163" font-size="12" fill="#1a1a1a">Asking harder</text><rect x="150" y="148" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="148" width="68" height="22" rx="5" fill="#0f62fe"><title>Asking harder: 25</title></rect><text x="233" y="163" font-size="12" fill="#57534e">25</text><text x="8" y="202" font-size="11" fill="#57534e">Week-1 survey, n=40</text></svg><figcaption>[Graph 2: barrier ranking across the 4 dimensions] · real survey data</figcaption></figure>
+<figure class="pic"><svg viewBox="0 0 400 144" role="img" aria-label="Benefits (Likert avg, 1-5)"><text x="8" y="22" font-size="14" font-weight="bold" fill="#1a1a1a">Benefits (Likert avg, 1-5)</text><text x="8" y="61" font-size="12" fill="#1a1a1a">Remember all content</text><rect x="150" y="46" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="46" width="150" height="22" rx="5" fill="#0f62fe"><title>Remember all content: 3.50</title></rect><text x="315" y="61" font-size="12" fill="#57534e">3.50</text><text x="8" y="95" font-size="12" fill="#1a1a1a">Prefer online</text><rect x="150" y="80" width="150" height="22" rx="5" fill="#e7e5e4"/><rect x="150" y="80" width="129" height="22" rx="5" fill="#0f62fe"><title>Prefer online: 3.00</title></rect><text x="294" y="95" font-size="12" fill="#57534e">3.00</text><text x="8" y="134" font-size="11" fill="#57534e">Remember avg 3.50 (55% agree) · Prefer avg 3.00 (28% agree), n=40</text></svg><figcaption>[Graph 3: Likert averages — perceived benefits] · real survey data</figcaption></figure>
 <div class="card"><table><tr><th>Theme (primary per response)</th><th>Responses</th></tr><tr><td>Distraction, noise, social media &amp; games</td><td>~21</td></tr><tr><td>Screen time &amp; Zoom fatigue</td><td>~8</td></tr><tr><td>Interaction with teachers / peers</td><td>~6</td></tr><tr><td>Network, mic &amp; devices</td><td>~5</td></tr></table><div class="muted">Group-coded from open answers, n=40.</div></div>
 <p>Top findings used below:</p>
 <ul class='card'><li>FINDING-1: 55% report screen/Zoom fatigue (avg 3.53/5)</li>
@@ -84,9 +102,10 @@ ul.card,ol.card{box-shadow:0 1px 3px rgba(0,0,0,.05)}
 <li>FINDING-3: 40% struggle with self-discipline unsupervised (avg 3.35/5)</li>
 <li>FINDING-4: 70% still study online (28/40); benefits are modest — remember-all avg 3.50 (55% agree), prefer-online avg 3.00 with 28% agree (11/40)</li>
 <li>FINDING-5: 25% find asking questions harder online (avg 2.78/5)</li></ul>
-</section>
-<section class="chapter">
-<h2 id="6-chapters-finding-theory-practice">6. Chapters — Finding → Theory → Practice</h2>
+
+</details>
+<details class="chapter">
+<summary><h2 id="6-chapters-finding-theory-practice">6. Chapters — Finding → Theory → Practice</h2></summary>
 <h3>Ch1 Self-Regulation &amp; Time (Group 1)</h3>
 <ul class='card'><li><b>Finding:</b> FINDING-3 — 40% struggle to keep discipline/motivation without supervision (avg 3.35/5).</li>
 <li><b>Theory:</b> Zimmerman self-regulation cycle (plan–monitor–reflect); SMART goals; ALPEN daily planning; Pomodoro intervals; retrieval practice (Roediger 2006); effective techniques review (Dunlosky 2013); OSLQ questionnaire constructs.</li>
@@ -103,22 +122,81 @@ ul.card,ol.card{box-shadow:0 1px 3px rgba(0,0,0,.05)}
 <ul class='card'><li><b>Finding:</b> FINDING-1 — 55% report screen/Zoom fatigue (avg 3.53/5), the top barrier.</li>
 <li><b>Theory:</b> Video-meeting overload mechanisms (Bailenson); technostress creators (Saleem 2024); extrinsic-load ceiling (Jordan 2026); light/sleep/focus behaviors (Huberman); 20-20-20 rule; segmenting principle.</li>
 <li><b>Practice:</b> 50-10 rhythm + 20-20-20 + meeting pre-check (see Doc1 Ch4).</li></ul>
-</section>
-<section class="chapter">
-<h2 id="7-discussion">7. Discussion</h2>
+
+</details>
+<details class="chapter">
+<summary><h2 id="7-discussion">7. Discussion</h2></summary>
 <p>Each recommendation above links to exactly one Top 3–5 survey finding — no pre-chosen advice. Where findings were weak, the routine is marked optional.</p>
 <p><b>Limitations:</b> one class, self-report, descriptive stats only, two-week window; results describe our class, not all first-years.</p>
-</section>
-<section class="chapter">
-<h2 id="8-references-starter-set-groups-extend">8. References (starter set — groups extend)</h2>
+
+</details>
+<details class="chapter">
+<summary><h2 id="8-references-starter-set-groups-extend">8. References (starter set — groups extend)</h2></summary>
 <p>Bailenson (Zoom overload) · Broadbent &amp; Poon 2015 · Dunlosky 2013 · Garrison (CoI) · Huberman (focus behaviors) · Jordan 2026 · Martin &amp; Bolliger 2018 · Moore (transactional distance) · Ophir, Nass &amp; Wagner 2009 · Roediger 2006 · Saleem 2024 · Sweller (CLT) · Uncapher 2018 · Ward 2017 · Zimmerman (self-regulation cycle).</p>
-</section>
-<section class="chapter">
-<h2 id="appendix">Appendix</h2>
+
+</details>
+<details class="chapter">
+<summary><h2 id="appendix">Appendix</h2></summary>
 <ul class='card'><li>A. Survey form (10–12Q, as distributed)</li>
 <li>B. Action Table (Finding → Routine → Owner group)</li>
 <li>C. Distribution log (channel, date, reminders, response counts)</li></ul>
-</section>
+
+</details>
 </div>
+<script>
+(function(){
+var RK="gb-routines-v1",QK="gb-quiz-v1";
+function load(k){try{return JSON.parse(localStorage.getItem(k))||{}}catch(e){return{}}}
+var R=load(RK),Q=load(QK);
+function save(){try{localStorage.setItem(RK,JSON.stringify(R));localStorage.setItem(QK,JSON.stringify(Q))}catch(e){}}
+function paint(){
+ document.querySelectorAll("[data-check]").forEach(function(el){el.checked=!!R[el.getAttribute("data-check")]});
+ var all=document.querySelectorAll("[data-check]").length;
+ var done=Object.keys(R).filter(function(k){return R[k]}).length;
+ var qs={};document.querySelectorAll("[data-opt]").forEach(function(o){qs[o.getAttribute("data-q")]=1});
+ var qt=Object.keys(qs).length,qd=Object.keys(Q).length;
+ Object.keys(Q).forEach(function(qid){restore(qid)});
+ var p=document.getElementById("progress");
+ if(p)p.innerHTML="<b>My progress</b> — routines "+done+"/"+all+" · quiz "+qd+"/"+qt;
+}
+function restore(qid){
+ var box=document.querySelector('[data-qbox="'+qid+'"]');if(!box)return;
+ var pick=Q[qid];
+ box.querySelectorAll("[data-opt]").forEach(function(o){
+  o.disabled=true;
+  if(o.getAttribute("data-ok")==="1")o.classList.add("right");
+  else if(o.getAttribute("data-pick")===String(pick))o.classList.add("wrong");
+ });
+ var m=box.querySelector("[data-msg]");
+ if(m&&pick!==undefined){m.textContent=box.getAttribute("data-verdict");m.style.display="block"}
+}
+document.addEventListener("change",function(e){
+ var el=e.target;
+ if(el.hasAttribute&&el.hasAttribute("data-check")){
+  var k=el.getAttribute("data-check");
+  if(el.checked)R[k]=1;else delete R[k];
+  save();paint();
+ }
+});
+document.addEventListener("click",function(e){
+ var b=e.target.closest?e.target.closest("[data-opt]"):null;
+ if(b&&!b.disabled){
+  var qid=b.getAttribute("data-q"),ok=b.getAttribute("data-ok")==="1";
+  var box=b.closest("[data-qbox]");
+  box.setAttribute("data-verdict",(ok?"Correct. ":"Not quite. ")+b.getAttribute("data-why"));
+  Q[qid]=b.getAttribute("data-pick");save();paint();return;
+ }
+ var t=e.target.closest?e.target.closest(".toc a"):null;
+ if(t){var id=t.getAttribute("href");
+  if(id&&id.charAt(0)==="#"){var d=document.getElementById(id.slice(1));
+   if(d){var det=d.closest("details");if(det)det.open=true}}
+ }
+});
+window.addEventListener("beforeprint",function(){
+ document.querySelectorAll("details.chapter").forEach(function(d){d.open=true});
+});
+paint();
+})();
+</script>
 </body>
 </html>

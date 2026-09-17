@@ -71,6 +71,20 @@ li.pic{{list-style:none}}
 .card,ul.card,ol.card{{line-height:1.7}}
 ul.card,ol.card{{box-shadow:0 1px 3px rgba(0,0,0,.05)}}
 .sub{{color:#57534e;font-size:14px;margin:2px 0 0}}
+details.chapter summary{{cursor:pointer}}
+details.chapter summary h2{{display:inline}}
+details.chapter summary::-webkit-details-marker{{color:#0f62fe}}
+.check{{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #f1f0ee;cursor:pointer}}
+.check:last-child{{border-bottom:none}}
+.check input{{width:18px;height:18px;margin-top:3px;accent-color:#0f62fe;flex:none}}
+.opts{{display:flex;flex-direction:column;gap:8px;margin:8px 0}}
+.opts button{{text-align:left;background:#fff;border:1px solid #e7e5e4;border-radius:10px;padding:8px 12px;font-size:14px;cursor:pointer}}
+.opts button:hover:not(:disabled){{border-color:#0f62fe}}
+.opts button.right{{background:#dcfce7;border-color:#16a34a}}
+.opts button.wrong{{background:#fee2e2;border-color:#dc2626}}
+.opts button:disabled{{cursor:default}}
+.msg{{display:none;background:#f7f7f5;border-radius:10px;padding:8px 12px;font-size:13px;color:#57534e}}
+.progress{{background:#1a1a1a;color:#fff;border-radius:12px;padding:12px 16px;margin:12px 0;font-size:14px}}
 @media(min-width:1100px){{.wrap{{max-width:1100px}}.grid2{{grid-template-columns:1fr 1fr 1fr}}}}
 @media print{{.topbar{{display:none}}.toc{{position:static;background:#fff}}.wrap{{max-width:100%;padding:0}}body{{background:#fff}}.card,.tldr{{break-inside:avoid}}}}
 </style>
@@ -80,6 +94,61 @@ ul.card,ol.card{{box-shadow:0 1px 3px rgba(0,0,0,.05)}}
 <div class="topbar"><a href="index.html">&larr; Alph</a><span class="muted">Guidebook</span></div>
 {body_inner}
 </div>
+<script>
+(function(){{
+var RK="gb-routines-v1",QK="gb-quiz-v1";
+function load(k){{try{{return JSON.parse(localStorage.getItem(k))||{{}}}}catch(e){{return{{}}}}}}
+var R=load(RK),Q=load(QK);
+function save(){{try{{localStorage.setItem(RK,JSON.stringify(R));localStorage.setItem(QK,JSON.stringify(Q))}}catch(e){{}}}}
+function paint(){{
+ document.querySelectorAll("[data-check]").forEach(function(el){{el.checked=!!R[el.getAttribute("data-check")]}});
+ var all=document.querySelectorAll("[data-check]").length;
+ var done=Object.keys(R).filter(function(k){{return R[k]}}).length;
+ var qs={{}};document.querySelectorAll("[data-opt]").forEach(function(o){{qs[o.getAttribute("data-q")]=1}});
+ var qt=Object.keys(qs).length,qd=Object.keys(Q).length;
+ Object.keys(Q).forEach(function(qid){{restore(qid)}});
+ var p=document.getElementById("progress");
+ if(p)p.innerHTML="<b>My progress</b> — routines "+done+"/"+all+" · quiz "+qd+"/"+qt;
+}}
+function restore(qid){{
+ var box=document.querySelector('[data-qbox="'+qid+'"]');if(!box)return;
+ var pick=Q[qid];
+ box.querySelectorAll("[data-opt]").forEach(function(o){{
+  o.disabled=true;
+  if(o.getAttribute("data-ok")==="1")o.classList.add("right");
+  else if(o.getAttribute("data-pick")===String(pick))o.classList.add("wrong");
+ }});
+ var m=box.querySelector("[data-msg]");
+ if(m&&pick!==undefined){{m.textContent=box.getAttribute("data-verdict");m.style.display="block"}}
+}}
+document.addEventListener("change",function(e){{
+ var el=e.target;
+ if(el.hasAttribute&&el.hasAttribute("data-check")){{
+  var k=el.getAttribute("data-check");
+  if(el.checked)R[k]=1;else delete R[k];
+  save();paint();
+ }}
+}});
+document.addEventListener("click",function(e){{
+ var b=e.target.closest?e.target.closest("[data-opt]"):null;
+ if(b&&!b.disabled){{
+  var qid=b.getAttribute("data-q"),ok=b.getAttribute("data-ok")==="1";
+  var box=b.closest("[data-qbox]");
+  box.setAttribute("data-verdict",(ok?"Correct. ":"Not quite. ")+b.getAttribute("data-why"));
+  Q[qid]=b.getAttribute("data-pick");save();paint();return;
+ }}
+ var t=e.target.closest?e.target.closest(".toc a"):null;
+ if(t){{var id=t.getAttribute("href");
+  if(id&&id.charAt(0)==="#"){{var d=document.getElementById(id.slice(1));
+   if(d){{var det=d.closest("details");if(det)det.open=true}}}}
+ }}
+}});
+window.addEventListener("beforeprint",function(){{
+ document.querySelectorAll("details.chapter").forEach(function(d){{d.open=true}});
+}});
+paint();
+}})();
+</script>
 </body>
 </html>"""
 
@@ -158,7 +227,7 @@ def hbars(title, rows, note=""):
         num = f"{v:.2f}" if isinstance(v, float) else f"{v:d}"
         p.append(f'<text x="8" y="{y + 15}" font-size="12" fill="#1a1a1a">{esc(lab)}</text>')
         p.append(f'<rect x="150" y="{y}" width="150" height="{bh}" rx="5" fill="#e7e5e4"/>')
-        p.append(f'<rect x="150" y="{y}" width="{w:.0f}" height="{bh}" rx="5" fill="#0f62fe"/>')
+        p.append(f'<rect x="150" y="{y}" width="{w:.0f}" height="{bh}" rx="5" fill="#0f62fe"><title>{esc(lab)}: {num}</title></rect>')
         p.append(f'<text x="{165 + w:.0f}" y="{y + 15}" font-size="12" fill="#57534e">{num}</text>')
         y += bh + gap
     if note:
@@ -206,7 +275,7 @@ def table_chart(txt):
             + rows + '</table><div class="muted">Group-coded from open answers, n=40.</div></div>')
 
 
-def md_to_html(text):
+def md_to_html(text, extras=None):
     out, toc, seen, lines, i = [], [], set(), text.split("\n"), 0
     while i < len(lines):
         ln = lines[i].rstrip()
@@ -278,7 +347,11 @@ def md_to_html(text):
             else:
                 out.append(f"<p>{inline(txt)}</p>")
         i += 1
-    hero, rest = group_sections(out)
+    return md_assemble(out, toc, extras)
+
+
+def md_assemble(out, toc, extras):
+    hero, rest = group_sections(out, extras)
     if toc:
         nav = '<div class="toc">' + "".join(
             f'<a href="#{esc(sid)}">{esc(t)}</a>' for sid, t in toc
@@ -287,8 +360,9 @@ def md_to_html(text):
     return hero + rest
 
 
-def group_sections(blocks):
-    """Cover blocks -> hero card; each h2 + following blocks -> chapter card."""
+def group_sections(blocks, extras=None):
+    """Cover blocks -> hero card; each h2 + following blocks -> collapsible chapter."""
+    extras = extras or {}
     idx = [n for n, b in enumerate(blocks) if b.startswith("<h2")]
     if not idx:
         return "", "\n".join(blocks)
@@ -298,8 +372,102 @@ def group_sections(blocks):
     rest = []
     for k, s in enumerate(idx):
         e = idx[k + 1] if k + 1 < len(idx) else len(blocks)
-        rest.append('<section class="chapter">\n' + "\n".join(blocks[s:e]) + "\n</section>")
+        m = re.search(r'id="([^"]+)"', blocks[s])
+        sid = m.group(1) if m else ""
+        extra = extras.get(sid, "")
+        o = " open" if k == 0 else ""
+        rest.append(f'<details class="chapter"{o}>\n<summary>{blocks[s]}</summary>\n'
+                    + "\n".join(blocks[s + 1:e]) + "\n" + extra + "\n</details>")
     return hero, "\n".join(rest)
+
+
+CHECKLISTS = {
+    "chapter-1-self-regulation-time": [
+        "Wrote one SMART goal for tonight",
+        "Made tomorrow's ALPEN plan",
+        "Finished a 25-5 x2 study block",
+    ],
+    "chapter-2-distraction-concentration": [
+        "Phone in drawer during study",
+        "Kept to one browser tab",
+        "Turned notifications off",
+    ],
+    "chapter-3-interaction-support": [
+        "Used the question template once",
+        "Peer-checked with a classmate",
+        "Posted in the class channel",
+    ],
+    "chapter-4-fatigue-technology": [
+        "Studied 50 minutes, moved 10",
+        "Did 20-20-20 twice today",
+        "Ran the pre-check before a meeting",
+    ],
+}
+
+QUIZZES = {
+    "chapter-1-self-regulation-time": [
+        ("In SMART, the M stands for…", ["Manageable", "Measurable", "Morning"], 1,
+         "Goals must be measurable so tomorrow-you can check them off."),
+        ("One focus block in our routine is…", ["25 min work, 5 rest", "50 min work, 10 rest", "2 hours flat"], 0,
+         "Short spaced sessions with recall beat re-reading."),
+        ("An ALPEN plan starts with…", ["Listing tasks", "Adding buffer", "Checking off"], 0,
+         "List first, then estimate, buffer, order, review at night."),
+    ],
+    "chapter-2-distraction-concentration": [
+        ("During study blocks your phone should be…", ["Face-down on desk", "In a drawer or bag", "In hand, on silent"], 1,
+         "A nearby phone drains thinking power even untouched (Brain Drain)."),
+        ("Why one browser tab?", ["Saves battery", "Avoids attention residue", "Loads pages faster"], 1,
+         "Every glance elsewhere leaves residue that slows you down."),
+        ("Heavy multitaskers…", ["Switch tasks better", "Switch tasks worse", "Are unaffected"], 1,
+         "Ophir, Nass & Wagner (2009): they perform worse at switching."),
+    ],
+    "chapter-3-interaction-support": [
+        ("Ask for help after being stuck…", ["15 minutes", "2 hours", "Next week"], 0,
+         "15 minutes is the rule — then template, peer, post."),
+        ("A good question states…", ["Tried / expected / got / question", "Only the error message", "Your grade goal"], 0,
+         "Clear questions get faster, better help."),
+        ("After writing it, first…", ["DM anyone online", "Peer-check, then post publicly", "Wait for the teacher"], 1,
+         "Peer-check first, then post so the whole class benefits."),
+    ],
+    "chapter-4-fatigue-technology": [
+        ("20-20-20 means…", ["20 min study, 20 rest, 20 snacks", "Every 20 min, look 20 m away for 20 s", "20 pages in 20 minutes"], 1,
+         "It rests your eyes during screen time."),
+        ("Our study rhythm is…", ["Study 50, move 10", "One 3-hour marathon", "Back-to-back meetings"], 0,
+         "Breaks are part of studying, not a reward after."),
+        ("Before each online meeting…", ["Test net, mic and camera", "Charge overnight", "Nothing needed"], 0,
+         "The 2-minute pre-check kills most tech stress."),
+    ],
+}
+
+
+def checklist_html(doc, sid, items):
+    lis = "".join(
+        f'<label class="check"><input type="checkbox" data-check="{doc}-{sid}-{n}"> {inline(t)}</label>'
+        for n, t in enumerate(items)
+    )
+    return f'<div class="card"><b>Try it this week — tick when done</b>{lis}</div>'
+
+
+def quiz_html(doc, sid, questions):
+    out = ['<div class="card"><b>Quick check — pick one</b>']
+    for qi, (q, opts, _a, _why) in enumerate(questions):
+        qid = f"{doc}-{sid}-q{qi}"
+        out.append(f'<div data-qbox="{qid}"><p><b>{inline(q)}</b></p><div class="opts">')
+        for oi, opt in enumerate(opts):
+            ok = "1" if oi == _a else "0"
+            out.append(f'<button type="button" data-q="{qid}" data-opt data-pick="{oi}" data-ok="{ok}" data-why="{esc(_why)}">{inline(opt)}</button>')
+        out.append('</div><p class="msg" data-msg></p></div>')
+    out.append("</div>")
+    return "\n".join(out)
+
+
+def doc1_extras():
+    extras = {}
+    for sid, items in CHECKLISTS.items():
+        extras[sid] = checklist_html("doc1", sid, items)
+    for sid, questions in QUIZZES.items():
+        extras[sid] = extras.get(sid, "") + quiz_html("doc1", sid, questions)
+    return extras
 
 
 def main():
@@ -307,7 +475,13 @@ def main():
     os.makedirs(DOCS_DIR, exist_ok=True)
     for fn, label, _desc in DOCS:
         with open(os.path.join(BASE_DIR, fn), encoding="utf-8") as f:
-            html = shell(label, md_to_html(f.read()))
+            extras = doc1_extras() if fn.startswith("DOC1") else None
+            body = md_to_html(f.read(), extras)
+            if extras:
+                nq = sum(len(v) for v in QUIZZES.values())
+                nc = sum(len(v) for v in CHECKLISTS.values())
+                body += f'<div class="progress" id="progress"><b>My progress</b> — routines 0/{nc} · quiz 0/{nq}</div>'
+            html = shell(label, body)
         name = fn.replace(".md", ".html")
         with open(os.path.join(OUT_DIR, name), "w", encoding="utf-8") as f:
             f.write(html)

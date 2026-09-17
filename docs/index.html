@@ -40,6 +40,20 @@ li.pic{list-style:none}
 .card,ul.card,ol.card{line-height:1.7}
 ul.card,ol.card{box-shadow:0 1px 3px rgba(0,0,0,.05)}
 .sub{color:#57534e;font-size:14px;margin:2px 0 0}
+details.chapter summary{cursor:pointer}
+details.chapter summary h2{display:inline}
+details.chapter summary::-webkit-details-marker{color:#0f62fe}
+.check{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #f1f0ee;cursor:pointer}
+.check:last-child{border-bottom:none}
+.check input{width:18px;height:18px;margin-top:3px;accent-color:#0f62fe;flex:none}
+.opts{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.opts button{text-align:left;background:#fff;border:1px solid #e7e5e4;border-radius:10px;padding:8px 12px;font-size:14px;cursor:pointer}
+.opts button:hover:not(:disabled){border-color:#0f62fe}
+.opts button.right{background:#dcfce7;border-color:#16a34a}
+.opts button.wrong{background:#fee2e2;border-color:#dc2626}
+.opts button:disabled{cursor:default}
+.msg{display:none;background:#f7f7f5;border-radius:10px;padding:8px 12px;font-size:13px;color:#57534e}
+.progress{background:#1a1a1a;color:#fff;border-radius:12px;padding:12px 16px;margin:12px 0;font-size:14px}
 @media(min-width:1100px){.wrap{max-width:1100px}.grid2{grid-template-columns:1fr 1fr 1fr}}
 @media print{.topbar{display:none}.toc{position:static;background:#fff}.wrap{max-width:100%;padding:0}body{background:#fff}.card,.tldr{break-inside:avoid}}
 </style>
@@ -49,5 +63,60 @@ ul.card,ol.card{box-shadow:0 1px 3px rgba(0,0,0,.05)}
 <div class="topbar"><a href="index.html">&larr; Alph</a><span class="muted">Guidebook</span></div>
 <h1>Guidebook</h1><div class="card"><a href="DOC1-practical-short.html"><b>Practical Short — Student Guide</b></a><div class="sub">Routines first: 5-minute fixes for time, distraction, interaction and fatigue.</div></div><div class="card"><a href="DOC2-detailed-long.html"><b>Detailed Long — Evidence Report</b></a><div class="sub">Survey results, theories and linked recommendations (n=40).</div></div><div class="card"><a href="DOC3-mix-textbook.html"><b>Mix Textbook — Teacher Lessons</b></a><div class="sub">15-minute lesson scripts, activities and class norms.</div></div>
 </div>
+<script>
+(function(){
+var RK="gb-routines-v1",QK="gb-quiz-v1";
+function load(k){try{return JSON.parse(localStorage.getItem(k))||{}}catch(e){return{}}}
+var R=load(RK),Q=load(QK);
+function save(){try{localStorage.setItem(RK,JSON.stringify(R));localStorage.setItem(QK,JSON.stringify(Q))}catch(e){}}
+function paint(){
+ document.querySelectorAll("[data-check]").forEach(function(el){el.checked=!!R[el.getAttribute("data-check")]});
+ var all=document.querySelectorAll("[data-check]").length;
+ var done=Object.keys(R).filter(function(k){return R[k]}).length;
+ var qs={};document.querySelectorAll("[data-opt]").forEach(function(o){qs[o.getAttribute("data-q")]=1});
+ var qt=Object.keys(qs).length,qd=Object.keys(Q).length;
+ Object.keys(Q).forEach(function(qid){restore(qid)});
+ var p=document.getElementById("progress");
+ if(p)p.innerHTML="<b>My progress</b> — routines "+done+"/"+all+" · quiz "+qd+"/"+qt;
+}
+function restore(qid){
+ var box=document.querySelector('[data-qbox="'+qid+'"]');if(!box)return;
+ var pick=Q[qid];
+ box.querySelectorAll("[data-opt]").forEach(function(o){
+  o.disabled=true;
+  if(o.getAttribute("data-ok")==="1")o.classList.add("right");
+  else if(o.getAttribute("data-pick")===String(pick))o.classList.add("wrong");
+ });
+ var m=box.querySelector("[data-msg]");
+ if(m&&pick!==undefined){m.textContent=box.getAttribute("data-verdict");m.style.display="block"}
+}
+document.addEventListener("change",function(e){
+ var el=e.target;
+ if(el.hasAttribute&&el.hasAttribute("data-check")){
+  var k=el.getAttribute("data-check");
+  if(el.checked)R[k]=1;else delete R[k];
+  save();paint();
+ }
+});
+document.addEventListener("click",function(e){
+ var b=e.target.closest?e.target.closest("[data-opt]"):null;
+ if(b&&!b.disabled){
+  var qid=b.getAttribute("data-q"),ok=b.getAttribute("data-ok")==="1";
+  var box=b.closest("[data-qbox]");
+  box.setAttribute("data-verdict",(ok?"Correct. ":"Not quite. ")+b.getAttribute("data-why"));
+  Q[qid]=b.getAttribute("data-pick");save();paint();return;
+ }
+ var t=e.target.closest?e.target.closest(".toc a"):null;
+ if(t){var id=t.getAttribute("href");
+  if(id&&id.charAt(0)==="#"){var d=document.getElementById(id.slice(1));
+   if(d){var det=d.closest("details");if(det)det.open=true}}
+ }
+});
+window.addEventListener("beforeprint",function(){
+ document.querySelectorAll("details.chapter").forEach(function(d){d.open=true});
+});
+paint();
+})();
+</script>
 </body>
 </html>
