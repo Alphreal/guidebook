@@ -52,7 +52,7 @@ Then: (1) peer-check with one classmate, (2) post it in the class channel / foru
 
 ## Chapter 4 — Fatigue & Technology
 
-**Routine:** Study 50 minutes, move 10. Every 20 minutes, look 20 meters away for 20 seconds (20-20-20). Before each online meeting: test internet, mic, camera (2-minute pre-check).
+**Routine:** Study 50 minutes, move 10. Every 20 minutes, look 20 feet (~6 meters) away for 20 seconds (20-20-20). Before each online meeting: test internet, mic, camera (2-minute pre-check).
 
 **Why it works (3 lines):** Back-to-back video calls overload the brain (Zoom fatigue, Bailenson). Tech stress builds when tools feel out of control (Saleem 2024). Light, sleep, and breaks protect focus (Huberman); short segments beat marathons (segmenting principle).
 

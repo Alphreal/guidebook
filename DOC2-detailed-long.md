@@ -25,7 +25,7 @@ Anonymous online form (15 questions: multiple choice + 5-point Likert + open). D
 
 ## 5. Results (Week 1 survey, n=40)
 
-[Graph 1: online frequency — sessions per week]
+[Graph 1: current use — still online + weekly frequency]
 [Graph 2: barrier ranking across the 4 dimensions]
 [Graph 3: Likert averages — perceived benefits]
 [Table: open-answer themes, coded]

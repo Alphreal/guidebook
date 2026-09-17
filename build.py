@@ -265,7 +265,7 @@ GRAPH_CHARTS = [  # most-specific keys first: first match wins
     (("asking difficulty",), ("Asking harder online", [("Score 4-5", 25)], "25% of n=40 · comparison arm not surveyed")),
     (("fatigue level",), ("Screen / Zoom fatigue", [("Score 4-5", 55)], "55% of n=40 · comparison arm not surveyed")),
     (("barriers by agree",), ("Barriers by agree % (4-5/5)", BARRIERS, "Week-1 survey, n=40")),
-    (("graph 1", "sessions per week"), ("Online frequency (sessions/week)", [("2-4 / week", 43), ("Course-dependent", 40), ("6+ / week", 8), ("4-6 / week", 5), ("1 / week", 5)], "Options as surveyed · % rounded, sums to 101%")),
+    (("graph 1", "sessions per week", "current use"), ("Current use (% of n=40)", [("Still online", 70), ("2-4 sessions/week", 43), ("Course-dependent", 40), ("6+ / week", 8), ("4-6 / week", 5), ("1 / week", 5)], "Still-online + frequency as surveyed · % rounded")),
     (("graph 2", "barrier ranking"), ("Barrier ranking (agree %)", BARRIERS, "Week-1 survey, n=40")),
     (("graph 3", "perceived benefits", "likert averages"), ("Benefits (Likert avg, 1-5)", [("Remember all content", 3.5), ("Prefer online", 3.0)], "Remember avg 3.50 (55% agree) · Prefer avg 3.00 (28% agree), n=40")),
 ]
@@ -449,7 +449,7 @@ QUIZZES = {
          "Peer-check first, then post so the whole class benefits."),
     ],
     "chapter-4-fatigue-technology": [
-        ("20-20-20 means…", ["20 min study, 20 rest, 20 snacks", "Every 20 min, look 20 m away for 20 s", "20 pages in 20 minutes"], 1,
+        ("20-20-20 means…", ["20 min study, 20 rest, 20 snacks", "Every 20 min, look 20 feet away for 20 s", "20 pages in 20 minutes"], 1,
          "It rests your eyes during screen time."),
         ("Our study rhythm is…", ["Study 50, move 10", "One 3-hour marathon", "Back-to-back meetings"], 0,
          "Breaks are part of studying, not a reward after."),
