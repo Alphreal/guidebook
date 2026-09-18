@@ -222,7 +222,7 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 .tour .big{{background:linear-gradient(135deg,#818cf8,#c084fc);color:#020617;font-weight:800;border:none;border-radius:999px;padding:10px 24px;font-size:15px;cursor:pointer;margin-top:8px}}
 .tour .big:hover{{transform:translateY(-2px)}}
 .tour .trow{{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:4px}}
-.tour .trow .tbtn{{margin:8px 0 0}}
+.tour .trow .tbtn{{font-size:15px;padding:10px 24px;margin:8px 0 0}}
 .tbtn{{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);color:#e2e8f0;border-radius:999px;padding:7px 16px;font-size:13px;cursor:pointer;margin:6px 6px 0 0;text-decoration:none;display:inline-block}}
 .tbtn:hover{{border-color:#818cf8}}
 .tbtn.pri{{background:linear-gradient(135deg,#818cf8,#c084fc);color:#020617;border-color:transparent;font-weight:700}}
@@ -831,7 +831,7 @@ def tour_html():
     return ('<div class="card tour" id="tourcard"><b>New here? Guided start (2 minutes)</b>'
             '<div class="muted">Tap Start — we walk you through every step of this guide.</div>'
             '<div class="trow"><div data-tourbody><button type="button" class="big" data-tour="start">Let\'s get started</button></div>'
-            '<div><a class="tbtn big" href="vn.html">Xem posters tiếng Việt</a></div></div></div>')
+            '<div><a class="tbtn" href="vn.html">Xem posters tiếng Việt</a></div></div></div>')
 
 
 def main():
