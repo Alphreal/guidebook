@@ -101,6 +101,12 @@ details[open]>.dbody{grid-template-rows:1fr}
 .prof{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0;font-size:13px}
 .prof input{background:rgba(2,6,23,.6);border:1px solid rgba(255,255,255,.2);color:#f1f5f9;border-radius:10px;padding:6px 10px;font-size:13px;min-width:140px}
 .expout{width:100%;box-sizing:border-box;background:rgba(2,6,23,.6);border:1px solid rgba(255,255,255,.2);color:#cbd5e1;border-radius:10px;padding:8px;font-size:12px;margin-top:8px;white-space:pre-wrap}
+.tour{border:1px solid rgba(129,140,248,.55);background:linear-gradient(135deg,rgba(129,140,248,.14),rgba(192,132,252,.08))}
+.tour .big{background:linear-gradient(135deg,#818cf8,#c084fc);color:#020617;font-weight:800;border:none;border-radius:999px;padding:10px 24px;font-size:15px;cursor:pointer;margin-top:8px}
+.tour .big:hover{transform:translateY(-2px)}
+.tour .tbtn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);color:#e2e8f0;border-radius:999px;padding:7px 16px;font-size:13px;cursor:pointer;margin:6px 6px 0 0}
+.tour .tbtn:hover{border-color:#818cf8}
+.tour .tbtn.pri{background:linear-gradient(135deg,#818cf8,#c084fc);color:#020617;border-color:transparent;font-weight:700}
 .progress{background:linear-gradient(135deg,rgba(129,140,248,.25),rgba(192,132,252,.18));border:1px solid rgba(129,140,248,.4);border-radius:14px;padding:12px 16px;margin:12px 0;font-size:14px}
 .rv{opacity:0;transform:translateY(14px);transition:opacity .5s ease-out,transform .5s ease-out}
 .rv.on{opacity:1;transform:none}
@@ -221,6 +227,16 @@ function dayCount(key){var b=W[key]||{};return Object.keys(b).length}
 function weekMarks(){var m=iso(monday()),n=0;Object.keys(W).forEach(function(k){if(k<m)return;var dt;try{dt=new Date(k+"T12:00:00")}catch(e){return};if(!onDay(wdi(dt)))return;n+=Object.keys(W[k]).length});return n}
 function streak(){var d=new Date(),s=0,g=0;var td=wdi(d);if(!onDay(td)||dayCount(iso(d))<2){d.setDate(d.getDate()-1);g++}while(g<40){var di=wdi(d);if(!onDay(di)){d.setDate(d.getDate()-1);g++;continue}if(dayCount(iso(d))>=2){s++;d.setDate(d.getDate()-1);g++}else break}return s}
 function summary(){var boxes=document.querySelectorAll("[data-check]");var done=0;boxes.forEach(function(el){if(R[el.getAttribute("data-check")])done++});var days=[];for(var i=0;i<7;i++)if(onDay(i))days.push(["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][i]);var notes=[];document.querySelectorAll("[data-note]").forEach(function(el){var v=(N[el.getAttribute("data-note")]||"").trim();if(v)notes.push("- "+v.slice(0,140))});return "Guidebook progress"+(user?" ("+user+")":"")+" "+iso(new Date())+"\nRoutines: "+done+"/"+boxes.length+"\nWeek: "+weekMarks()+"/"+(onlineCount()*4)+" (online: "+(days.join(",")||"none")+")\nStreak: "+streak()+"d"+(notes.length?"\nMy texts:\n"+notes.join("\n"):"")}
+var CHS=[["chapter-1-self-regulation-time","Time","Plan & focus blocks"],["chapter-2-distraction-concentration","Distraction","One tab, phone away"],["chapter-3-interaction-support","Interaction","Ask with the template"],["chapter-4-fatigue-technology","Fatigue","One stream, move & rest"]];
+var TG={step:0,ch:0};
+function goSid(sid){var h=document.getElementById(sid);var det=h&&h.closest?h.closest("details"):null;if(det){det.open=true;setTimeout(function(){try{det.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){det.scrollIntoView()}},80)}}
+function goWeek(){var w=document.querySelector("[data-day]");var c=w&&w.closest?w.closest(".card"):null;if(c){try{c.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){c.scrollIntoView()}}}
+function tourRender(){var b=document.querySelector("[data-tourbody]");if(!b)return;var s=TG.step,c=CHS[TG.ch],dots="Step "+(s+1)+" of 5";
+ if(s===0){b.innerHTML='<div class="muted">'+dots+' — what is your biggest struggle?</div><div><button type="button" class="tbtn" data-tour="pick:0">Time</button><button type="button" class="tbtn" data-tour="pick:1">Distraction</button><button type="button" class="tbtn" data-tour="pick:2">Interaction</button><button type="button" class="tbtn" data-tour="pick:3">Fatigue</button></div>'}
+ else if(s===1){b.innerHTML='<div>'+dots+' — your chapter: <b>'+c[2]+'</b>. Open it and read the routine first.</div><div><button type="button" class="tbtn pri" data-tour="opench">Open my chapter</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}
+ else if(s===2){b.innerHTML='<div>'+dots+' — do the 5-minute routine now. Stuck? Tap How? next to any item.</div><div><button type="button" class="tbtn pri" data-tour="next">Done, next</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}
+ else if(s===3){b.innerHTML='<div>'+dots+' — read the short "Why it works" box, then track your week below.</div><div><button type="button" class="tbtn pri" data-tour="week">Take me to My study week</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}
+ else{b.innerHTML='<div class="ok">Done — routine tried, days picked, progress saved. Tap Send to teacher when ready.</div><div><button type="button" class="tbtn" data-tour="restart">Restart tour</button></div>'}}
 function paint(){
  var boxes=document.querySelectorAll("[data-check]");
  boxes.forEach(function(el){el.checked=!!R[el.getAttribute("data-check")]});
@@ -261,6 +277,15 @@ document.addEventListener("click",function(e){
  if(db){var di=db.getAttribute("data-day");if(D[di])delete D[di];else D[di]=1;save();paint();return}
  var da=e.target.closest?e.target.closest("[data-dayact]"):null;
  if(da){var a=da.getAttribute("data-dayact");if(a==="all")D={"0":1,"1":1,"2":1,"3":1,"4":1,"5":1,"6":1};else if(a==="weekdays")D={"0":1,"1":1,"2":1,"3":1,"4":1};else D={};save();paint();return}
+ var tr=e.target.closest?e.target.closest("[data-tour]"):null;
+ if(tr){var ta=tr.getAttribute("data-tour");
+  if(ta==="start"){TG.step=0;tourRender();return}
+  if(ta.indexOf("pick:")===0){TG.ch=parseInt(ta.slice(5),10)||0;TG.step=1;tourRender();goSid(CHS[TG.ch][0]);return}
+  if(ta==="opench"){goSid(CHS[TG.ch][0]);TG.step=2;tourRender();return}
+  if(ta==="next"){TG.step=3;tourRender();return}
+  if(ta==="week"){goWeek();TG.step=4;tourRender();return}
+  if(ta==="back"){TG.step=Math.max(0,TG.step-1);tourRender();return}
+  if(ta==="restart"){TG.step=0;TG.ch=0;tourRender();return}}
  var gc=e.target.closest?e.target.closest("[data-goalcheck]"):null;
  if(gc){var k3=gc.getAttribute("data-goalcheck");var ta=document.querySelector('[data-note="'+k3+'-note"]');var msg=document.querySelector('[data-goalmsg="'+k3+'"]');var v=ta&&ta.value?ta.value.trim():"";var hasNum=/\d/.test(v);var hasTime=/(before|by|tomorrow|tonight|today|pm|am|min|week|mon|tue|wed|thu|fri)/i.test(v);var pts=(v.length>=12?1:0)+(hasNum?1:0)+(hasTime?1:0);if(msg){msg.hidden=false;if(pts>=2){msg.className="ok";msg.textContent="Looks good ("+pts+"/3): has detail + number/time. Now tick Done."}else{msg.className="bad";msg.textContent="Add more ("+pts+"/3): need 12+ chars"+(hasNum?"":" + a number")+(hasTime?"":" + a time/deadline")+". See example above."}}return}
  var ex=e.target.closest?e.target.closest("[data-exp]"):null;

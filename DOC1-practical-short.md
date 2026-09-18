@@ -17,9 +17,9 @@ Example: "Finish LMS Unit 3 quiz (20 questions) before 9pm tomorrow, score 70%+.
 
 **Tomorrow morning (5 min): ALPEN plan.** List tasks, estimate minutes, add buffer, decide order, check off at night.
 
-**Study block: 25-5 x2.** 25 minutes focused work, 5 minutes break, repeat once. Then a longer 15-minute break.
+**Study block: flexible focus (Flowtime).** Start with 25 minutes to get going. If you enter flow — time disappears, work feels smooth — keep going up to 50 minutes; never let a timer interrupt deep work. When focus fades, stop at a natural seam (end of a section, not mid-thought) and break 5–15 minutes.
 
-**Why it works (3 lines):** Self-regulated learners plan, monitor, and adjust in a cycle (Zimmerman). Specific goals beat vague intentions (SMART). Short spaced sessions with recall beat re-reading (Roediger 2006; Dunlosky 2013).
+**Why it works (3 lines):** Self-regulated learners plan, monitor, and adjust in a cycle (Zimmerman). Specific goals beat vague intentions (SMART). Fixed timers can shatter fragile flow (Csikszentmihalyi; Smits et al. 2025) — so protect it: extend good blocks, rest between them, and recall instead of re-reading (Roediger 2006; Dunlosky 2013).
 
 [Graph: Week 1 survey — barriers by agree % (n=40)]
 [Picture: desk timer next to a ticked checklist]
@@ -52,9 +52,9 @@ Then: (1) peer-check with one classmate, (2) post it in the class channel / foru
 
 ## Chapter 4 — Fatigue & Technology
 
-**Routine:** Study 50 minutes, move 10. Every 20 minutes, look 20 feet (~6 meters) away for 20 seconds (20-20-20). Before each online meeting: test internet, mic, camera (2-minute pre-check).
+**Routine:** One stream at a time — the lesson only. Parallel YouTube, feeds, or music with lyrics compete for the same working memory, so the lesson never encodes. Study 50 minutes, move 10. Rest your eyes at natural breaks (end of a video or chapter): look ~6 meters away for ~20 seconds, roll your shoulders — no clock-watching mid-lesson. Before each online meeting: test internet, mic, camera (2-minute pre-check).
 
-**Why it works (3 lines):** Back-to-back video calls overload the brain (Zoom fatigue, Bailenson). Tech stress builds when tools feel out of control (Saleem 2024). Light, sleep, and breaks protect focus (Huberman); short segments beat marathons (segmenting principle).
+**Why it works (3 lines):** Back-to-back video calls overload the brain (Zoom fatigue, Bailenson). Parallel streams overload working memory, so nothing transfers to memory (Sweller; Ophir 2009); tech stress builds when tools feel out of control (Saleem 2024). Light, sleep, and breaks protect focus (Huberman); stop at task seams, not timer signals, to avoid attention residue (Leroy 2009).
 
 [Picture: stretching + correct screen distance diagram]
 
