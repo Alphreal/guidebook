@@ -232,7 +232,8 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 .bar{{transform:scaleX(0);transform-box:fill-box;transform-origin:left;animation:grow .7s ease-out forwards}}
 @keyframes grow{{to{{transform:scaleX(1)}}}}
 a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{{outline:2px solid #818cf8;outline-offset:2px}}
-@media(min-width:1100px){{.wrap{{max-width:1100px}}.grid2{{grid-template-columns:1fr 1fr 1fr}}}}
+@media(min-width:1100px){{.wrap{{max-width:min(1400px,94vw)}}.grid2{{grid-template-columns:1fr 1fr 1fr}}.pic{{max-width:640px}}}}
+@media(min-width:1600px){{.wrap{{max-width:min(1600px,94vw)}}}}
 @media print{{body{{background:#fff;color:#111}}body::before{{display:none}}.hero h1{{color:#111!important;background:none!important;-webkit-text-fill-color:#111!important}}.topbar,.toc,.progress{{display:none}}.wrap{{max-width:100%;padding:0}}.card,.tldr,.chapter,figure{{background:#fff!important;color:#111!important;border:1px solid #ccc!important;box-shadow:none!important;backdrop-filter:none!important}}.tldr{{border-left:4px solid #111!important}}.muted,.cap,.pic figcaption,.sub{{color:#444!important}}a{{color:#111}}.rv{{opacity:1!important;transform:none!important}}.bar{{animation:none;transform:none}}.grad{{color:#111;-webkit-text-fill-color:#111}}.chapter{{break-inside:avoid}}}}
 @media (prefers-reduced-motion:reduce){{*,*::before,*::after{{animation:none!important;transition:none!important}}.rv{{opacity:1;transform:none}}.bar{{transform:none}}}}
 </style>
