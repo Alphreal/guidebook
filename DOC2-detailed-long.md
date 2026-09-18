@@ -23,7 +23,7 @@ Students shifting to online/digital self-study face self-regulation gaps more th
 
 Anonymous online form (15 questions: multiple choice + 5-point Likert + open). Distributed in class channels with permission; 5–7 minutes. Analysis: descriptive stats only — percentages, averages, rankings. Sample: 40 class-survey responses (subgroups too small to report separately). Feedback form target 25 (Week 2). Ethics: voluntary, anonymous, no names/IDs, aggregated reporting.
 
-## 5. Results (Week 1 survey, n=40)
+## 5. Results
 
 [Graph 1: current use — still online + weekly frequency]
 [Graph 2: barrier ranking across the 4 dimensions]
@@ -73,7 +73,7 @@ Each recommendation above links to exactly one Top 3–5 survey finding — no p
 
 **Limitations:** one class, self-report, descriptive stats only, two-week window; results describe our class, not all students.
 
-## 8. References (starter set — groups extend)
+## 8. References
 
 1. Broadbent, J., & Poon, W. L. (2015). Self-regulated learning strategies & academic achievement in online higher education learning environments: A systematic review. The Internet and Higher Education, 27, 1–13. [doi:10.1016/j.iheduc.2015.04.007](https://doi.org/10.1016/j.iheduc.2015.04.007)
 2. Martin, F., & Bolliger, D. U. (2018). Engagement matters: Student perceptions on the importance of engagement strategies in the online learning environment. Online Learning, 22(1). [doi:10.24059/olj.v22i1.1092](https://doi.org/10.24059/olj.v22i1.1092)

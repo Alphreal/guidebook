@@ -88,11 +88,11 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 .hero h1,.hero h3,.hero p,.hero .sub{{width:100%;max-width:70ch;margin-left:auto!important;margin-right:auto!important;text-align:center!important}}
 .hero h1{{font-size:clamp(30px,5vw,46px);margin:10px auto;background:linear-gradient(135deg,#a5b4fc,#e9d5ff);-webkit-background-clip:text;background-clip:text;color:transparent}}
 .hero .sub{{font-size:16px}}
-.chapter{{border-top:3px solid #818cf8}}
-details.chapter:nth-of-type(4n+1){{border-top-color:#818cf8}}
-details.chapter:nth-of-type(4n+2){{border-top-color:#34d399}}
-details.chapter:nth-of-type(4n+3){{border-top-color:#fbbf24}}
-details.chapter:nth-of-type(4n){{border-top-color:#fb7185}}
+.chapter{{border-top:3px solid rgba(255,255,255,.14);transition:border-color .2s}}
+details.chapter[open]:nth-of-type(4n+1),details.chapter:nth-of-type(4n+1):hover{{border-top-color:#818cf8}}
+details.chapter[open]:nth-of-type(4n+2),details.chapter:nth-of-type(4n+2):hover{{border-top-color:#34d399}}
+details.chapter[open]:nth-of-type(4n+3),details.chapter:nth-of-type(4n+3):hover{{border-top-color:#fbbf24}}
+details.chapter[open]:nth-of-type(4n),details.chapter:nth-of-type(4n):hover{{border-top-color:#fb7185}}
 .chapter p,.chapter li{{max-width:70ch}}
 .chapter h2{{margin-top:14px}}
 .chapter h3{{color:#c7d2fe}}

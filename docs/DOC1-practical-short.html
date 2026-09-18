@@ -50,11 +50,11 @@ details[open]>.dbody{grid-template-rows:1fr}
 .hero h1,.hero h3,.hero p,.hero .sub{width:100%;max-width:70ch;margin-left:auto!important;margin-right:auto!important;text-align:center!important}
 .hero h1{font-size:clamp(30px,5vw,46px);margin:10px auto;background:linear-gradient(135deg,#a5b4fc,#e9d5ff);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .sub{font-size:16px}
-.chapter{border-top:3px solid #818cf8}
-details.chapter:nth-of-type(4n+1){border-top-color:#818cf8}
-details.chapter:nth-of-type(4n+2){border-top-color:#34d399}
-details.chapter:nth-of-type(4n+3){border-top-color:#fbbf24}
-details.chapter:nth-of-type(4n){border-top-color:#fb7185}
+.chapter{border-top:3px solid rgba(255,255,255,.14);transition:border-color .2s}
+details.chapter[open]:nth-of-type(4n+1),details.chapter:nth-of-type(4n+1):hover{border-top-color:#818cf8}
+details.chapter[open]:nth-of-type(4n+2),details.chapter:nth-of-type(4n+2):hover{border-top-color:#34d399}
+details.chapter[open]:nth-of-type(4n+3),details.chapter:nth-of-type(4n+3):hover{border-top-color:#fbbf24}
+details.chapter[open]:nth-of-type(4n),details.chapter:nth-of-type(4n):hover{border-top-color:#fb7185}
 .chapter p,.chapter li{max-width:70ch}
 .chapter h2{margin-top:14px}
 .chapter h3{color:#c7d2fe}
@@ -120,7 +120,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 <h3>Asia University — Students (Practical Short Version)</h3>
 <p><b>How to use this guide (2 minutes):</b></p><div class="steps"><div class="step"><span class="n">1</span>Find your biggest difficulty below — time, distraction, interaction, or fatigue.</div><div class="step"><span class="n">2</span>Go straight to that chapter. Do the <b>5-minute routine first</b>.</div><div class="step"><span class="n">3</span>Read the short &quot;Why it works&quot; only after you try it.</div><div class="step"><span class="n">4</span>At the end of Week 2, answer the 3 feedback questions (QR code on the last page).</div></div>
 </div>
-<div class="toc"><a href="#chapter-1-self-regulation-time" class="m">Chapter 1 — Self-Regulation &amp; Time</a><a href="#chapter-2-distraction-concentration" class="m">Chapter 2 — Distraction &amp; Concentration</a><a href="#chapter-3-interaction-support" class="m">Chapter 3 — Interaction &amp; Support</a><a href="#chapter-4-fatigue-technology" class="m">Chapter 4 — Fatigue &amp; Technology</a><a href="#one-page-class-guide-week-1-survey-n-40-top-4-findings" class="s">One-Page Class Guide (Week 1 survey, n=40 — Top 4 findings)</a><a href="#feedback-week-2-target-25-responses" class="s">Feedback (Week 2 — target 25 responses)</a></div><details class="chapter" open>
+<div class="toc"><a href="#chapter-1-self-regulation-time" class="m">Chapter 1 — Self-Regulation &amp; Time</a><a href="#chapter-2-distraction-concentration" class="m">Chapter 2 — Distraction &amp; Concentration</a><a href="#chapter-3-interaction-support" class="m">Chapter 3 — Interaction &amp; Support</a><a href="#chapter-4-fatigue-technology" class="m">Chapter 4 — Fatigue &amp; Technology</a><a href="#one-page-class-guide" class="s">One-Page Class Guide</a><a href="#feedback" class="s">Feedback</a></div><details class="chapter" open>
 <summary><h2 id="chapter-1-self-regulation-time">Chapter 1 — Self-Regulation &amp; Time</h2></summary>
 <div class="dbody"><div class="dbody-in">
 <p><b>Tonight (5 min): SMART tonight.</b> Write ONE study goal for tomorrow in this shape:</p>
@@ -164,7 +164,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 </div></div>
 </details>
 <details class="chapter">
-<summary><h2 id="one-page-class-guide-week-1-survey-n-40-top-4-findings">One-Page Class Guide (Week 1 survey, n=40 — Top 4 findings)</h2></summary>
+<summary><h2 id="one-page-class-guide">One-Page Class Guide</h2></summary>
 <div class="dbody"><div class="dbody-in">
 <div class='card'><table>
 <tr><th>#</th><th>Survey finding</th><th>Do this</th></tr>
@@ -178,7 +178,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 </div></div>
 </details>
 <details class="chapter">
-<summary><h2 id="feedback-week-2-target-25-responses">Feedback (Week 2 — target 25 responses)</h2></summary>
+<summary><h2 id="feedback">Feedback</h2></summary>
 <div class="dbody"><div class="dbody-in">
 <div class="placeholder">[QR code to anonymous form — voluntary, anonymous, no names or IDs]</div>
 <ol><li>Was this guide clear? (1–5)</li>

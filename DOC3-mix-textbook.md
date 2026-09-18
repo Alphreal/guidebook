@@ -1,13 +1,13 @@
 # Teacher-Use Textbook-Mix: 4 Lessons from the Class Guide
 ### For the facilitating teacher (Doc1 is the student handout)
 
-## 0. Lesson Plan (15 minutes per lesson)
+## 0. Lesson Plan
 
 **Objectives:** students try one routine live and leave with a tonight-assignment.
 **Materials:** printed Doc1 (1 per student) · survey form link + backup link · spreadsheet of results · Canva/class slides.
 **Rhythm per lesson:** routine demo (3 min) → reason box (2 min) → activity (5 min) → mistake correction (3 min) → assignment (2 min).
 
-## Lesson 1 — Plan Your Study (Group 1)
+## Lesson 1 — Plan Your Study
 
 ### Routine
 Write a SMART goal for tonight + ALPEN plan for tomorrow (Doc1 Ch1).
@@ -22,7 +22,7 @@ Everyone writes tonight's SMART goal on paper; neighbor checks Specific + Time-b
 - [Graph: discipline difficulty — 40% score 4-5 (n=40)]
 - [Picture demo: timer + checklist on projector]
 
-## Lesson 2 — Remove Distraction (Group 2)
+## Lesson 2 — Remove Distraction
 
 ### Routine
 Phone in bag/drawer, 1 tab, notifications off — do it now, in class (Doc1 Ch2).
@@ -37,7 +37,7 @@ Nearby phones drain capacity untouched; multitaskers switch worse; residue linge
 - [Graph: distraction level — 53% score 4-5 (n=40)]
 - [Picture demo: phone-out vs on-desk photo]
 
-## Lesson 3 — Ask for Help Early (Group 3)
+## Lesson 3 — Ask for Help Early
 
 ### Routine
 The 15-minute question template + peer check + channel post (Doc1 Ch3).
@@ -52,7 +52,7 @@ Pairs turn a vague "I don't understand Unit 3" into the template on paper.
 - [Graph: asking difficulty — 25% score 4-5 (n=40)]
 - [Picture demo: good vs vague chat post]
 
-## Lesson 4 — Study Without Burning Out (Group 4)
+## Lesson 4 — Study Without Burning Out
 
 ### Routine
 50-10 rhythm, 20-20-20, meeting pre-check (Doc1 Ch4).

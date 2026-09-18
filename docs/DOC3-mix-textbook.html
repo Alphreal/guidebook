@@ -50,11 +50,11 @@ details[open]>.dbody{grid-template-rows:1fr}
 .hero h1,.hero h3,.hero p,.hero .sub{width:100%;max-width:70ch;margin-left:auto!important;margin-right:auto!important;text-align:center!important}
 .hero h1{font-size:clamp(30px,5vw,46px);margin:10px auto;background:linear-gradient(135deg,#a5b4fc,#e9d5ff);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .sub{font-size:16px}
-.chapter{border-top:3px solid #818cf8}
-details.chapter:nth-of-type(4n+1){border-top-color:#818cf8}
-details.chapter:nth-of-type(4n+2){border-top-color:#34d399}
-details.chapter:nth-of-type(4n+3){border-top-color:#fbbf24}
-details.chapter:nth-of-type(4n){border-top-color:#fb7185}
+.chapter{border-top:3px solid rgba(255,255,255,.14);transition:border-color .2s}
+details.chapter[open]:nth-of-type(4n+1),details.chapter:nth-of-type(4n+1):hover{border-top-color:#818cf8}
+details.chapter[open]:nth-of-type(4n+2),details.chapter:nth-of-type(4n+2):hover{border-top-color:#34d399}
+details.chapter[open]:nth-of-type(4n+3),details.chapter:nth-of-type(4n+3):hover{border-top-color:#fbbf24}
+details.chapter[open]:nth-of-type(4n),details.chapter:nth-of-type(4n):hover{border-top-color:#fb7185}
 .chapter p,.chapter li{max-width:70ch}
 .chapter h2{margin-top:14px}
 .chapter h3{color:#c7d2fe}
@@ -119,8 +119,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 <h1>Teacher-Use Textbook-Mix: 4 Lessons from the Class Guide</h1>
 <h3>For the facilitating teacher (Doc1 is the student handout)</h3>
 </div>
-<div class="toc"><a href="#0-lesson-plan-15-minutes-per-lesson" class="m">0. Lesson Plan (15 minutes per lesson)</a><a href="#lesson-1-plan-your-study-group-1" class="m">Lesson 1 — Plan Your Study (Group 1)</a><a href="#lesson-2-remove-distraction-group-2" class="m">Lesson 2 — Remove Distraction (Group 2)</a><a href="#lesson-3-ask-for-help-early-group-3" class="m">Lesson 3 — Ask for Help Early (Group 3)</a><a href="#lesson-4-study-without-burning-out-group-4" class="m">Lesson 4 — Study Without Burning Out (Group 4)</a></div><details class="chapter" open>
-<summary><h2 id="0-lesson-plan-15-minutes-per-lesson">0. Lesson Plan (15 minutes per lesson)</h2></summary>
+<div class="toc"><a href="#0-lesson-plan" class="m">0. Lesson Plan</a><a href="#lesson-1-plan-your-study" class="m">Lesson 1 — Plan Your Study</a><a href="#lesson-2-remove-distraction" class="m">Lesson 2 — Remove Distraction</a><a href="#lesson-3-ask-for-help-early" class="m">Lesson 3 — Ask for Help Early</a><a href="#lesson-4-study-without-burning-out" class="m">Lesson 4 — Study Without Burning Out</a></div><details class="chapter" open>
+<summary><h2 id="0-lesson-plan">0. Lesson Plan</h2></summary>
 <div class="dbody"><div class="dbody-in">
 <p><b>Objectives:</b> students try one routine live and leave with a tonight-assignment.</p>
 <p><b>Materials:</b> printed Doc1 (1 per student) · survey form link + backup link · spreadsheet of results · Canva/class slides.</p>
@@ -129,7 +129,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 </div></div>
 </details>
 <details class="chapter">
-<summary><h2 id="lesson-1-plan-your-study-group-1">Lesson 1 — Plan Your Study (Group 1)</h2></summary>
+<summary><h2 id="lesson-1-plan-your-study">Lesson 1 — Plan Your Study</h2></summary>
 <div class="dbody"><div class="dbody-in">
 <h3>Routine</h3>
 <p>Write a SMART goal for tonight + ALPEN plan for tomorrow (Doc1 Ch1).</p>
@@ -147,7 +147,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 </div></div>
 </details>
 <details class="chapter">
-<summary><h2 id="lesson-2-remove-distraction-group-2">Lesson 2 — Remove Distraction (Group 2)</h2></summary>
+<summary><h2 id="lesson-2-remove-distraction">Lesson 2 — Remove Distraction</h2></summary>
 <div class="dbody"><div class="dbody-in">
 <h3>Routine</h3>
 <p>Phone in bag/drawer, 1 tab, notifications off — do it now, in class (Doc1 Ch2).</p>
@@ -165,7 +165,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 </div></div>
 </details>
 <details class="chapter">
-<summary><h2 id="lesson-3-ask-for-help-early-group-3">Lesson 3 — Ask for Help Early (Group 3)</h2></summary>
+<summary><h2 id="lesson-3-ask-for-help-early">Lesson 3 — Ask for Help Early</h2></summary>
 <div class="dbody"><div class="dbody-in">
 <h3>Routine</h3>
 <p>The 15-minute question template + peer check + channel post (Doc1 Ch3).</p>
@@ -183,7 +183,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 </div></div>
 </details>
 <details class="chapter">
-<summary><h2 id="lesson-4-study-without-burning-out-group-4">Lesson 4 — Study Without Burning Out (Group 4)</h2></summary>
+<summary><h2 id="lesson-4-study-without-burning-out">Lesson 4 — Study Without Burning Out</h2></summary>
 <div class="dbody"><div class="dbody-in">
 <h3>Routine</h3>
 <p>50-10 rhythm, 20-20-20, meeting pre-check (Doc1 Ch4).</p>

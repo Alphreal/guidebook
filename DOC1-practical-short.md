@@ -60,7 +60,7 @@ Then: (1) peer-check with one classmate, (2) post it in the class channel / foru
 
 ---
 
-## One-Page Class Guide (Week 1 survey, n=40 — Top 4 findings)
+## One-Page Class Guide
 
 | # | Survey finding | Do this |
 |---|---------------|---------|
@@ -73,7 +73,7 @@ Then: (1) peer-check with one classmate, (2) post it in the class channel / foru
 
 ---
 
-## Feedback (Week 2 — target 25 responses)
+## Feedback
 
 [QR code to anonymous form — voluntary, anonymous, no names or IDs]
 
