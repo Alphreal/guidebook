@@ -709,7 +709,7 @@ def group_chapters(blocks, extras=None):
         e = idx[k + 1] if k + 1 < len(idx) else len(blocks)
         m = re.search(r'id="([^"]+)"', blocks[s])
         sid = m.group(1) if m else f"ch{k}"
-        title = re.sub(r"<[^>]+>", "", blocks[s]).strip()
+        title = html.unescape(re.sub(r"<[^>]+>", "", blocks[s]).strip())
         chaps.append({"sid": sid, "h2": blocks[s], "title": title,
                       "short": title.split(" — ")[0],
                       "content": "\n".join(blocks[s + 1:e]),
@@ -948,12 +948,7 @@ def main():
                         c["content"] += "\n" + feedback_html()
                 ch4, rest = chaps[:4], chaps[4:]
                 pages = [(c["sid"], f"DOC1-{c['sid']}.html") for c in ch4]
-                hubnav = '<div class="toc">' + "".join(
-                    f'<a href="{pg}" class="m">{esc(c["title"])}</a>'
-                    for c, (_, pg) in zip(ch4, pages))
-                hubnav += "".join(
-                    f'<a href="#{c["sid"]}" class="s">{esc(c["title"])}</a>' for c in rest) + "</div>"
-                body = hero + tour_html() + hubnav + hub_grids(chaps, pages)
+                body = hero + tour_html() + hub_grids(chaps, pages)
                 nc = sum(len(v) for v in CHECKLISTS.values())
                 body += planner_html()
                 body += f'<div class="progress" id="progress"><b>My progress</b> — routines 0/{nc} · week 0/28 · streak 0d</div>'
