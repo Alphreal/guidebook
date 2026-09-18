@@ -235,6 +235,10 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 .hch{{text-align:center}}
 .hch .n{{display:flex;width:30px;height:30px;border-radius:50%;background:#818cf8;color:#020617;align-items:center;justify-content:center;margin:0 auto 8px;font-weight:800}}
 .hch b{{display:block;margin-bottom:4px}}
+.hgrid2 details.chapter{{border:1px solid rgba(129,140,248,.45);border-radius:14px;background:rgba(129,140,248,.07);padding:0 6px}}
+.hgrid2 details.chapter summary{{padding:14px 12px}}
+.hgrid2 details.chapter summary h2{{font-size:19px}}
+.hgrid2 details.chapter summary::after{{font-size:26px}}
 .tbtn{{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);color:#e2e8f0;border-radius:999px;padding:7px 16px;font-size:13px;cursor:pointer;margin:6px 6px 0 0;text-decoration:none;display:inline-block}}
 .tbtn:hover{{border-color:#818cf8}}
 .tbtn.pri{{background:linear-gradient(135deg,#818cf8,#c084fc);color:#020617;border-color:transparent;font-weight:700}}
