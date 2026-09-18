@@ -48,17 +48,18 @@ def vn_body():
     return ('<div class="hero card"><div class="eyebrow">Tiếng Việt</div>'
             '<h1 class="grad">Posters tiếng Việt</h1>'
             '<div class="sub">Bấm vào từng ảnh để xem lớn — 7 posters cho học sinh Việt Nam.</div></div>'
-            '<div class="vnav"><button type="button" class="tbtn" data-vscroll="prev">‹</button>'
-            '<span class="muted">Kéo hoặc bấm mũi tên để xem 7 posters</span>'
-            '<button type="button" class="tbtn" data-vscroll="next">›</button></div>'
+            '<div class="muted" style="text-align:center">Kéo qua lại hoặc bấm mũi tên — xem từng bước 1 → 7</div>'
             '<div class="vgrid">' + figs + "</div>"
+            '<div class="vnav"><button type="button" class="tbtn" data-vscroll="prev">‹ Trước</button>'
+            '<button type="button" class="tbtn" data-vscroll="next">Tiếp ›</button></div>'
             '<div class="vlight" data-vlight hidden>'
             '<div class="vinner"><div class="vstep" data-vstep></div><img data-vimg alt="Poster tiếng Việt">'
             '<div class="vcap" data-vcap></div>'
             '<div class="vnav"><button type="button" class="tbtn" data-vnav="prev">‹ Trước</button>'
             '<button type="button" class="tbtn" data-vnav="next">Tiếp ›</button>'
             '<button type="button" class="tbtn pri" data-vnav="close">Đóng</button></div></div></div>'
-            "<style>.vgrid{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 12px;margin-top:10px}"
+            "<style>.vgrid{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 12px;margin-top:10px;scrollbar-width:none}"
+            ".vgrid::-webkit-scrollbar{display:none}"
             ".vfig{flex:0 0 148px;margin:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:8px;cursor:zoom-in;scroll-snap-align:start}"
             ".vfig:hover{border-color:rgba(129,140,248,.6)}"
             ".vfig img{width:100%;height:auto;border-radius:10px;display:block}"
