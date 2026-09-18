@@ -50,9 +50,9 @@ def vn_body():
             '<div class="sub">Bấm vào từng ảnh để xem lớn — 7 posters cho học sinh Việt Nam.</div></div>'
             '<div class="vgrid">' + figs + "</div>"
             '<div class="vlight" data-vlight hidden>'
-            '<div class="vinner"><img data-vimg alt="Poster tiếng Việt">'
+            '<div class="vinner"><div class="vstep" data-vstep></div><img data-vimg alt="Poster tiếng Việt">'
             '<div class="vcap" data-vcap></div>'
-            '<div><button type="button" class="tbtn" data-vnav="prev">‹ Trước</button>'
+            '<div class="vnav"><button type="button" class="tbtn" data-vnav="prev">‹ Trước</button>'
             '<button type="button" class="tbtn" data-vnav="next">Tiếp ›</button>'
             '<button type="button" class="tbtn pri" data-vnav="close">Đóng</button></div></div></div>'
             "<style>.vgrid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}"
@@ -65,13 +65,18 @@ def vn_body():
             ".vlight[hidden]{display:none}"
             ".vinner{max-width:720px;width:100%;text-align:center}"
             ".vinner img{width:100%;max-height:76vh;object-fit:contain;border-radius:12px;background:#fff}"
-            ".vcap{color:#e2e8f0;margin:10px 0}</style>"
+            ".vcap{color:#e2e8f0;margin:12px 0 4px;font-size:15px}"
+            ".vnav{display:flex;gap:10px;justify-content:center;margin-top:10px;flex-wrap:wrap}"
+            ".vnav .tbtn{font-size:15px;padding:10px 22px;margin:0}"
+            ".vstep{color:#94a3b8;font-size:12px;letter-spacing:.12em;margin-bottom:6px}</style>"
             "<script>(function(){var caps=["
             + ",".join('"' + cap.replace('"', "") + '"' for _, cap in VN_POSTERS)
-            + "];var cur=0;var box=document.querySelector('[data-vlight]');"
+            +             "];var cur=0;var box=document.querySelector('[data-vlight]');"
             "var img=document.querySelector('[data-vimg]');var cap=document.querySelector('[data-vcap]');"
+            "var stp=document.querySelector('[data-vstep]');"
             "function show(n){cur=(n+caps.length)%caps.length;"
-            "img.src='vn/poster'+(cur+1)+'.png';img.alt=caps[cur];cap.textContent=caps[cur];box.hidden=false;}"
+            "img.src='vn/poster'+(cur+1)+'.png';img.alt=caps[cur];cap.textContent=caps[cur];"
+            "stp.textContent='Bước '+(cur+1)+' / '+caps.length;box.hidden=false;}"
             "function hide(){box.hidden=true;}"
             "document.addEventListener('click',function(e){"
             "var f=e.target.closest?e.target.closest('[data-vn]'):null;"
@@ -202,9 +207,9 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 .tour{{border:1px solid rgba(129,140,248,.55);background:linear-gradient(135deg,rgba(129,140,248,.14),rgba(192,132,252,.08))}}
 .tour .big{{background:linear-gradient(135deg,#818cf8,#c084fc);color:#020617;font-weight:800;border:none;border-radius:999px;padding:10px 24px;font-size:15px;cursor:pointer;margin-top:8px}}
 .tour .big:hover{{transform:translateY(-2px)}}
-.tour .tbtn{{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);color:#e2e8f0;border-radius:999px;padding:7px 16px;font-size:13px;cursor:pointer;margin:6px 6px 0 0}}
-.tour .tbtn:hover{{border-color:#818cf8}}
-.tour .tbtn.pri{{background:linear-gradient(135deg,#818cf8,#c084fc);color:#020617;border-color:transparent;font-weight:700}}
+.tbtn{{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);color:#e2e8f0;border-radius:999px;padding:7px 16px;font-size:13px;cursor:pointer;margin:6px 6px 0 0;text-decoration:none;display:inline-block}}
+.tbtn:hover{{border-color:#818cf8}}
+.tbtn.pri{{background:linear-gradient(135deg,#818cf8,#c084fc);color:#020617;border-color:transparent;font-weight:700}}
 .progress{{background:linear-gradient(135deg,rgba(129,140,248,.25),rgba(192,132,252,.18));border:1px solid rgba(129,140,248,.4);border-radius:14px;padding:12px 16px;margin:12px 0;font-size:14px}}
 .rv{{opacity:0;transform:translateY(14px);transition:opacity .5s ease-out,transform .5s ease-out}}
 .rv.on{{opacity:1;transform:none}}
@@ -809,7 +814,8 @@ def doc1_extras():
 def tour_html():
     return ('<div class="card tour" id="tourcard"><b>New here? Guided start (2 minutes)</b>'
             '<div class="muted">Tap Start — we walk you through every step of this guide.</div>'
-            '<div data-tourbody><button type="button" class="big" data-tour="start">Let\'s get started</button></div></div>')
+            '<div data-tourbody><button type="button" class="big" data-tour="start">Let\'s get started</button></div>'
+            '<div><a class="tbtn" href="vn.html">Xem posters tiếng Việt</a></div></div>')
 
 
 def main():
