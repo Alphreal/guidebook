@@ -27,6 +27,9 @@ DOCS = [
 # Empty = Send button shows setup hint. Example: "https://script.google.com/macros/s/ABC.../exec"
 TEACHER_ENDPOINT = "https://script.google.com/macros/s/AKfycbyK66DvH--P53Ok_f_9WuCFQZ2MShrf2JyuH4Km0j-QELoOc0lezz_Pods8EvZKBRzB/exec"
 
+# Week-2 feedback form (Link + QR on the Feedback dropdown).
+FEEDBACK_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeD3Bl311gnAwO5tChw-KaPyH--lpX_20g6egzVTQBI7HTViQ/viewform"
+
 # Vietnamese poster gallery (images live in vn/*.png, copied to out/vn + docs/vn).
 VN_POSTERS = [
     ("poster1.png", "1 — Nhớ lại trước khi đọc lại"),
@@ -910,6 +913,15 @@ def doc1_extras():
     return {sid: checklist_html("doc1", sid, items) for sid, items in CHECKLISTS.items()}
 
 
+def feedback_html():
+    import urllib.parse
+    qr = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=" + urllib.parse.quote(FEEDBACK_URL, safe="")
+    return (f'<div class="card"><b>Feedback form (Week 2)</b>'
+            f'<p><a href="{FEEDBACK_URL}">Open the form →</a></p>'
+            f'<figure class="pic"><img src="{qr}" alt="QR code to feedback form" width="180" height="180" loading="lazy">'
+            f"<figcaption>Scan to open the form</figcaption></figure></div>")
+
+
 def schedule_html():
     daybtns = "".join(f'<button type="button" data-day="{di}">{d}</button>' for di, d in enumerate(DAYS))
     return ('<div class="card" id="schedule"><b>Step 1 — My study days</b>'
@@ -940,6 +952,9 @@ def main():
             if fn.startswith("DOC1"):
                 hero, nav, chaps = md_to_html(f.read(), extras, keep, hub=True)
                 hub = fn.replace(".md", ".html")
+                for c in chaps:
+                    if c["sid"] == "feedback":
+                        c["content"] += "\n" + feedback_html()
                 ch4, rest = chaps[:4], chaps[4:]
                 pages = [(c["sid"], f"DOC1-{c['sid']}.html") for c in ch4]
                 hubnav = '<div class="toc">' + "".join(
