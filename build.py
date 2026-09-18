@@ -48,6 +48,9 @@ def vn_body():
     return ('<div class="hero card"><div class="eyebrow">Tiếng Việt</div>'
             '<h1 class="grad">Posters tiếng Việt</h1>'
             '<div class="sub">Bấm vào từng ảnh để xem lớn — 7 posters cho học sinh Việt Nam.</div></div>'
+            '<div class="vnav"><button type="button" class="tbtn" data-vscroll="prev">‹</button>'
+            '<span class="muted">Kéo hoặc bấm mũi tên để xem 7 posters</span>'
+            '<button type="button" class="tbtn" data-vscroll="next">›</button></div>'
             '<div class="vgrid">' + figs + "</div>"
             '<div class="vlight" data-vlight hidden>'
             '<div class="vinner"><div class="vstep" data-vstep></div><img data-vimg alt="Poster tiếng Việt">'
@@ -55,12 +58,11 @@ def vn_body():
             '<div class="vnav"><button type="button" class="tbtn" data-vnav="prev">‹ Trước</button>'
             '<button type="button" class="tbtn" data-vnav="next">Tiếp ›</button>'
             '<button type="button" class="tbtn pri" data-vnav="close">Đóng</button></div></div></div>'
-            "<style>.vgrid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}"
-            "@media(min-width:720px){.vgrid{grid-template-columns:1fr 1fr}}"
-            ".vfig{margin:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;cursor:zoom-in}"
+            "<style>.vgrid{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 12px;margin-top:10px}"
+            ".vfig{flex:0 0 148px;margin:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:8px;cursor:zoom-in;scroll-snap-align:start}"
             ".vfig:hover{border-color:rgba(129,140,248,.6)}"
             ".vfig img{width:100%;height:auto;border-radius:10px;display:block}"
-            ".vfig figcaption{color:#c7d2fe;font-size:13px;margin-top:8px;text-align:center}"
+            ".vfig figcaption{color:#c7d2fe;font-size:12px;margin-top:6px;text-align:center}"
             ".vlight{position:fixed;inset:0;z-index:50;background:rgba(2,6,23,.92);display:flex;align-items:center;justify-content:center;padding:16px}"
             ".vlight[hidden]{display:none}"
             ".vinner{max-width:720px;width:100%;text-align:center}"
@@ -79,6 +81,10 @@ def vn_body():
             "stp.textContent='Bước '+(cur+1)+' / '+caps.length;box.hidden=false;}"
             "function hide(){box.hidden=true;}"
             "document.addEventListener('click',function(e){"
+            "var sv=e.target.closest?e.target.closest('[data-vscroll]'):null;"
+            "if(sv){var g=document.querySelector('.vgrid');"
+            "if(g){var dd=sv.getAttribute('data-vscroll')==='next'?320:-320;"
+            "try{g.scrollBy({left:dd,behavior:'smooth'})}catch(e2){g.scrollLeft+=dd}}return;}"
             "var f=e.target.closest?e.target.closest('[data-vn]'):null;"
             "if(f){show(parseInt(f.getAttribute('data-vn'),10));return;}"
             "var nv=e.target.closest?e.target.closest('[data-vnav]'):null;"
@@ -207,6 +213,8 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 .tour{{border:1px solid rgba(129,140,248,.55);background:linear-gradient(135deg,rgba(129,140,248,.14),rgba(192,132,252,.08))}}
 .tour .big{{background:linear-gradient(135deg,#818cf8,#c084fc);color:#020617;font-weight:800;border:none;border-radius:999px;padding:10px 24px;font-size:15px;cursor:pointer;margin-top:8px}}
 .tour .big:hover{{transform:translateY(-2px)}}
+.tour .trow{{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:4px}}
+.tour .trow .tbtn{{margin:8px 0 0}}
 .tbtn{{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);color:#e2e8f0;border-radius:999px;padding:7px 16px;font-size:13px;cursor:pointer;margin:6px 6px 0 0;text-decoration:none;display:inline-block}}
 .tbtn:hover{{border-color:#818cf8}}
 .tbtn.pri{{background:linear-gradient(135deg,#818cf8,#c084fc);color:#020617;border-color:transparent;font-weight:700}}
@@ -814,8 +822,8 @@ def doc1_extras():
 def tour_html():
     return ('<div class="card tour" id="tourcard"><b>New here? Guided start (2 minutes)</b>'
             '<div class="muted">Tap Start — we walk you through every step of this guide.</div>'
-            '<div data-tourbody><button type="button" class="big" data-tour="start">Let\'s get started</button></div>'
-            '<div><a class="tbtn" href="vn.html">Xem posters tiếng Việt</a></div></div>')
+            '<div class="trow"><div data-tourbody><button type="button" class="big" data-tour="start">Let\'s get started</button></div>'
+            '<div><a class="tbtn" href="vn.html">Xem posters tiếng Việt</a></div></div></div>')
 
 
 def main():
@@ -846,8 +854,7 @@ def main():
         f'<div class="card"><b>{role}</b><div class="sub">{esc(DOCS[i][2])}</div>'
         f'<p><a href="{DOCS[i][0].replace(".md", ".html")}">Start →</a></p></div>'
         for role, i in roles
-    ) + '<div class="card"><b>Bản tiếng Việt — xem posters</b><div class="sub">7 posters minh họa cho học sinh Việt Nam.</div>'
-        '<p><a href="vn.html">Xem →</a></p></div>' + "</div>")
+    ) + "</div>")
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(shell("Guidebook", idx_body))
     shutil.copy(os.path.join(OUT_DIR, "index.html"), os.path.join(DOCS_DIR, "index.html"))
