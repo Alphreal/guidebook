@@ -27,6 +27,64 @@ DOCS = [
 # Empty = Send button shows setup hint. Example: "https://script.google.com/macros/s/ABC.../exec"
 TEACHER_ENDPOINT = "https://script.google.com/macros/s/AKfycbyK66DvH--P53Ok_f_9WuCFQZ2MShrf2JyuH4Km0j-QELoOc0lezz_Pods8EvZKBRzB/exec"
 
+# Vietnamese poster gallery (images live in vn/*.png, copied to out/vn + docs/vn).
+VN_POSTERS = [
+    ("poster1.png", "1 — Nhớ lại trước khi đọc lại"),
+    ("poster2.png", "2 — Học từ ví dụ có lời giải"),
+    ("poster3.png", "3 — Làm một trang bài học rõ ràng"),
+    ("poster4.png", "4 — Để điện thoại ở vị trí riêng"),
+    ("poster5.png", "5 — Thoải mái hơn khi gọi video"),
+    ("poster6.png", "6 — Phiếu kiểm tra 3 buổi học"),
+    ("poster7.png", "7 — Chọn cách học theo vấn đề của bạn"),
+]
+
+
+def vn_body():
+    figs = "".join(
+        '<figure class="vfig" data-vn="' + str(n) + '">'
+        '<img src="vn/' + fn + '" alt="' + esc(cap) + '" loading="lazy">'
+        "<figcaption>" + esc(cap) + "</figcaption></figure>"
+        for n, (fn, cap) in enumerate(VN_POSTERS))
+    return ('<div class="hero card"><div class="eyebrow">Tiếng Việt</div>'
+            '<h1 class="grad">Posters tiếng Việt</h1>'
+            '<div class="sub">Bấm vào từng ảnh để xem lớn — 7 posters cho học sinh Việt Nam.</div></div>'
+            '<div class="vgrid">' + figs + "</div>"
+            '<div class="vlight" data-vlight hidden>'
+            '<div class="vinner"><img data-vimg alt="Poster tiếng Việt">'
+            '<div class="vcap" data-vcap></div>'
+            '<div><button type="button" class="tbtn" data-vnav="prev">‹ Trước</button>'
+            '<button type="button" class="tbtn" data-vnav="next">Tiếp ›</button>'
+            '<button type="button" class="tbtn pri" data-vnav="close">Đóng</button></div></div></div>'
+            "<style>.vgrid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}"
+            "@media(min-width:720px){.vgrid{grid-template-columns:1fr 1fr}}"
+            ".vfig{margin:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;cursor:zoom-in}"
+            ".vfig:hover{border-color:rgba(129,140,248,.6)}"
+            ".vfig img{width:100%;height:auto;border-radius:10px;display:block}"
+            ".vfig figcaption{color:#c7d2fe;font-size:13px;margin-top:8px;text-align:center}"
+            ".vlight{position:fixed;inset:0;z-index:50;background:rgba(2,6,23,.92);display:flex;align-items:center;justify-content:center;padding:16px}"
+            ".vlight[hidden]{display:none}"
+            ".vinner{max-width:720px;width:100%;text-align:center}"
+            ".vinner img{width:100%;max-height:76vh;object-fit:contain;border-radius:12px;background:#fff}"
+            ".vcap{color:#e2e8f0;margin:10px 0}</style>"
+            "<script>(function(){var caps=["
+            + ",".join('"' + cap.replace('"', "") + '"' for _, cap in VN_POSTERS)
+            + "];var cur=0;var box=document.querySelector('[data-vlight]');"
+            "var img=document.querySelector('[data-vimg]');var cap=document.querySelector('[data-vcap]');"
+            "function show(n){cur=(n+caps.length)%caps.length;"
+            "img.src='vn/poster'+(cur+1)+'.png';img.alt=caps[cur];cap.textContent=caps[cur];box.hidden=false;}"
+            "function hide(){box.hidden=true;}"
+            "document.addEventListener('click',function(e){"
+            "var f=e.target.closest?e.target.closest('[data-vn]'):null;"
+            "if(f){show(parseInt(f.getAttribute('data-vn'),10));return;}"
+            "var nv=e.target.closest?e.target.closest('[data-vnav]'):null;"
+            "if(nv){var a=nv.getAttribute('data-vnav');"
+            "if(a==='prev')show(cur-1);else if(a==='next')show(cur+1);else hide();return;}"
+            "if(e.target===box)hide();});"
+            "document.addEventListener('keydown',function(e){"
+            "if(box.hidden)return;"
+            "if(e.key==='Escape')hide();else if(e.key==='ArrowLeft')show(cur-1);else if(e.key==='ArrowRight')show(cur+1);});"
+            "})();</script>")
+
 
 def esc(s):
     return html.escape(s or "", quote=True)
@@ -782,11 +840,20 @@ def main():
         f'<div class="card"><b>{role}</b><div class="sub">{esc(DOCS[i][2])}</div>'
         f'<p><a href="{DOCS[i][0].replace(".md", ".html")}">Start →</a></p></div>'
         for role, i in roles
-    ) + "</div>")
+    ) + '<div class="card"><b>Bản tiếng Việt — xem posters</b><div class="sub">7 posters minh họa cho học sinh Việt Nam.</div>'
+        '<p><a href="vn.html">Xem →</a></p></div>' + "</div>")
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(shell("Guidebook", idx_body))
     shutil.copy(os.path.join(OUT_DIR, "index.html"), os.path.join(DOCS_DIR, "index.html"))
     print("Built: index.html (out/ + docs/)")
+    for d in (os.path.join(OUT_DIR, "vn"), os.path.join(DOCS_DIR, "vn")):
+        os.makedirs(d, exist_ok=True)
+        for fn, _cap in VN_POSTERS:
+            shutil.copy(os.path.join(BASE_DIR, "vn", fn), os.path.join(d, fn))
+    with open(os.path.join(OUT_DIR, "vn.html"), "w", encoding="utf-8") as f:
+        f.write(shell("Bản tiếng Việt — Posters", vn_body()))
+    shutil.copy(os.path.join(OUT_DIR, "vn.html"), os.path.join(DOCS_DIR, "vn.html"))
+    print("Built: vn.html + vn/*.png (out/ + docs/)")
 
 
 if __name__ == "__main__":
