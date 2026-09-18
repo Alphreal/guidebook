@@ -748,7 +748,7 @@ def chapter_page(c, prevp, nextp, hub="DOC1-practical-short.html"):
     body = (f'<p><a href="{hub}">← All chapters</a></p>'
             f'<details class="chapter" open>\n<summary>{c["h2"]}</summary>\n'
             f'<div class="dbody"><div class="dbody-in">\n{c["content"]}\n{c["extra"]}\n</div></div>\n</details>\n' + nav)
-    return shell(esc(c["title"]) + " — Student Guide", body)
+    return shell(c["title"] + " — Student Guide", body)
 
 
 CHECKLISTS = {
