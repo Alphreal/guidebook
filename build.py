@@ -890,17 +890,8 @@ def planner_html():
             for di, d in enumerate(DAYS)
         )
         rows.append(f"<span>{esc(label)}</span>{cells}")
-    daybtns = "".join(f'<button type="button" data-day="{di}">{d}</button>' for di, d in enumerate(DAYS))
     return ('<div class="card" id="weekcard"><b>My study week - tap each day you kept the routine</b>'
-            '<div class="prof"><span class="muted">My code:</span>'
-            '<input data-user placeholder="e.g. A01 - saved on this device">'
-            '<button type="button" class="mini" data-exp="saveuser">Save</button></div>'
-            '<div class="muted">Pick any code (e.g. your group + number). It labels your progress on this device and in the teacher sheet - use the same code every time. No names needed.</div>'
-            '<div class="muted">1) Choose your online days - other days turn grey and are skipped in your score.</div>'
-            f'<div class="daypick">{daybtns}'
-            '<button type="button" class="q" data-dayact="weekdays">Weekdays</button>'
-            '<button type="button" class="q" data-dayact="all">All</button>'
-            '<button type="button" class="q" data-dayact="clear">Clear</button></div>'
+            '<div class="muted">Code + online days are set on the <a href="index.html#schedule">main page</a>.</div>'
             '<div class="planner">' + "".join(rows) + "</div>"
             '<div><button type="button" class="mini" data-exp="send">Send to teacher</button>'
             '<button type="button" class="mini" data-exp="download">Download</button>'
