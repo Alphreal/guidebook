@@ -223,6 +223,13 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 .tour .big:hover{{transform:translateY(-2px)}}
 .tour .trow{{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:4px}}
 .tour .trow .tbtn{{font-size:15px;padding:10px 24px;margin:8px 0 0}}
+.hgrid4{{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0}}
+@media(min-width:720px){{.hgrid4{{grid-template-columns:repeat(4,1fr)}}}}
+.hgrid2{{display:grid;grid-template-columns:1fr;gap:12px;margin:12px 0}}
+@media(min-width:720px){{.hgrid2{{grid-template-columns:repeat(2,1fr)}}}}
+.hch{{text-align:center}}
+.hch .n{{display:flex;width:30px;height:30px;border-radius:50%;background:#818cf8;color:#020617;align-items:center;justify-content:center;margin:0 auto 8px;font-weight:800}}
+.hch b{{display:block;margin-bottom:4px}}
 .tbtn{{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2);color:#e2e8f0;border-radius:999px;padding:7px 16px;font-size:13px;cursor:pointer;margin:6px 6px 0 0;text-decoration:none;display:inline-block}}
 .tbtn:hover{{border-color:#818cf8}}
 .tbtn.pri{{background:linear-gradient(135deg,#818cf8,#c084fc);color:#020617;border-color:transparent;font-weight:700}}
@@ -695,12 +702,21 @@ def group_chapters(blocks, extras=None):
     return hero, chaps
 
 
-def hub_card(c, page):
-    first = c["content"].split("\n")[0] if c["content"] else ""
-    if not first.startswith("<p>"):
-        first = ""
-    return (f'<div class="card"><div class="trow"><div>{c["h2"]}</div>'
-            f'<div><a class="tbtn pri" href="{page}">Open →</a></div></div>{first}</div>')
+def hub_grids(chaps, pages):
+    """Compact numbered cards: 4 chapters in one row, guide + feedback in one row."""
+    items = []
+    for c in chaps:
+        parts = c["title"].split(" — ", 1)
+        items.append((parts[0], parts[1] if len(parts) > 1 else ""))
+
+    def card(n, main_t, sub, pg):
+        return (f'<div class="card hch"><span class="n">{n}</span><b>{esc(main_t)}</b>'
+                + (f'<div class="muted">{esc(sub)}</div>' if sub else "")
+                + f'<div><a class="tbtn pri" href="{pg}">Open →</a></div></div>')
+
+    g4 = "".join(card(k + 1, m, s, pages[k][1]) for k, (m, s) in enumerate(items[:4]))
+    g2 = "".join(card(k + 5, m, s, pages[k + 4][1]) for k, (m, s) in enumerate(items[4:]))
+    return f'<div class="hgrid4">{g4}</div><div class="hgrid2">{g2}</div>'
 
 
 def chapter_page(c, prevp, nextp, hub="DOC1-practical-short.html"):
@@ -895,8 +911,10 @@ def main():
                 hero, nav, chaps = md_to_html(f.read(), extras, keep, hub=True)
                 hub = fn.replace(".md", ".html")
                 pages = [(c["sid"], f"DOC1-{c['sid']}.html") for c in chaps]
-                previews = "".join(hub_card(c, pg) for c, (_, pg) in zip(chaps, pages))
-                body = hero + tour_html() + nav + previews
+                hubnav = '<div class="toc">' + "".join(
+                    f'<a href="{pg}" class="{"m" if c["title"].startswith("Chapter") else "s"}">{esc(c["title"])}</a>'
+                    for c, (_, pg) in zip(chaps, pages)) + "</div>"
+                body = hero + tour_html() + hubnav + hub_grids(chaps, pages)
                 nc = sum(len(v) for v in CHECKLISTS.values())
                 body += planner_html()
                 body += f'<div class="progress" id="progress"><b>My progress</b> — routines 0/{nc} · week 0/28 · streak 0d</div>'
