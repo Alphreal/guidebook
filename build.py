@@ -161,7 +161,9 @@ li.pic{{list-style:none}}
 .dbody{{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease-out}}
 details[open]>.dbody{{grid-template-rows:1fr}}
 .dbody-in{{overflow:hidden;min-height:0}}
-.hero{{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}}
+.hero{{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;position:relative}}
+.howq{{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(129,140,248,.15);border:1px solid rgba(129,140,248,.55);color:#e0e7ff;font-weight:800;font-size:16px;cursor:pointer}}
+.howq:hover{{background:rgba(129,140,248,.35)}}
 .hero h1,.hero h3,.hero p,.hero .sub{{width:100%;max-width:70ch;margin-left:auto!important;margin-right:auto!important;text-align:center!important}}
 .hero h1{{font-size:clamp(30px,5vw,46px);margin:10px auto;background:linear-gradient(135deg,#a5b4fc,#e9d5ff);-webkit-background-clip:text;background-clip:text;color:transparent}}
 .hero .sub{{font-size:16px}}
@@ -239,7 +241,7 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 .bar{{transform:scaleX(0);transform-box:fill-box;transform-origin:left;animation:grow .7s ease-out forwards}}
 @keyframes grow{{to{{transform:scaleX(1)}}}}
 a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{{outline:2px solid #818cf8;outline-offset:2px}}
-@media(min-width:1100px){{.wrap{{max-width:min(1400px,94vw)}}.grid2{{grid-template-columns:1fr 1fr 1fr}}.pic{{max-width:640px}}}}
+@media(min-width:1100px){{.wrap{{max-width:min(1400px,94vw)}}.grid2{{grid-template-columns:1fr 1fr}}.pic{{max-width:640px}}}}
 @media(min-width:1600px){{.wrap{{max-width:min(1600px,94vw)}}}}
 @media print{{body{{background:#fff;color:#111}}body::before{{display:none}}.hero h1{{color:#111!important;background:none!important;-webkit-text-fill-color:#111!important}}.topbar,.toc,.progress{{display:none}}.wrap{{max-width:100%;padding:0}}.card,.tldr,.chapter,figure{{background:#fff!important;color:#111!important;border:1px solid #ccc!important;box-shadow:none!important;backdrop-filter:none!important}}.tldr{{border-left:4px solid #111!important}}.muted,.cap,.pic figcaption,.sub{{color:#444!important}}a{{color:#111}}.rv{{opacity:1!important;transform:none!important}}.bar{{animation:none;transform:none}}.grad{{color:#111;-webkit-text-fill-color:#111}}.chapter{{break-inside:avoid}}}}
 @media (prefers-reduced-motion:reduce){{*,*::before,*::after{{animation:none!important;transition:none!important}}.rv{{opacity:1;transform:none}}.bar{{transform:none}}}}
@@ -346,6 +348,8 @@ document.addEventListener("click",function(e){{
  }}
  var w=e.target.closest?e.target.closest("[data-w]"):null;
  if(w){{if(w.disabled)return;var parts=w.getAttribute("data-w").split("|");var mon=monday(),dt=new Date(mon);dt.setDate(mon.getDate()+parseInt(parts[1],10));var key=iso(dt);W[key]=W[key]||{{}};if(W[key][parts[0]])delete W[key][parts[0]];else W[key][parts[0]]=1;save();paint();return}}
+ var hq=e.target.closest?e.target.closest("[data-howq]"):null;
+ if(hq){{var hp=hq.closest?hq.closest(".hero"):null;var pnl=hp?hp.querySelector("[data-howto]"):document.querySelector("[data-howto]");if(pnl)pnl.hidden=!pnl.hidden;return}}
  var cd=e.target.closest?e.target.closest("[data-chdone]"):null;
  if(cd){{if(cd.disabled)return;
   if(document.querySelector("[data-day]")){{goWeek();setTimeout(function(){{var s=document.querySelector('[data-exp="send"]');if(s){{s.classList.add("sendflash");try{{s.scrollIntoView({{behavior:"smooth",block:"center"}})}}catch(e2){{s.scrollIntoView()}}setTimeout(function(){{s.classList.remove("sendflash")}},2200)}}}},350);return}}
@@ -688,7 +692,15 @@ def group_chapters(blocks, extras=None):
     idx = [n for n, b in enumerate(blocks) if b.startswith("<h2")]
     hero = ""
     if idx and idx[0] > 0:
-        hero = '<div class="hero card">\n' + "\n".join(blocks[:idx[0]]) + "\n</div>\n"
+        cover = blocks[:idx[0]]
+        hi = next((n for n, b in enumerate(cover) if "How to use this guide" in b), None)
+        if hi is not None:
+            howto = '<div data-howto hidden>\n' + "\n".join(cover[hi:]) + "\n</div>"
+            hero = ('<div class="hero card">\n' + "\n".join(cover[:hi])
+                    + '\n<button type="button" class="howq" data-howq aria-label="How to use this guide">?</button>\n'
+                    + howto + "\n</div>\n")
+        else:
+            hero = '<div class="hero card">\n' + "\n".join(cover) + "\n</div>\n"
     chaps = []
     for k, s in enumerate(idx):
         e = idx[k + 1] if k + 1 < len(idx) else len(blocks)
@@ -703,9 +715,9 @@ def group_chapters(blocks, extras=None):
 
 
 def hub_grids(chaps, pages):
-    """Compact numbered cards: 4 chapters in one row, guide + feedback in one row."""
+    """Compact numbered cards for chapters (one row) + inline dropdowns for guide/feedback (one row)."""
     items = []
-    for c in chaps:
+    for c in chaps[:4]:
         parts = c["title"].split(" — ", 1)
         items.append((parts[0], parts[1] if len(parts) > 1 else ""))
 
@@ -714,8 +726,13 @@ def hub_grids(chaps, pages):
                 + (f'<div class="muted">{esc(sub)}</div>' if sub else "")
                 + f'<div><a class="tbtn pri" href="{pg}">Open →</a></div></div>')
 
-    g4 = "".join(card(k + 1, m, s, pages[k][1]) for k, (m, s) in enumerate(items[:4]))
-    g2 = "".join(card(k + 5, m, s, pages[k + 4][1]) for k, (m, s) in enumerate(items[4:]))
+    g4 = "".join(card(k + 1, m, s, pages[k][1]) for k, (m, s) in enumerate(items))
+
+    def drop(c):
+        return (f'<details class="chapter" id="{c["sid"]}"><summary>{c["h2"]}</summary>'
+                f'<div class="dbody"><div class="dbody-in">\n{c["content"]}\n</div></div></details>')
+
+    g2 = "".join(drop(c) for c in chaps[4:])
     return f'<div class="hgrid4">{g4}</div><div class="hgrid2">{g2}</div>'
 
 
@@ -923,10 +940,13 @@ def main():
             if fn.startswith("DOC1"):
                 hero, nav, chaps = md_to_html(f.read(), extras, keep, hub=True)
                 hub = fn.replace(".md", ".html")
-                pages = [(c["sid"], f"DOC1-{c['sid']}.html") for c in chaps]
+                ch4, rest = chaps[:4], chaps[4:]
+                pages = [(c["sid"], f"DOC1-{c['sid']}.html") for c in ch4]
                 hubnav = '<div class="toc">' + "".join(
-                    f'<a href="{pg}" class="{"m" if c["title"].startswith("Chapter") else "s"}">{esc(c["title"])}</a>'
-                    for c, (_, pg) in zip(chaps, pages)) + "</div>"
+                    f'<a href="{pg}" class="m">{esc(c["title"])}</a>'
+                    for c, (_, pg) in zip(ch4, pages))
+                hubnav += "".join(
+                    f'<a href="#{c["sid"]}" class="s">{esc(c["title"])}</a>' for c in rest) + "</div>"
                 body = hero + tour_html() + hubnav + hub_grids(chaps, pages)
                 nc = sum(len(v) for v in CHECKLISTS.values())
                 body += planner_html()
@@ -937,14 +957,19 @@ def main():
                     fo.write(html)
                 shutil.copy(os.path.join(OUT_DIR, name), os.path.join(DOCS_DIR, name))
                 print(f"Built: {name} (hub)")
-                for k, c in enumerate(chaps):
-                    prevp = (chaps[k - 1]["short"], pages[k - 1][1]) if k > 0 else None
-                    nextp = (chaps[k + 1]["short"], pages[k + 1][1]) if k + 1 < len(chaps) else None
+                for k, c in enumerate(ch4):
+                    prevp = (ch4[k - 1]["short"], pages[k - 1][1]) if k > 0 else None
+                    nextp = (ch4[k + 1]["short"], pages[k + 1][1]) if k + 1 < len(ch4) else None
                     ch = chapter_page(c, prevp, nextp, hub)
                     with open(os.path.join(OUT_DIR, pages[k][1]), "w", encoding="utf-8") as fo:
                         fo.write(ch)
                     shutil.copy(os.path.join(OUT_DIR, pages[k][1]), os.path.join(DOCS_DIR, pages[k][1]))
-                print(f"Built: {len(chaps)} chapter pages")
+                for dead in ("DOC1-one-page-class-guide.html", "DOC1-feedback.html"):
+                    for d in (OUT_DIR, DOCS_DIR):
+                        p = os.path.join(d, dead)
+                        if os.path.exists(p):
+                            os.remove(p)
+                print(f"Built: {len(ch4)} chapter pages")
                 continue
             body = md_to_html(f.read(), extras, keep)
             html = shell(label, body)
@@ -953,16 +978,19 @@ def main():
             f.write(html)
         shutil.copy(os.path.join(OUT_DIR, name), os.path.join(DOCS_DIR, name))
         print(f"Built: {name}")
-    roles = [("I'm a student — give me routines", 0), ("I teach — give me lessons", 2),
-             ("I want the evidence", 1)]
+    roles = [("I'm a student — give me routines", 0)]
+    srole, sdesc, spage = roles[0][0], DOCS[0][2], DOCS[0][0].replace(".md", ".html")
     idx_body = ('<div class="hero card"><div class="eyebrow">Asia University · Students</div>'
                 '<h1 class="grad">Study Smarter Online</h1>'
-                '<div class="sub">Pick the version you need — same research, three doors.</div></div>'
-                '<div class="grid2">' + "".join(
-        f'<div class="card"><b>{role}</b><div class="sub">{esc(DOCS[i][2])}</div>'
-        f'<p><a href="{DOCS[i][0].replace(".md", ".html")}">Start →</a></p></div>'
-        for role, i in roles
-    ) + "</div>" + schedule_html())
+                '<div class="sub">Pick what you need — start below.</div></div>'
+                '<div class="grid2">'
+                f'<div class="card"><b>{srole}</b><div class="sub">{esc(sdesc)}</div>'
+                f'<p><a href="{spage}">Start →</a></p></div>'
+                + schedule_html() + "</div>"
+                '<p class="muted" style="text-align:center">Teachers & researchers: '
+                '<a href="DOC3-mix-textbook.html">lessons</a> · '
+                '<a href="DOC2-detailed-long.html">evidence</a> · '
+                '<a href="vn.html">posters (VN)</a></p>')
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(shell("Guidebook", idx_body))
     shutil.copy(os.path.join(OUT_DIR, "index.html"), os.path.join(DOCS_DIR, "index.html"))

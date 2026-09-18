@@ -46,7 +46,9 @@ li.pic{list-style:none}
 .dbody{display:grid;grid-template-rows:0fr;transition:grid-template-rows .28s ease-out}
 details[open]>.dbody{grid-template-rows:1fr}
 .dbody-in{overflow:hidden;min-height:0}
-.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
+.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;position:relative}
+.howq{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(129,140,248,.15);border:1px solid rgba(129,140,248,.55);color:#e0e7ff;font-weight:800;font-size:16px;cursor:pointer}
+.howq:hover{background:rgba(129,140,248,.35)}
 .hero h1,.hero h3,.hero p,.hero .sub{width:100%;max-width:70ch;margin-left:auto!important;margin-right:auto!important;text-align:center!important}
 .hero h1{font-size:clamp(30px,5vw,46px);margin:10px auto;background:linear-gradient(135deg,#a5b4fc,#e9d5ff);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .sub{font-size:16px}
@@ -124,7 +126,7 @@ details[open]>.dbody{grid-template-rows:1fr}
 .bar{transform:scaleX(0);transform-box:fill-box;transform-origin:left;animation:grow .7s ease-out forwards}
 @keyframes grow{to{transform:scaleX(1)}}
 a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid #818cf8;outline-offset:2px}
-@media(min-width:1100px){.wrap{max-width:min(1400px,94vw)}.grid2{grid-template-columns:1fr 1fr 1fr}.pic{max-width:640px}}
+@media(min-width:1100px){.wrap{max-width:min(1400px,94vw)}.grid2{grid-template-columns:1fr 1fr}.pic{max-width:640px}}
 @media(min-width:1600px){.wrap{max-width:min(1600px,94vw)}}
 @media print{body{background:#fff;color:#111}body::before{display:none}.hero h1{color:#111!important;background:none!important;-webkit-text-fill-color:#111!important}.topbar,.toc,.progress{display:none}.wrap{max-width:100%;padding:0}.card,.tldr,.chapter,figure{background:#fff!important;color:#111!important;border:1px solid #ccc!important;box-shadow:none!important;backdrop-filter:none!important}.tldr{border-left:4px solid #111!important}.muted,.cap,.pic figcaption,.sub{color:#444!important}a{color:#111}.rv{opacity:1!important;transform:none!important}.bar{animation:none;transform:none}.grad{color:#111;-webkit-text-fill-color:#111}.chapter{break-inside:avoid}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.bar{transform:none}}
@@ -133,7 +135,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 <body>
 <div class="wrap mx-auto px-4">
 <div class="topbar"><a href="index.html">&larr; Alph</a><span class="muted">Guidebook</span></div>
-<div class="hero card"><div class="eyebrow">Asia University · Students</div><h1 class="grad">Study Smarter Online</h1><div class="sub">Pick the version you need — same research, three doors.</div></div><div class="grid2"><div class="card"><b>I'm a student — give me routines</b><div class="sub">Routines first: 5-minute fixes for time, distraction, interaction and fatigue.</div><p><a href="DOC1-practical-short.html">Start →</a></p></div><div class="card"><b>I teach — give me lessons</b><div class="sub">15-minute lesson scripts, activities and class norms.</div><p><a href="DOC3-mix-textbook.html">Start →</a></p></div><div class="card"><b>I want the evidence</b><div class="sub">Survey results, theories and linked recommendations.</div><p><a href="DOC2-detailed-long.html">Start →</a></p></div></div><div class="card" id="schedule"><b>Step 1 — My study days</b><div class="muted">Pick your code + online days first, then Start. Same choices appear inside the student guide.</div><div class="prof"><span class="muted">My code:</span><input data-user placeholder="e.g. A01 - saved on this device"><button type="button" class="mini" data-exp="saveuser">Save</button></div><div class="daypick"><button type="button" data-day="0">Mon</button><button type="button" data-day="1">Tue</button><button type="button" data-day="2">Wed</button><button type="button" data-day="3">Thu</button><button type="button" data-day="4">Fri</button><button type="button" data-day="5">Sat</button><button type="button" data-day="6">Sun</button><button type="button" class="q" data-dayact="weekdays">Weekdays</button><button type="button" class="q" data-dayact="all">All</button><button type="button" class="q" data-dayact="clear">Clear</button></div></div>
+<div class="hero card"><div class="eyebrow">Asia University · Students</div><h1 class="grad">Study Smarter Online</h1><div class="sub">Pick what you need — start below.</div></div><div class="grid2"><div class="card"><b>I'm a student — give me routines</b><div class="sub">Routines first: 5-minute fixes for time, distraction, interaction and fatigue.</div><p><a href="DOC1-practical-short.html">Start →</a></p></div><div class="card" id="schedule"><b>Step 1 — My study days</b><div class="muted">Pick your code + online days first, then Start. Same choices appear inside the student guide.</div><div class="prof"><span class="muted">My code:</span><input data-user placeholder="e.g. A01 - saved on this device"><button type="button" class="mini" data-exp="saveuser">Save</button></div><div class="daypick"><button type="button" data-day="0">Mon</button><button type="button" data-day="1">Tue</button><button type="button" data-day="2">Wed</button><button type="button" data-day="3">Thu</button><button type="button" data-day="4">Fri</button><button type="button" data-day="5">Sat</button><button type="button" data-day="6">Sun</button><button type="button" class="q" data-dayact="weekdays">Weekdays</button><button type="button" class="q" data-dayact="all">All</button><button type="button" class="q" data-dayact="clear">Clear</button></div></div></div><p class="muted" style="text-align:center">Teachers & researchers: <a href="DOC3-mix-textbook.html">lessons</a> · <a href="DOC2-detailed-long.html">evidence</a> · <a href="vn.html">posters (VN)</a></p>
 </div>
 <script>
 (function(){
@@ -231,6 +233,8 @@ document.addEventListener("click",function(e){
  }
  var w=e.target.closest?e.target.closest("[data-w]"):null;
  if(w){if(w.disabled)return;var parts=w.getAttribute("data-w").split("|");var mon=monday(),dt=new Date(mon);dt.setDate(mon.getDate()+parseInt(parts[1],10));var key=iso(dt);W[key]=W[key]||{};if(W[key][parts[0]])delete W[key][parts[0]];else W[key][parts[0]]=1;save();paint();return}
+ var hq=e.target.closest?e.target.closest("[data-howq]"):null;
+ if(hq){var hp=hq.closest?hq.closest(".hero"):null;var pnl=hp?hp.querySelector("[data-howto]"):document.querySelector("[data-howto]");if(pnl)pnl.hidden=!pnl.hidden;return}
  var cd=e.target.closest?e.target.closest("[data-chdone]"):null;
  if(cd){if(cd.disabled)return;
   if(document.querySelector("[data-day]")){goWeek();setTimeout(function(){var s=document.querySelector('[data-exp="send"]');if(s){s.classList.add("sendflash");try{s.scrollIntoView({behavior:"smooth",block:"center"})}catch(e2){s.scrollIntoView()}setTimeout(function(){s.classList.remove("sendflash")},2200)}},350);return}
