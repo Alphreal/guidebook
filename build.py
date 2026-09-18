@@ -893,6 +893,19 @@ def doc1_extras():
     return {sid: checklist_html("doc1", sid, items) for sid, items in CHECKLISTS.items()}
 
 
+def schedule_html():
+    daybtns = "".join(f'<button type="button" data-day="{di}">{d}</button>' for di, d in enumerate(DAYS))
+    return ('<div class="card" id="schedule"><b>Step 1 — My study days</b>'
+            '<div class="muted">Pick your code + online days first, then Start. Same choices appear inside the student guide.</div>'
+            '<div class="prof"><span class="muted">My code:</span>'
+            '<input data-user placeholder="e.g. A01 - saved on this device">'
+            '<button type="button" class="mini" data-exp="saveuser">Save</button></div>'
+            f'<div class="daypick">{daybtns}'
+            '<button type="button" class="q" data-dayact="weekdays">Weekdays</button>'
+            '<button type="button" class="q" data-dayact="all">All</button>'
+            '<button type="button" class="q" data-dayact="clear">Clear</button></div></div>')
+
+
 def tour_html():
     return ('<div class="card tour" id="tourcard"><b>New here? Guided start (2 minutes)</b>'
             '<div class="muted">Tap Start — we walk you through every step of this guide.</div>'
@@ -949,7 +962,7 @@ def main():
         f'<div class="card"><b>{role}</b><div class="sub">{esc(DOCS[i][2])}</div>'
         f'<p><a href="{DOCS[i][0].replace(".md", ".html")}">Start →</a></p></div>'
         for role, i in roles
-    ) + "</div>")
+    ) + "</div>" + schedule_html())
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as f:
         f.write(shell("Guidebook", idx_body))
     shutil.copy(os.path.join(OUT_DIR, "index.html"), os.path.join(DOCS_DIR, "index.html"))
