@@ -51,7 +51,8 @@ def vn_body():
             '<div class="muted" style="text-align:center">Kéo qua lại hoặc bấm mũi tên — xem từng bước 1 → 7</div>'
             '<div class="vgrid">' + figs + "</div>"
             '<div class="vnav"><button type="button" class="tbtn" data-vscroll="prev">‹ Trước</button>'
-            '<button type="button" class="tbtn" data-vscroll="next">Tiếp ›</button></div>'
+            '<button type="button" class="tbtn" data-vscroll="next">Tiếp ›</button>'
+            '<button type="button" class="tbtn pri" data-vdl>Tải tất cả (7 ảnh)</button></div>'
             '<div class="vlight" data-vlight hidden>'
             '<div class="vinner"><div class="vstep" data-vstep></div><img data-vimg alt="Poster tiếng Việt">'
             '<div class="vcap" data-vcap></div>'
@@ -63,7 +64,7 @@ def vn_body():
             ".vfig{flex:0 0 148px;margin:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:8px;cursor:zoom-in;scroll-snap-align:start}"
             ".vfig:hover{border-color:rgba(129,140,248,.6)}"
             ".vfig img{width:100%;height:auto;border-radius:10px;display:block}"
-            ".vfig figcaption{color:#c7d2fe;font-size:12px;margin-top:6px;text-align:center}"
+            ".vfig figcaption{color:#c7d2fe;font-size:12px;margin-top:6px;text-align:center;text-wrap:balance;min-height:2.8em}"
             ".vlight{position:fixed;inset:0;z-index:50;background:rgba(2,6,23,.92);display:flex;align-items:center;justify-content:center;padding:16px}"
             ".vlight[hidden]{display:none}"
             ".vinner{max-width:720px;width:100%;text-align:center}"
@@ -74,7 +75,9 @@ def vn_body():
             ".vstep{color:#94a3b8;font-size:12px;letter-spacing:.12em;margin-bottom:6px}</style>"
             "<script>(function(){var caps=["
             + ",".join('"' + cap.replace('"', "") + '"' for _, cap in VN_POSTERS)
-            +             "];var cur=0;var box=document.querySelector('[data-vlight]');"
+            + "];var files=["
+            + ",".join('"' + fn + '"' for fn, _ in VN_POSTERS)
+            + "];var cur=0;var box=document.querySelector('[data-vlight]');"
             "var img=document.querySelector('[data-vimg]');var cap=document.querySelector('[data-vcap]');"
             "var stp=document.querySelector('[data-vstep]');"
             "function show(n){cur=(n+caps.length)%caps.length;"
@@ -82,6 +85,10 @@ def vn_body():
             "stp.textContent='Bước '+(cur+1)+' / '+caps.length;box.hidden=false;}"
             "function hide(){box.hidden=true;}"
             "document.addEventListener('click',function(e){"
+            "var dl=e.target.closest?e.target.closest('[data-vdl]'):null;"
+            "if(dl){files.forEach(function(f,i){setTimeout(function(){"
+            "var a=document.createElement('a');a.href='vn/'+f;a.download=f;"
+            "document.body.appendChild(a);a.click();setTimeout(function(){a.remove()},800)},i*700)});return;}"
             "var sv=e.target.closest?e.target.closest('[data-vscroll]'):null;"
             "if(sv){var g=document.querySelector('.vgrid');"
             "if(g){var dd=sv.getAttribute('data-vscroll')==='next'?320:-320;"
@@ -824,7 +831,7 @@ def tour_html():
     return ('<div class="card tour" id="tourcard"><b>New here? Guided start (2 minutes)</b>'
             '<div class="muted">Tap Start — we walk you through every step of this guide.</div>'
             '<div class="trow"><div data-tourbody><button type="button" class="big" data-tour="start">Let\'s get started</button></div>'
-            '<div><a class="tbtn" href="vn.html">Xem posters tiếng Việt</a></div></div></div>')
+            '<div><a class="tbtn big" href="vn.html">Xem posters tiếng Việt</a></div></div></div>')
 
 
 def main():
