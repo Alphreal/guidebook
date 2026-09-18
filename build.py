@@ -267,12 +267,10 @@ var CHS=[["chapter-1-self-regulation-time","Time","Plan & focus blocks"],["chapt
 var TG={{step:0,ch:0}};
 function goSid(sid){{var h=document.getElementById(sid);var det=h&&h.closest?h.closest("details"):null;if(det){{det.open=true;setTimeout(function(){{try{{det.scrollIntoView({{behavior:"smooth",block:"start"}})}}catch(e){{det.scrollIntoView()}}}},80)}}}}
 function goWeek(){{var w=document.querySelector("[data-day]");var c=w&&w.closest?w.closest(".card"):null;if(c){{try{{c.scrollIntoView({{behavior:"smooth",block:"center"}})}}catch(e){{c.scrollIntoView()}}}}}}
-function tourRender(){{var b=document.querySelector("[data-tourbody]");if(!b)return;var s=TG.step,c=CHS[TG.ch],dots="Step "+(s+1)+" of 5";
+function tourRender(){{var b=document.querySelector("[data-tourbody]");if(!b)return;var s=TG.step,c=CHS[TG.ch],dots="Step "+(s+1)+" of 3";
  if(s===0){{b.innerHTML='<div class="muted">'+dots+' — what is your biggest struggle?</div><div><button type="button" class="tbtn" data-tour="pick:0">Time</button><button type="button" class="tbtn" data-tour="pick:1">Distraction</button><button type="button" class="tbtn" data-tour="pick:2">Interaction</button><button type="button" class="tbtn" data-tour="pick:3">Fatigue</button></div>'}}
- else if(s===1){{b.innerHTML='<div>'+dots+' — your chapter: <b>'+c[2]+'</b>. Open it and read the routine first.</div><div><button type="button" class="tbtn pri" data-tour="opench">Open my chapter</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}}
- else if(s===2){{b.innerHTML='<div>'+dots+' — do the 5-minute routine now. Stuck? Tap How? next to any item.</div><div><button type="button" class="tbtn pri" data-tour="next">Done, next</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}}
- else if(s===3){{b.innerHTML='<div>'+dots+' — read the short "Why it works" box, then track your week below.</div><div><button type="button" class="tbtn pri" data-tour="week">Take me to My study week</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}}
- else{{b.innerHTML='<div class="ok">Done — routine tried, days picked, progress saved. Tap Send to teacher when ready.</div><div><button type="button" class="tbtn" data-tour="restart">Restart tour</button></div>'}}}}
+ else if(s===1){{b.innerHTML='<div>'+dots+' — your chapter: <b>'+c[2]+'</b>. Open it, do the routine, tick Done.</div><div><button type="button" class="tbtn pri" data-tour="opench">Open my chapter →</button><button type="button" class="tbtn" data-tour="week">My study week</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}}
+ else{{b.innerHTML='<div class="ok">Done — track your week below, then Send to teacher.</div><div><button type="button" class="tbtn" data-tour="restart">Restart tour</button></div>'}}}}
 function paint(){{
  var boxes=document.querySelectorAll("[data-check]");
  boxes.forEach(function(el){{el.checked=!!R[el.getAttribute("data-check")]}});
@@ -325,10 +323,9 @@ document.addEventListener("click",function(e){{
  var tr=e.target.closest?e.target.closest("[data-tour]"):null;
  if(tr){{var ta=tr.getAttribute("data-tour");
   if(ta==="start"){{TG.step=0;tourRender();return}}
-  if(ta.indexOf("pick:")===0){{TG.ch=parseInt(ta.slice(5),10)||0;TG.step=1;tourRender();goSid(CHS[TG.ch][0]);return}}
-  if(ta==="opench"){{goSid(CHS[TG.ch][0]);TG.step=2;tourRender();return}}
-  if(ta==="next"){{TG.step=3;tourRender();return}}
-  if(ta==="week"){{goWeek();TG.step=4;tourRender();return}}
+  if(ta.indexOf("pick:")===0){{TG.ch=parseInt(ta.slice(5),10)||0;TG.step=1;tourRender();return}}
+  if(ta==="opench"){{location.href="DOC1-"+CHS[TG.ch][0]+".html";return}}
+  if(ta==="week"){{goWeek();TG.step=2;tourRender();return}}
   if(ta==="back"){{TG.step=Math.max(0,TG.step-1);tourRender();return}}
   if(ta==="restart"){{TG.step=0;TG.ch=0;tourRender();return}}}}
  var gc=e.target.closest?e.target.closest("[data-goalcheck]"):null;
@@ -343,7 +340,9 @@ document.addEventListener("click",function(e){{
  var w=e.target.closest?e.target.closest("[data-w]"):null;
  if(w){{if(w.disabled)return;var parts=w.getAttribute("data-w").split("|");var mon=monday(),dt=new Date(mon);dt.setDate(mon.getDate()+parseInt(parts[1],10));var key=iso(dt);W[key]=W[key]||{{}};if(W[key][parts[0]])delete W[key][parts[0]];else W[key][parts[0]]=1;save();paint();return}}
  var cd=e.target.closest?e.target.closest("[data-chdone]"):null;
- if(cd){{if(cd.disabled)return;goWeek();setTimeout(function(){{var s=document.querySelector('[data-exp="send"]');if(s){{s.classList.add("sendflash");try{{s.scrollIntoView({{behavior:"smooth",block:"center"}})}}catch(e2){{s.scrollIntoView()}}setTimeout(function(){{s.classList.remove("sendflash")}},2200)}}}},350);return}}
+ if(cd){{if(cd.disabled)return;
+  if(document.querySelector("[data-day]")){{goWeek();setTimeout(function(){{var s=document.querySelector('[data-exp="send"]');if(s){{s.classList.add("sendflash");try{{s.scrollIntoView({{behavior:"smooth",block:"center"}})}}catch(e2){{s.scrollIntoView()}}setTimeout(function(){{s.classList.remove("sendflash")}},2200)}}}},350);return}}
+  location.href="DOC1-practical-short.html#weekcard";return}}
  var t=e.target.closest?e.target.closest(".toc a"):null;
  if(t){{var id=t.getAttribute("href");
   if(id&&id.charAt(0)==="#"){{var d=document.getElementById(id.slice(1));
@@ -380,6 +379,7 @@ function shadow(){{
 window.addEventListener("scroll",shadow,{{passive:true}});
 reveal();shadow();openHash();
 paint();
+if(location.hash==="#weekcard"){{setTimeout(function(){{var s=document.querySelector('[data-exp="send"]');if(s){{s.classList.add("sendflash");setTimeout(function(){{s.classList.remove("sendflash")}},2500)}}}},600)}}
 }})();
 </script>
 </body>
@@ -501,7 +501,7 @@ def table_chart(txt):
             + rows + '</table><div class="muted">Group-coded from open answers.</div></div>')
 
 
-def md_to_html(text, extras=None, toc_keep=None):
+def md_to_html(text, extras=None, toc_keep=None, hub=False):
     out, toc, seen, lines, i = [], [], set(), text.split("\n"), 0
     while i < len(lines):
         ln = lines[i].rstrip()
@@ -632,6 +632,9 @@ def md_to_html(text, extras=None, toc_keep=None):
         i += 1
     if toc_keep:
         toc = [e for e in toc if any(k in e[0] for k in toc_keep)]
+    if hub:
+        hero, chaps = group_chapters(out, extras)
+        return hero, toc_nav(toc) if toc else "", chaps
     return md_assemble(out, toc, extras)
 
 
@@ -664,6 +667,52 @@ def group_sections(blocks, extras=None):
         rest.append(f'<details class="chapter"{o}>\n<summary>{blocks[s]}</summary>\n<div class="dbody"><div class="dbody-in">\n'
                     + "\n".join(blocks[s + 1:e]) + "\n" + extra + "\n</div></div>\n</details>")
     return hero, "\n".join(rest)
+
+
+def toc_nav(toc):
+    return '<div class="toc">' + "".join(
+        f'<a href="#{esc(sid)}" class="{"m" if main else "s"}">{esc(t)}</a>' for sid, t, main in toc
+    ) + "</div>"
+
+
+def group_chapters(blocks, extras=None):
+    """Split cover + h2 sections into structured chapters for per-page output."""
+    extras = extras or {}
+    idx = [n for n, b in enumerate(blocks) if b.startswith("<h2")]
+    hero = ""
+    if idx and idx[0] > 0:
+        hero = '<div class="hero card">\n' + "\n".join(blocks[:idx[0]]) + "\n</div>\n"
+    chaps = []
+    for k, s in enumerate(idx):
+        e = idx[k + 1] if k + 1 < len(idx) else len(blocks)
+        m = re.search(r'id="([^"]+)"', blocks[s])
+        sid = m.group(1) if m else f"ch{k}"
+        title = re.sub(r"<[^>]+>", "", blocks[s]).strip()
+        chaps.append({"sid": sid, "h2": blocks[s], "title": title,
+                      "short": title.split(" — ")[0],
+                      "content": "\n".join(blocks[s + 1:e]),
+                      "extra": extras.get(sid, "")})
+    return hero, chaps
+
+
+def hub_card(c, page):
+    first = c["content"].split("\n")[0] if c["content"] else ""
+    if not first.startswith("<p>"):
+        first = ""
+    return (f'<div class="card"><div class="trow"><div>{c["h2"]}</div>'
+            f'<div><a class="tbtn pri" href="{page}">Open →</a></div></div>{first}</div>')
+
+
+def chapter_page(c, prevp, nextp, hub="DOC1-practical-short.html"):
+    nav = (f'<div class="card"><div class="trow"><div>'
+           + (f'<a class="tbtn" href="{prevp[1]}">← {esc(prevp[0])}</a> ' if prevp else "")
+           + f'<a class="tbtn" href="{hub}">All chapters</a>'
+           + (f' <a class="tbtn" href="{nextp[1]}">{esc(nextp[0])} →</a>' if nextp else "")
+           + f'</div><div><a class="tbtn pri" href="{hub}#weekcard">My study week →</a></div></div></div>')
+    body = (f'<p><a href="{hub}">← All chapters</a></p>'
+            f'<details class="chapter" open>\n<summary>{c["h2"]}</summary>\n'
+            f'<div class="dbody"><div class="dbody-in">\n{c["content"]}\n{c["extra"]}\n</div></div>\n</details>\n' + nav)
+    return shell(esc(c["title"]) + " — Student Guide", body)
 
 
 CHECKLISTS = {
@@ -806,7 +855,7 @@ def planner_html():
         )
         rows.append(f"<span>{esc(label)}</span>{cells}")
     daybtns = "".join(f'<button type="button" data-day="{di}">{d}</button>' for di, d in enumerate(DAYS))
-    return ('<div class="card"><b>My study week - tap each day you kept the routine</b>'
+    return ('<div class="card" id="weekcard"><b>My study week - tap each day you kept the routine</b>'
             '<div class="prof"><span class="muted">My code:</span>'
             '<input data-user placeholder="e.g. A01 - saved on this device">'
             '<button type="button" class="mini" data-exp="saveuser">Save</button></div>'
@@ -842,12 +891,31 @@ def main():
         with open(os.path.join(BASE_DIR, fn), encoding="utf-8") as f:
             extras = doc1_extras() if fn.startswith("DOC1") else None
             keep = ["results", "chapters", "discussion", "appendix"] if fn.startswith("DOC2") else None
-            body = md_to_html(f.read(), extras, keep)
-            if extras:
-                body = body.replace('<div class="toc">', tour_html() + '<div class="toc">', 1)
+            if fn.startswith("DOC1"):
+                hero, nav, chaps = md_to_html(f.read(), extras, keep, hub=True)
+                hub = fn.replace(".md", ".html")
+                pages = [(c["sid"], f"DOC1-{c['sid']}.html") for c in chaps]
+                previews = "".join(hub_card(c, pg) for c, (_, pg) in zip(chaps, pages))
+                body = hero + tour_html() + nav + previews
                 nc = sum(len(v) for v in CHECKLISTS.values())
                 body += planner_html()
                 body += f'<div class="progress" id="progress"><b>My progress</b> — routines 0/{nc} · week 0/28 · streak 0d</div>'
+                html = shell(label, body)
+                name = hub
+                with open(os.path.join(OUT_DIR, name), "w", encoding="utf-8") as fo:
+                    fo.write(html)
+                shutil.copy(os.path.join(OUT_DIR, name), os.path.join(DOCS_DIR, name))
+                print(f"Built: {name} (hub)")
+                for k, c in enumerate(chaps):
+                    prevp = (chaps[k - 1]["short"], pages[k - 1][1]) if k > 0 else None
+                    nextp = (chaps[k + 1]["short"], pages[k + 1][1]) if k + 1 < len(chaps) else None
+                    ch = chapter_page(c, prevp, nextp, hub)
+                    with open(os.path.join(OUT_DIR, pages[k][1]), "w", encoding="utf-8") as fo:
+                        fo.write(ch)
+                    shutil.copy(os.path.join(OUT_DIR, pages[k][1]), os.path.join(DOCS_DIR, pages[k][1]))
+                print(f"Built: {len(chaps)} chapter pages")
+                continue
+            body = md_to_html(f.read(), extras, keep)
             html = shell(label, body)
         name = fn.replace(".md", ".html")
         with open(os.path.join(OUT_DIR, name), "w", encoding="utf-8") as f:

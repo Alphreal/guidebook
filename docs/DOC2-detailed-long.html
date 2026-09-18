@@ -266,12 +266,10 @@ var CHS=[["chapter-1-self-regulation-time","Time","Plan & focus blocks"],["chapt
 var TG={step:0,ch:0};
 function goSid(sid){var h=document.getElementById(sid);var det=h&&h.closest?h.closest("details"):null;if(det){det.open=true;setTimeout(function(){try{det.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){det.scrollIntoView()}},80)}}
 function goWeek(){var w=document.querySelector("[data-day]");var c=w&&w.closest?w.closest(".card"):null;if(c){try{c.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){c.scrollIntoView()}}}
-function tourRender(){var b=document.querySelector("[data-tourbody]");if(!b)return;var s=TG.step,c=CHS[TG.ch],dots="Step "+(s+1)+" of 5";
+function tourRender(){var b=document.querySelector("[data-tourbody]");if(!b)return;var s=TG.step,c=CHS[TG.ch],dots="Step "+(s+1)+" of 3";
  if(s===0){b.innerHTML='<div class="muted">'+dots+' — what is your biggest struggle?</div><div><button type="button" class="tbtn" data-tour="pick:0">Time</button><button type="button" class="tbtn" data-tour="pick:1">Distraction</button><button type="button" class="tbtn" data-tour="pick:2">Interaction</button><button type="button" class="tbtn" data-tour="pick:3">Fatigue</button></div>'}
- else if(s===1){b.innerHTML='<div>'+dots+' — your chapter: <b>'+c[2]+'</b>. Open it and read the routine first.</div><div><button type="button" class="tbtn pri" data-tour="opench">Open my chapter</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}
- else if(s===2){b.innerHTML='<div>'+dots+' — do the 5-minute routine now. Stuck? Tap How? next to any item.</div><div><button type="button" class="tbtn pri" data-tour="next">Done, next</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}
- else if(s===3){b.innerHTML='<div>'+dots+' — read the short "Why it works" box, then track your week below.</div><div><button type="button" class="tbtn pri" data-tour="week">Take me to My study week</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}
- else{b.innerHTML='<div class="ok">Done — routine tried, days picked, progress saved. Tap Send to teacher when ready.</div><div><button type="button" class="tbtn" data-tour="restart">Restart tour</button></div>'}}
+ else if(s===1){b.innerHTML='<div>'+dots+' — your chapter: <b>'+c[2]+'</b>. Open it, do the routine, tick Done.</div><div><button type="button" class="tbtn pri" data-tour="opench">Open my chapter →</button><button type="button" class="tbtn" data-tour="week">My study week</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}
+ else{b.innerHTML='<div class="ok">Done — track your week below, then Send to teacher.</div><div><button type="button" class="tbtn" data-tour="restart">Restart tour</button></div>'}}
 function paint(){
  var boxes=document.querySelectorAll("[data-check]");
  boxes.forEach(function(el){el.checked=!!R[el.getAttribute("data-check")]});
@@ -324,10 +322,9 @@ document.addEventListener("click",function(e){
  var tr=e.target.closest?e.target.closest("[data-tour]"):null;
  if(tr){var ta=tr.getAttribute("data-tour");
   if(ta==="start"){TG.step=0;tourRender();return}
-  if(ta.indexOf("pick:")===0){TG.ch=parseInt(ta.slice(5),10)||0;TG.step=1;tourRender();goSid(CHS[TG.ch][0]);return}
-  if(ta==="opench"){goSid(CHS[TG.ch][0]);TG.step=2;tourRender();return}
-  if(ta==="next"){TG.step=3;tourRender();return}
-  if(ta==="week"){goWeek();TG.step=4;tourRender();return}
+  if(ta.indexOf("pick:")===0){TG.ch=parseInt(ta.slice(5),10)||0;TG.step=1;tourRender();return}
+  if(ta==="opench"){location.href="DOC1-"+CHS[TG.ch][0]+".html";return}
+  if(ta==="week"){goWeek();TG.step=2;tourRender();return}
   if(ta==="back"){TG.step=Math.max(0,TG.step-1);tourRender();return}
   if(ta==="restart"){TG.step=0;TG.ch=0;tourRender();return}}
  var gc=e.target.closest?e.target.closest("[data-goalcheck]"):null;
@@ -342,7 +339,9 @@ document.addEventListener("click",function(e){
  var w=e.target.closest?e.target.closest("[data-w]"):null;
  if(w){if(w.disabled)return;var parts=w.getAttribute("data-w").split("|");var mon=monday(),dt=new Date(mon);dt.setDate(mon.getDate()+parseInt(parts[1],10));var key=iso(dt);W[key]=W[key]||{};if(W[key][parts[0]])delete W[key][parts[0]];else W[key][parts[0]]=1;save();paint();return}
  var cd=e.target.closest?e.target.closest("[data-chdone]"):null;
- if(cd){if(cd.disabled)return;goWeek();setTimeout(function(){var s=document.querySelector('[data-exp="send"]');if(s){s.classList.add("sendflash");try{s.scrollIntoView({behavior:"smooth",block:"center"})}catch(e2){s.scrollIntoView()}setTimeout(function(){s.classList.remove("sendflash")},2200)}},350);return}
+ if(cd){if(cd.disabled)return;
+  if(document.querySelector("[data-day]")){goWeek();setTimeout(function(){var s=document.querySelector('[data-exp="send"]');if(s){s.classList.add("sendflash");try{s.scrollIntoView({behavior:"smooth",block:"center"})}catch(e2){s.scrollIntoView()}setTimeout(function(){s.classList.remove("sendflash")},2200)}},350);return}
+  location.href="DOC1-practical-short.html#weekcard";return}
  var t=e.target.closest?e.target.closest(".toc a"):null;
  if(t){var id=t.getAttribute("href");
   if(id&&id.charAt(0)==="#"){var d=document.getElementById(id.slice(1));
@@ -379,6 +378,7 @@ function shadow(){
 window.addEventListener("scroll",shadow,{passive:true});
 reveal();shadow();openHash();
 paint();
+if(location.hash==="#weekcard"){setTimeout(function(){var s=document.querySelector('[data-exp="send"]');if(s){s.classList.add("sendflash");setTimeout(function(){s.classList.remove("sendflash")},2500)}},600)}
 })();
 </script>
 </body>
