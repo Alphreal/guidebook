@@ -145,6 +145,8 @@ p{{margin:10px 0}}
 h1{{font-size:26px;margin:8px 0}}h2{{font-size:19px;margin:0 0 8px}}h3{{font-size:16px;margin:14px 0 6px}}
 .grid2{{display:grid;grid-template-columns:1fr;gap:14px}}
 @media(min-width:720px){{.grid2{{grid-template-columns:1fr 1fr}}}}
+.grid2>.card{{position:relative}}
+[data-schstart]::after{{content:"";position:absolute;inset:0}}
 a{{color:#a5b4fc}}
 table{{width:100%;border-collapse:collapse;font-size:14px}}
 th,td{{text-align:left;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.1);vertical-align:top}}
