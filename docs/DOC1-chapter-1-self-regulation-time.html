@@ -185,11 +185,11 @@ var CHS=[["chapter-1-self-regulation-time","Time","Plan & focus blocks"],["chapt
 var TG={step:0,ch:0};
 function goSid(sid){var h=document.getElementById(sid);var det=h&&h.closest?h.closest("details"):null;if(det){det.open=true;setTimeout(function(){try{det.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){det.scrollIntoView()}},80)}}
 function goWeek(){var w=document.querySelector("[data-day]");var c=w&&w.closest?w.closest(".card"):null;if(c){try{c.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){c.scrollIntoView()}}}
-var SCHT=[["[data-user]","Your code","Type any code, like your group + number (A01). It keeps your progress private to this device."],['[data-exp="saveuser"]',"Save it","Tap Save. Come back anytime — your progress reloads under this code."],["#schedule .daypick","Pick study days","Tap the days you study online — or Weekdays. Grey days are skipped in your score. Then open the student guide and tap Start!"]];
+var SCHT=["[data-user]",'[data-exp="saveuser"]',"#schedule .daypick"];
 var SCH={step:0,open:0};
 function schClear(){document.querySelectorAll(".schlight").forEach(function(el){el.classList.remove("schlight")})}
 function schHide(){SCH.open=0;if(SCH.tm)clearTimeout(SCH.tm);schClear();var o=document.querySelector("[data-schov]");if(o)o.hidden=true;var tp=document.querySelector("[data-schtip]");if(tp)tp.hidden=true}
-function schShow(n){SCH.step=(n+SCHT.length)%SCHT.length;SCH.open=1;schClear();var s=SCHT[SCH.step];var o=document.querySelector("[data-schov]");if(o){if(o.parentNode!==document.body)document.body.appendChild(o);o.hidden=false}var tp0=document.querySelector("[data-schtip]");if(tp0){if(tp0.parentNode!==document.body)document.body.appendChild(tp0);tp0.hidden=true}var el=document.querySelector(s[0]);if(el){el.classList.add("schlight");try{el.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){el.scrollIntoView()}}if(SCH.tm)clearTimeout(SCH.tm);SCH.tm=setTimeout(function(){if(!SCH.open)return;var t2=document.querySelector("[data-schtip]");if(!t2)return;var th=t2.offsetHeight||220,sp=12;t2.style.left="50%";t2.style.transform="translateX(-50%)";var e2=document.querySelector(SCHT[SCH.step][0]);if(e2){var r=e2.getBoundingClientRect();if(r.bottom+th+sp<window.innerHeight){t2.style.top=(r.bottom+sp)+"px";t2.style.bottom="auto"}else if(r.top-th-sp>0){t2.style.top=Math.max(8,r.top-th-sp)+"px";t2.style.bottom="auto"}else if(r.top>window.innerHeight*0.5){t2.style.top="18px";t2.style.bottom="auto"}else{t2.style.top="auto";t2.style.bottom="18px"}}else{t2.style.top="auto";t2.style.bottom="18px"}t2.hidden=false;var h=t2.querySelector("[data-schtitle]");if(h)h.textContent=(SCH.step+1)+" / "+SCHT.length+" — "+SCHT[SCH.step][1];var x=t2.querySelector("[data-schtext]");if(x)x.textContent=SCHT[SCH.step][2];var bk=t2.querySelector('[data-sch="back"]');if(bk)bk.disabled=SCH.step===0;var nx=t2.querySelector('[data-sch="next"]');if(nx)nx.textContent=SCH.step===SCHT.length-1?"Done ✓":"Next ›"},380)}
+function schShow(n){if(n>=SCHT.length){schHide();return}SCH.step=n;SCH.open=1;schClear();var s=SCHT[SCH.step];var o=document.querySelector("[data-schov]");if(o){if(o.parentNode!==document.body)document.body.appendChild(o);o.hidden=false}var el=document.querySelector(s[0]);if(el){el.classList.add("schlight");try{el.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){el.scrollIntoView()}}}
 function tourRender(){var b=document.querySelector("[data-tourbody]");if(!b)return;var s=TG.step,c=CHS[TG.ch],dots="Step "+(s+1)+" of 3";
  if(s===0){b.innerHTML='<div class="muted">'+dots+' — what is your biggest struggle?</div><div><button type="button" class="tbtn" data-tour="pick:0">Time</button><button type="button" class="tbtn" data-tour="pick:1">Distraction</button><button type="button" class="tbtn" data-tour="pick:2">Interaction</button><button type="button" class="tbtn" data-tour="pick:3">Fatigue</button></div>'}
  else if(s===1){b.innerHTML='<div>'+dots+' — your chapter: <b>'+c[2]+'</b>. Open it, do the routine, tick Done.</div><div><button type="button" class="tbtn pri" data-tour="opench">Open my chapter →</button><button type="button" class="tbtn" data-tour="week">My study week</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}
@@ -267,13 +267,7 @@ document.addEventListener("click",function(e){
  var hq=e.target.closest?e.target.closest("[data-howq]"):null;
  if(hq){var hp=hq.closest?hq.closest(".hero"):null;var pnl=hp?hp.querySelector("[data-howto]"):document.querySelector("[data-howto]");if(pnl)pnl.hidden=!pnl.hidden;return}
  var so=e.target.closest?e.target.closest("[data-schov]"):null;
- if(so){schHide();return}
- var sc=e.target.closest?e.target.closest("[data-sch]"):null;
- if(sc){var sa=sc.getAttribute("data-sch");
-  if(sa==="start"){schShow(0);return}
-  if(sa==="next"){if(SCH.step>=SCHT.length-1){schHide()}else{schShow(SCH.step+1)}return}
-  if(sa==="back"){schShow(SCH.step-1);return}
-  if(sa==="skip"){schHide();return}}
+ if(so){schShow(SCH.step+1);return}
  var cd=e.target.closest?e.target.closest("[data-chdone]"):null;
  if(cd){if(cd.disabled)return;
   if(document.querySelector("[data-day]")){goWeek();setTimeout(function(){var s=document.querySelector('[data-exp="send"]');if(s){s.classList.add("sendflash");try{s.scrollIntoView({behavior:"smooth",block:"center"})}catch(e2){s.scrollIntoView()}setTimeout(function(){s.classList.remove("sendflash")},2200)}},350);return}
