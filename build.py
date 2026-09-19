@@ -347,6 +347,8 @@ document.addEventListener("click",function(e){{
  if(db){{var di=db.getAttribute("data-day");if(D[di])delete D[di];else D[di]=1;save();paint();return}}
  var da=e.target.closest?e.target.closest("[data-dayact]"):null;
  if(da){{var a=da.getAttribute("data-dayact");if(a==="all")D={{"0":1,"1":1,"2":1,"3":1,"4":1,"5":1,"6":1}};else if(a==="weekdays")D={{"0":1,"1":1,"2":1,"3":1,"4":1}};else D={{}};save();paint();return}}
+ var st=e.target.closest?e.target.closest("[data-schstart]"):null;
+ if(st){{try{{if(!sessionStorage.getItem("gbSchAuto")&&!hasK(kk("gb-days-v3"))){{sessionStorage.setItem("gbSchAuto","1");e.preventDefault();schShow(0);return}}}}catch(e3){{}}}}
  var tr=e.target.closest?e.target.closest("[data-tour]"):null;
  if(tr){{var ta=tr.getAttribute("data-tour");
   if(ta==="start"){{TG.step=0;tourRender();return}}
@@ -941,7 +943,6 @@ def schedule_html():
     daybtns = "".join(f'<button type="button" data-day="{di}">{d}</button>' for di, d in enumerate(DAYS))
     return ('<div class="card" id="schedule"><b>Step 1 — My study days</b>'
             '<div class="muted">Pick your code + online days first, then Start. Same choices appear inside the student guide.</div>'
-            '<div><button type="button" class="mini" data-sch="start">Show me how</button></div>'
             '<div class="schov" data-schov hidden></div>'
             '<div class="schtip" data-schtip hidden><b data-schtitle></b><p class="muted" data-schtext></p>'
             '<div class="trow"><div><button type="button" class="tbtn" data-sch="back">‹ Back</button>'
