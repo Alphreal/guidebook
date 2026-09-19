@@ -290,6 +290,8 @@ document.addEventListener("click",function(e){
  if(se){var sa2=se.getAttribute("data-secret");
   if(sa2==="open"){if(streak()<7)return;var L=document.querySelector("[data-sealight]");if(L){if(L.parentNode!==document.body)document.body.appendChild(L);L.hidden=false}return}
   if(sa2==="close"){var L2=document.querySelector("[data-sealight]");if(L2)L2.hidden=true;return}}
+ var lk=e.target.closest?e.target.closest("[data-secretlock]"):null;
+ if(lk){SCH.lk=(SCH.lk||0)+1;if(SCH.lkt)clearTimeout(SCH.lkt);SCH.lkt=setTimeout(function(){SCH.lk=0},2500);if(SCH.lk>=5){SCH.lk=0;var L=document.querySelector("[data-sealight]");if(L){if(L.parentNode!==document.body)document.body.appendChild(L);L.hidden=false}return}}
  var t=e.target.closest?e.target.closest(".toc a"):null;
  if(t){var id=t.getAttribute("href");
   if(id&&id.charAt(0)==="#"){var d=document.getElementById(id.slice(1));
