@@ -255,7 +255,7 @@ var CHS=[["chapter-1-self-regulation-time","Time","Plan & focus blocks"],["chapt
 var TG={step:0,ch:0};
 function goSid(sid){var h=document.getElementById(sid);var det=h&&h.closest?h.closest("details"):null;if(det){det.open=true;setTimeout(function(){try{det.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){det.scrollIntoView()}},80)}}
 function goWeek(){var w=document.querySelector("[data-day]");var c=w&&w.closest?w.closest(".card"):null;if(c){try{c.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){c.scrollIntoView()}}}
-var SCHT=[["[data-user]","Your code","Type any code, like your group + number (A01). It keeps your progress private to this device."],['[data-exp="saveuser"]',"Save it","Tap Save. Come back anytime — your progress reloads under this code."],["#schedule .daypick","Pick study days","Tap the days you study online — or Weekdays. Grey days are skipped in your score."],["[data-schstart]","Start learning","Head into the student guide and tap Start. Your week tracker already knows your days!"]];
+var SCHT=[["[data-user]","Your code","Type any code, like your group + number (A01). It keeps your progress private to this device."],['[data-exp="saveuser"]',"Save it","Tap Save. Come back anytime — your progress reloads under this code."],["#schedule .daypick","Pick study days","Tap the days you study online — or Weekdays. Grey days are skipped in your score. Then open the student guide and tap Start!"]];
 var SCH={step:0,open:0};
 function schClear(){document.querySelectorAll(".schlight").forEach(function(el){el.classList.remove("schlight")})}
 function schHide(){SCH.open=0;schClear();var o=document.querySelector("[data-schov]");if(o)o.hidden=true;var tp=document.querySelector("[data-schtip]");if(tp)tp.hidden=true}
