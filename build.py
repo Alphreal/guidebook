@@ -1024,7 +1024,6 @@ def secret_html():
              f'<div class="seagrid"><div class="sea-pro"><b>✓ Advantages</b>{pro}</div><div class="sea-con"><b>✕ Disadvantages</b>{con}</div></div>'
              f'<figure class="seafig">{SVG_FLOW_CYCLE}<figcaption>The 4-stage wave most learners ride into flow.</figcaption></figure>'
              "<h3>Notes when using</h3>" + nts +
-             '<p class="muted">Based on: Csikszentmihalyi (1990); Smits et al. (2025); your class Flow Stage report.</p>'
              '<div style="text-align:center"><button type="button" class="tbtn pri" data-secret="close">Back to surface ↑</button></div>'
              "</div></div></div>")
     return teaser + vault
