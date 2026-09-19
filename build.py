@@ -230,7 +230,7 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 .tour .trow .tbtn{{font-size:15px;padding:10px 24px;margin:8px 0 0}}
 .hgrid4{{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0}}
 @media(min-width:720px){{.hgrid4{{grid-template-columns:repeat(4,1fr)}}}}
-.hgrid2{{display:grid;grid-template-columns:1fr;gap:12px;margin:12px 0}}
+.hgrid2{{display:grid;grid-template-columns:1fr;gap:12px;margin:12px 0;align-items:start}}
 @media(min-width:720px){{.hgrid2{{grid-template-columns:repeat(2,1fr)}}}}
 .hch{{text-align:center}}
 .hch .n{{display:flex;width:30px;height:30px;border-radius:50%;background:#818cf8;color:#020617;align-items:center;justify-content:center;margin:0 auto 8px;font-weight:800}}

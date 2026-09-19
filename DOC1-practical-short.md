@@ -64,9 +64,9 @@ Then: (1) peer-check with one classmate, (2) post it in the class channel / foru
 
 | # | Survey finding | Do this |
 |---|---------------|---------|
-| 1 | 55% report screen/Zoom fatigue (4–5/5) | Ch4: 50-10 rhythm + 20-20-20 + meeting pre-check |
+| 1 | 55% report screen/Zoom fatigue (4–5/5) | Ch4: 50-10 rhythm + eye rests at breaks + meeting pre-check |
 | 2 | 53% easily distracted by other apps | Ch2: phone in drawer + 1 tab + notifications off |
-| 3 | 40% struggle with self-discipline unsupervised | Ch1: SMART tonight + ALPEN tomorrow + 25-5x2 |
+| 3 | 40% struggle with self-discipline unsupervised | Ch1: SMART tonight + ALPEN tomorrow + flexible focus blocks |
 | 4 | 25% find asking questions harder online | Ch3: 15-min question template + peer check + post |
 
 *Source: Week-1 class survey, n=40. Rule kept: every row links to a real Top finding. Nothing pre-chosen.*
