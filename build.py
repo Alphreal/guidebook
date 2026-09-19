@@ -1010,7 +1010,7 @@ def secret_html():
     con = "".join(f"<div>✕ {inline(s)}</div>" for s in cons)
     nts = "".join(f'<div class="seanote">• {inline(s)}</div>' for s in notes)
     teaser = ('<div class="card seacard" id="secretcard"><span class="sealock" data-secretlock>🔒</span> '
-              "<b>Secret: The Flow Stage</b>"
+              "<b>Find out yourself!</b>"
               '<div class="muted" data-secretmsg>Streak 0/7 — keep going!</div>'
               '<div><button type="button" class="seabtn" data-secret="open" disabled>Open</button></div></div>')
     vault = ('<div class="sealight" data-sealight hidden><div class="seabox" role="dialog" aria-label="The Flow Stage secret method">'
