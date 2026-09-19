@@ -940,8 +940,8 @@ def schedule_html():
             '<div class="prof"><span class="muted">My code:</span>'
             '<input data-user placeholder="e.g. A01 - saved on this device">'
             '<button type="button" class="mini" data-exp="saveuser">Save</button></div>'
-            f'<div class="daypick">{daybtns}'
-            '<button type="button" class="q" data-dayact="weekdays">Weekdays</button>'
+            f'<div class="daypick">{daybtns}</div>'
+            '<div class="daypick"><button type="button" class="q" data-dayact="weekdays">Weekdays</button>'
             '<button type="button" class="q" data-dayact="all">All</button>'
             '<button type="button" class="q" data-dayact="clear">Clear</button></div></div>')
 
