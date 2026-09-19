@@ -75,8 +75,6 @@ Then: (1) peer-check with one classmate, (2) post it in the class channel / foru
 
 ## Feedback
 
-[QR code to anonymous form — voluntary, anonymous, no names or IDs]
-
 1. Was this guide clear? (1–5)
 2. Was it relevant to your study? (1–5)
 3. Which routine will you keep using? (open, one line)
