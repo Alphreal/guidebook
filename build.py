@@ -218,6 +218,28 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 .mini:hover{{border-color:#818cf8}}
 .mini:disabled{{opacity:.4;cursor:not-allowed}}
 .sendflash{{box-shadow:0 0 0 3px #818cf8!important;background:linear-gradient(135deg,#818cf8,#c084fc)!important;color:#020617!important}}
+.seacard{{border:1px solid rgba(34,211,238,.4);background:linear-gradient(135deg,rgba(14,116,144,.25),rgba(34,211,238,.07))}}
+.seacard.unlocked{{border-color:#22d3ee;box-shadow:0 0 24px rgba(34,211,238,.25)}}
+.sealock{{font-size:28px}}
+.seabtn{{background:linear-gradient(135deg,#0ea5e9,#22d3ee);color:#03252e;font-weight:800;border:none;border-radius:999px;padding:10px 24px;font-size:15px;cursor:pointer;margin-top:8px}}
+.seabtn:disabled{{opacity:.4;cursor:not-allowed}}
+.sealight{{position:fixed;inset:0;z-index:70;background:rgba(2,20,35,.82);display:flex;align-items:center;justify-content:center;padding:16px}}
+.sealight[hidden]{{display:none}}
+.seabox{{width:min(640px,94vw);max-height:86vh;overflow-y:auto;background:linear-gradient(180deg,#083344,#0c4a6e 45%,#155e75);border:1px solid rgba(34,211,238,.5);border-radius:20px;padding:0 0 20px;color:#ecfeff}}
+.seahead{{padding:26px 22px 8px;text-align:center;background:linear-gradient(180deg,rgba(34,211,238,.28),transparent)}}
+.seahead h2{{margin:6px 0;font-size:26px}}
+.seaeyebrow{{color:#67e8f9;font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:12px}}
+.seabody{{padding:4px 22px}}
+.seabody h3{{color:#a5f3fc;margin:18px 0 6px}}
+.seagrid{{display:grid;grid-template-columns:1fr;gap:10px}}
+@media(min-width:720px){{.seagrid{{grid-template-columns:1fr 1fr}}}}
+.sea-pro,.sea-con{{border-radius:14px;padding:12px 14px;font-size:14px}}
+.sea-pro{{background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.45)}}
+.sea-con{{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.45)}}
+.seanote{{padding:6px 0;font-size:14px;border-bottom:1px solid rgba(165,243,252,.15)}}
+.seafig{{margin:12px auto;text-align:center;max-width:520px}}
+.seafig svg{{width:100%;height:auto;background:linear-gradient(180deg,#f0fdff,#ddf3f7);border-radius:14px;display:block}}
+.seafig figcaption{{color:#a5f3fc;font-size:13px;margin-top:6px}}
 .daypick{{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}}
 .daypick button{{background:transparent;border:1px solid rgba(255,255,255,.25);color:#cbd5e1;border-radius:999px;padding:4px 12px;font-size:12px;cursor:pointer}}
 .daypick button.on{{background:linear-gradient(135deg,#818cf8,#c084fc);color:#020617;border-color:transparent;font-weight:800}}
@@ -253,7 +275,7 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{{outline:2px solid #818cf8;outline-offset:2px}}
 @media(min-width:1100px){{.wrap{{max-width:min(1400px,94vw)}}.grid2{{grid-template-columns:1fr 1fr}}.pic{{max-width:640px}}}}
 @media(min-width:1600px){{.wrap{{max-width:min(1600px,94vw)}}}}
-@media print{{body{{background:#fff;color:#111}}body::before{{display:none}}.hero h1{{color:#111!important;background:none!important;-webkit-text-fill-color:#111!important}}.topbar,.toc,.progress{{display:none}}.wrap{{max-width:100%;padding:0}}.card,.tldr,.chapter,figure{{background:#fff!important;color:#111!important;border:1px solid #ccc!important;box-shadow:none!important;backdrop-filter:none!important}}.tldr{{border-left:4px solid #111!important}}.muted,.cap,.pic figcaption,.sub{{color:#444!important}}a{{color:#111}}.rv{{opacity:1!important;transform:none!important}}.bar{{animation:none;transform:none}}.grad{{color:#111;-webkit-text-fill-color:#111}}.chapter{{break-inside:avoid}}}}
+@media print{{body{{background:#fff;color:#111}}body::before{{display:none}}.hero h1{{color:#111!important;background:none!important;-webkit-text-fill-color:#111!important}}.topbar,.toc,.progress,.sealight{{display:none}}.wrap{{max-width:100%;padding:0}}.card,.tldr,.chapter,figure{{background:#fff!important;color:#111!important;border:1px solid #ccc!important;box-shadow:none!important;backdrop-filter:none!important}}.tldr{{border-left:4px solid #111!important}}.muted,.cap,.pic figcaption,.sub{{color:#444!important}}a{{color:#111}}.rv{{opacity:1!important;transform:none!important}}.bar{{animation:none;transform:none}}.grad{{color:#111;-webkit-text-fill-color:#111}}.chapter{{break-inside:avoid}}}}
 @media (prefers-reduced-motion:reduce){{*,*::before,*::after{{animation:none!important;transition:none!important}}.rv{{opacity:1;transform:none}}.bar{{transform:none}}}}
 </style>
 </head>
@@ -324,7 +346,8 @@ function paint(){{
   el.setAttribute("aria-pressed",on?"true":"false");
  }});
  var p=document.getElementById("progress");
- if(p){{var yc=onlineCount()*4;var msg="<b>My progress"+(user?" ("+user.replace(/</g,"&lt;")+")":"")+"</b> - routines "+done+"/"+boxes.length+" &middot; week "+weekMarks()+"/"+yc+" &middot; streak "+streak()+"d";if(!onlineCount())msg+=" - pick your online days above";p.innerHTML=msg}}
+ if(p){{var yc=onlineCount()*4;var msg="<b>My progress"+(user?" ("+user.replace(/</g,"&lt;")+")":"")+"</b> - routines "+done+"/"+boxes.length+" &middot; week "+weekMarks()+"/"+yc+" &middot; streak "+streak()+"d"; if(!onlineCount())msg+=" - pick your online days above";p.innerHTML=msg}}
+ var sk=streak();var sg=document.querySelector('[data-secret="open"]');var sm=document.querySelector("[data-secretmsg]");var sc2=document.getElementById("secretcard");var sl=document.querySelector("[data-secretlock]");if(sm)sm.textContent=sk>=7?"Unlocked — dive in!":"Streak "+sk+"/7 — keep going!";if(sg)sg.disabled=sk<7;if(sc2)sc2.classList.toggle("unlocked",sk>=7);if(sl)sl.textContent=sk>=7?"🌊":"🔒";
 }}
 document.addEventListener("change",function(e){{
  var el=e.target;
@@ -366,17 +389,21 @@ document.addEventListener("click",function(e){{
  if(w){{if(w.disabled)return;var parts=w.getAttribute("data-w").split("|");var mon=monday(),dt=new Date(mon);dt.setDate(mon.getDate()+parseInt(parts[1],10));var key=iso(dt);W[key]=W[key]||{{}};if(W[key][parts[0]])delete W[key][parts[0]];else W[key][parts[0]]=1;save();paint();return}}
  var hq=e.target.closest?e.target.closest("[data-howq]"):null;
  if(hq){{var hp=hq.closest?hq.closest(".hero"):null;var pnl=hp?hp.querySelector("[data-howto]"):document.querySelector("[data-howto]");if(pnl)pnl.hidden=!pnl.hidden;return}}
-  var cd=e.target.closest?e.target.closest("[data-chdone]"):null;
+ var cd=e.target.closest?e.target.closest("[data-chdone]"):null;
  if(cd){{if(cd.disabled)return;
   if(document.querySelector("[data-day]")){{goWeek();setTimeout(function(){{var s=document.querySelector('[data-exp="send"]');if(s){{s.classList.add("sendflash");try{{s.scrollIntoView({{behavior:"smooth",block:"center"}})}}catch(e2){{s.scrollIntoView()}}setTimeout(function(){{s.classList.remove("sendflash")}},2200)}}}},350);return}}
   location.href="DOC1-practical-short.html#weekcard";return}}
+ var se=e.target.closest?e.target.closest("[data-secret]"):null;
+ if(se){{var sa2=se.getAttribute("data-secret");
+  if(sa2==="open"){{if(streak()<7)return;var L=document.querySelector("[data-sealight]");if(L){{if(L.parentNode!==document.body)document.body.appendChild(L);L.hidden=false}}return}}
+  if(sa2==="close"){{var L2=document.querySelector("[data-sealight]");if(L2)L2.hidden=true;return}}}}
  var t=e.target.closest?e.target.closest(".toc a"):null;
  if(t){{var id=t.getAttribute("href");
   if(id&&id.charAt(0)==="#"){{var d=document.getElementById(id.slice(1));
    if(d){{var det=d.closest("details");if(det)det.open=true}}}}
  }}
 }});
-document.addEventListener("keydown",function(e){{if(e&&e.key==="Escape"&&SCH.open)schHide()}});
+document.addEventListener("keydown",function(e){{if(e&&e.key==="Escape"){{if(SCH.open)schHide();var L=document.querySelector("[data-sealight]");if(L&&!L.hidden)L.hidden=true}}}});
 function openHash(){{
  var id=location.hash;
  if(id&&id.length>1){{var d=document.getElementById(id.slice(1));
@@ -439,6 +466,10 @@ SVG_TIMER = """<svg viewBox="0 0 600 210" role="img" aria-label="Three steps: se
 SVG_PHONE = """<svg viewBox="0 0 400 240" role="img" aria-label="Phone in drawer versus on desk"><text x="100" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">IN DRAWER</text><rect x="35" y="52" width="130" height="112" rx="10" fill="#f7f7f5" stroke="#1a1a1a" stroke-width="3"/><rect x="45" y="60" width="110" height="26" rx="6" fill="#fff" stroke="#1a1a1a" stroke-width="2"/><line x1="88" y1="73" x2="112" y2="73" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/><rect x="45" y="92" width="110" height="62" rx="6" fill="#1a1a1a"/><rect x="78" y="82" width="44" height="70" rx="8" fill="#1a1a1a" stroke="#fff" stroke-width="2"/><rect x="85" y="94" width="30" height="40" rx="4" fill="#334155"/><text x="100" y="122" text-anchor="middle" font-size="15" font-weight="bold" fill="#a5b4fc">Zz</text><text x="100" y="146" text-anchor="middle" font-size="9" letter-spacing="2" fill="#cbd5e1">SILENT</text><text x="100" y="200" text-anchor="middle" font-size="30" font-weight="bold" fill="#0f62fe">✓</text><text x="300" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">ON DESK</text><rect x="235" y="152" width="130" height="10" rx="5" fill="#e7e5e4"/><rect x="278" y="78" width="44" height="74" rx="6" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><rect x="284" y="86" width="32" height="8" rx="4" fill="#dbeafe"/><rect x="284" y="98" width="24" height="6" rx="3" fill="#e7e5e4"/><rect x="284" y="108" width="28" height="6" rx="3" fill="#e7e5e4"/><rect x="284" y="118" width="18" height="6" rx="3" fill="#fde68a"/><circle cx="316" cy="86" r="10" fill="#ef4444"/><text x="316" y="90" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">3</text><path d="M262 78 Q254 105 262 132" fill="none" stroke="#a8a29e" stroke-width="2"/><path d="M270 84 Q264 105 270 126" fill="none" stroke="#0f62fe" stroke-width="2"/><path d="M338 78 Q346 105 338 132" fill="none" stroke="#a8a29e" stroke-width="2"/><path d="M330 84 Q336 105 330 126" fill="none" stroke="#0f62fe" stroke-width="2"/><text x="250" y="66" font-size="13" fill="#57534e">♪</text><text x="342" y="66" font-size="13" fill="#57534e">✉</text><text x="300" y="200" text-anchor="middle" font-size="30" font-weight="bold" fill="#57534e">✗</text></svg>"""
 
 SVG_CHAT = """<svg viewBox="0 0 400 250" role="img" aria-label="Good help post example"><rect x="30" y="12" width="340" height="226" rx="12" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><text x="48" y="40" font-size="14" font-weight="bold" fill="#1a1a1a">Class channel</text><line x1="30" y1="52" x2="370" y2="52" stroke="#e7e5e4" stroke-width="2"/><rect x="46" y="64" width="252" height="96" rx="10" fill="#f1f0ee"/><text x="60" y="90" font-size="12" fill="#1a1a1a">Tried: Unit 3 quiz Q5</text><text x="60" y="112" font-size="12" fill="#1a1a1a">Expected 70%, got 40%</text><text x="60" y="134" font-size="12" fill="#1a1a1a">Question: which formula?</text><rect x="140" y="170" width="214" height="56" rx="10" fill="#0f62fe"/><text x="156" y="193" font-size="12" fill="#fff">Good question — see</text><text x="156" y="211" font-size="12" fill="#fff">Unit 3.2, example 2</text></svg>"""
+
+SVG_FLOW_CHANNEL = """<svg viewBox="0 0 400 250" role="img" aria-label="Flow channel: anxiety, flow and boredom zones"><polygon points="70,200 350,60 350,100 70,240" fill="#5eead4" opacity=".55"/><text x="120" y="60" font-size="13" font-weight="bold" fill="#be123c">Too hard → anxiety</text><text x="235" y="225" font-size="13" font-weight="bold" fill="#92400e">Too easy → boredom</text><line x1="50" y1="20" x2="50" y2="220" stroke="#1a1a1a" stroke-width="2"/><polygon points="50,20 45,30 55,30" fill="#1a1a1a"/><line x1="50" y1="220" x2="370" y2="220" stroke="#1a1a1a" stroke-width="2"/><polygon points="370,220 360,215 360,225" fill="#1a1a1a"/><text x="14" y="120" font-size="12" font-weight="bold" fill="#1a1a1a" transform="rotate(-90 14,120)">challenge</text><text x="300" y="238" font-size="12" font-weight="bold" fill="#1a1a1a">skill</text><path d="M70 200 Q140 190 170 160 T250 110 T350 60" fill="none" stroke="#0e7490" stroke-width="3" stroke-linecap="round"/><circle cx="225" cy="128" r="16" fill="none" stroke="#0e7490" stroke-width="2" opacity=".5"/><circle cx="225" cy="128" r="9" fill="none" stroke="#0e7490" stroke-width="2" opacity=".7"/><circle cx="225" cy="128" r="4" fill="#0e7490"/><text x="225" y="162" text-anchor="middle" font-size="12" font-weight="bold" fill="#0e7490">YOU</text><text x="205" y="105" text-anchor="middle" font-size="12" font-weight="bold" fill="#0e7490">FLOW</text></svg>"""
+
+SVG_FLOW_CYCLE = """<svg viewBox="0 0 400 220" role="img" aria-label="Four flow stages in a wave cycle"><defs><marker id="fh" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><polygon points="0,0 8,4 0,8" fill="#0e7490"/></marker></defs><path d="M30 150 Q70 150 85 110 T165 70 T250 80 T330 130 T390 140" fill="none" stroke="#0e7490" stroke-width="3" stroke-linecap="round" marker-end="url(#fh)"/><circle cx="60" cy="148" r="20" fill="#f59e0b"/><text x="60" y="155" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">1</text><text x="60" y="182" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a1a">Struggle</text><text x="60" y="196" text-anchor="middle" font-size="10" fill="#57534e">20-30 min</text><circle cx="160" cy="72" r="20" fill="#0ea5e9"/><text x="160" y="79" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">2</text><text x="160" y="30" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a1a">Release</text><text x="160" y="44" text-anchor="middle" font-size="10" fill="#57534e">5-15 min</text><circle cx="260" cy="82" r="20" fill="#14b8a6"/><text x="260" y="89" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">3</text><text x="260" y="40" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a1a">Flow</text><text x="260" y="54" text-anchor="middle" font-size="10" fill="#57534e">45-90 min</text><circle cx="350" cy="132" r="20" fill="#6366f1"/><text x="350" y="139" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">4</text><text x="350" y="166" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a1a">Recovery</text><text x="350" y="180" text-anchor="middle" font-size="10" fill="#57534e">rest refuel</text></svg>"""
 
 SVG_STRETCH = """<svg viewBox="0 0 400 240" role="img" aria-label="Screen distance and stretching"><rect x="14" y="10" width="200" height="26" rx="13" fill="#eef2ff" stroke="#1a1a1a" stroke-width="2"/><text x="114" y="27" text-anchor="middle" font-size="11" font-weight="bold" fill="#1a1a1a">every 20 min → look far 20 s</text><line x1="14" y1="202" x2="386" y2="202" stroke="#a8a29e" stroke-width="2"/><rect x="30" y="142" width="132" height="8" rx="4" fill="#e7e5e4"/><line x1="44" y1="150" x2="44" y2="202" stroke="#1a1a1a" stroke-width="3"/><line x1="148" y1="150" x2="148" y2="202" stroke="#1a1a1a" stroke-width="3"/><rect x="48" y="70" width="96" height="62" rx="8" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><rect x="58" y="80" width="76" height="42" rx="4" fill="#dbeafe"/><polygon points="88,90 88,112 106,101" fill="#0f62fe"/><rect x="58" y="114" width="44" height="5" rx="2.5" fill="#fff"/><rect x="64" y="132" width="64" height="8" rx="3" fill="#fff" stroke="#1a1a1a" stroke-width="2"/><line x1="96" y1="132" x2="96" y2="142" stroke="#1a1a1a" stroke-width="3"/><line x1="74" y1="142" x2="118" y2="142" stroke="#1a1a1a" stroke-width="3"/><line x1="170" y1="168" x2="272" y2="168" stroke="#57534e" stroke-width="2"/><polygon points="170,168 180,163 180,173" fill="#57534e"/><polygon points="272,168 262,163 262,173" fill="#57534e"/><text x="221" y="158" text-anchor="middle" font-size="13" font-weight="bold" fill="#57534e">50 cm</text><circle cx="302" cy="56" r="13" fill="#fff" stroke="#1a1a1a" stroke-width="3"/><line x1="302" y1="69" x2="302" y2="128" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="302" y1="84" x2="280" y2="60" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="302" y1="84" x2="322" y2="102" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="302" y1="128" x2="288" y2="196" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="302" y1="128" x2="316" y2="196" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="280" y1="196" x2="296" y2="196" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><line x1="308" y1="196" x2="324" y2="196" stroke="#1a1a1a" stroke-width="4" stroke-linecap="round"/><path d="M268 52 Q262 44 266 36" fill="none" stroke="#0f62fe" stroke-width="2" stroke-linecap="round"/><path d="M274 56 Q270 46 275 38" fill="none" stroke="#0f62fe" stroke-width="2" stroke-linecap="round"/><text x="302" y="222" text-anchor="middle" font-size="12" font-weight="bold" fill="#57534e">stand • stretch • 20-20-20</text></svg>"""
 
@@ -941,6 +972,62 @@ def schedule_html():
             '<button type="button" class="q" data-dayact="clear">Clear</button></div></div>')
 
 
+def secret_html():
+    steps = [
+        "**Struggle (20–30 min):** hardest meaningful problem first, phone away. Expect frustration — it means your brain is loading.",
+        "**Release (5–15 min):** walk, stretch, drink water, look far away. No scrolling. Let go so ideas surface.",
+        "**Flow (45–90 min):** one clear goal, instant feedback, zero interruptions. Protect this block fiercely.",
+        "**Recovery:** stop while good. Move lightly, eat, drink, sleep. Never chain two deep sessions without rest.",
+    ]
+    pros = [
+        "Learn faster and remember longer — encoding runs at full power.",
+        "Total focus: distractions and inner critic fade out.",
+        "Time flies and work feels rewarding, not draining.",
+        "Peak performance — your best output lives here.",
+        "Builds skill fast: challenge matched to ability stretches you.",
+    ]
+    cons = [
+        "Takes ~25 min of hard effort just to enter.",
+        "Fragile: 30 seconds of interruption can cost 15–25 min to re-enter.",
+        "Exhausting — without real recovery the next entry is blocked.",
+        "Cannot be forced, only invited — pushing harder backfires.",
+        "Wrong tool for easy or boring tasks — save it for worthy ones.",
+    ]
+    notes = [
+        "**Match challenge to skill:** too hard → anxiety, too easy → boredom. Aim the middle channel.",
+        "**One clear goal + fast feedback:** know what good looks like and see it immediately.",
+        "**One stream only:** phone away, one tab — parallel feeds kill entry.",
+        "**Stop at seams:** break between sections, never mid-thought.",
+        "**Fuel matters:** sleep, food, and water decide whether flow is even possible today.",
+        "**Notice your patterns:** track which subjects and hours give you flow, repeat them.",
+    ]
+    cells = "".join(
+        f'<div class="step"><span class="n">{n + 1}</span>{inline(s)}</div>'
+        for n, s in enumerate(steps))
+    pro = "".join(f"<div>✓ {inline(s)}</div>" for s in pros)
+    con = "".join(f"<div>✕ {inline(s)}</div>" for s in cons)
+    nts = "".join(f'<div class="seanote">• {inline(s)}</div>' for s in notes)
+    teaser = ('<div class="card seacard" id="secretcard"><span class="sealock" data-secretlock>🔒</span> '
+              "<b>Secret: The Flow Stage</b>"
+              '<div class="muted" data-secretmsg>Streak 0/7 — keep going!</div>'
+              '<div><button type="button" class="seabtn" data-secret="open" disabled>Open</button></div></div>')
+    vault = ('<div class="sealight" data-sealight hidden><div class="seabox" role="dialog" aria-label="The Flow Stage secret method">'
+             '<div class="seahead"><div class="seaeyebrow">Secret unlocked · 7-day streak</div>'
+             "<h2>🌊 The Flow Stage</h2>"
+             "<div>Your reward: how to enter deep focus on purpose — and ride it.</div></div>"
+             '<div class="seabody"><h3>How to ride it</h3>'
+             f'<div class="steps">{cells}</div>'
+             f'<figure class="seafig">{SVG_FLOW_CHANNEL}<figcaption>Challenge = skill → flow. Too hard → anxiety. Too easy → boredom.</figcaption></figure>'
+             "<h3>Advantages vs disadvantages</h3>"
+             f'<div class="seagrid"><div class="sea-pro"><b>✓ Advantages</b>{pro}</div><div class="sea-con"><b>✕ Disadvantages</b>{con}</div></div>'
+             f'<figure class="seafig">{SVG_FLOW_CYCLE}<figcaption>The 4-stage wave most learners ride into flow.</figcaption></figure>'
+             "<h3>Notes when using</h3>" + nts +
+             '<p class="muted">Based on: Csikszentmihalyi (1990); Smits et al. (2025); your class Flow Stage report.</p>'
+             '<div style="text-align:center"><button type="button" class="tbtn pri" data-secret="close">Back to surface ↑</button></div>'
+             "</div></div></div>")
+    return teaser + vault
+
+
 def tour_html():
     return ('<div class="card tour" id="tourcard"><b>New here? Guided start (2 minutes)</b>'
             '<div class="muted">Tap Start — we walk you through every step of this guide.</div>'
@@ -967,6 +1054,7 @@ def main():
                 nc = sum(len(v) for v in CHECKLISTS.values())
                 body += planner_html()
                 body += f'<div class="progress" id="progress"><b>My progress</b> — routines 0/{nc} · week 0/28 · streak 0d</div>'
+                body += secret_html()
                 html = shell(label, body)
                 name = hub
                 with open(os.path.join(OUT_DIR, name), "w", encoding="utf-8") as fo:
