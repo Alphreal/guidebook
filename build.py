@@ -965,7 +965,7 @@ def main():
                 hub = fn.replace(".md", ".html")
                 for c in chaps:
                     if c["sid"] == "feedback":
-                        c["content"] += "\n" + feedback_html()
+                        c["content"] = feedback_html() + "\n" + c["content"]
                 ch4, rest = chaps[:4], chaps[4:]
                 pages = [(c["sid"], f"DOC1-{c['sid']}.html") for c in ch4]
                 body = hero + tour_html() + hub_grids(chaps, pages)
