@@ -188,8 +188,8 @@ function goWeek(){var w=document.querySelector("[data-day]");var c=w&&w.closest?
 var SCHT=["[data-user]",'[data-exp="saveuser"]',"#schedule .daypick"];
 var SCH={step:0,open:0};
 function schClear(){document.querySelectorAll(".schlight").forEach(function(el){el.classList.remove("schlight")})}
-function schHide(){SCH.open=0;if(SCH.tm)clearTimeout(SCH.tm);schClear();var o=document.querySelector("[data-schov]");if(o)o.hidden=true;var tp=document.querySelector("[data-schtip]");if(tp)tp.hidden=true}
-function schShow(n){if(n>=SCHT.length){schHide();return}SCH.step=n;SCH.open=1;schClear();var sel=SCHT[SCH.step];var o=document.querySelector("[data-schov]");if(o){if(o.parentNode!==document.body)document.body.appendChild(o);o.hidden=false}var el=document.querySelector(sel);if(el){el.classList.add("schlight");try{el.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){el.scrollIntoView()}}}
+function schHide(){SCH.open=0;schClear()}
+function schShow(n){if(n>=SCHT.length){schHide();return}SCH.step=n;SCH.open=1;schClear();var sel=SCHT[SCH.step];var el=document.querySelector(sel);if(el){el.classList.add("schlight");try{el.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){el.scrollIntoView()}}}
 function tourRender(){var b=document.querySelector("[data-tourbody]");if(!b)return;var s=TG.step,c=CHS[TG.ch],dots="Step "+(s+1)+" of 3";
  if(s===0){b.innerHTML='<div class="muted">'+dots+' — what is your biggest struggle?</div><div><button type="button" class="tbtn" data-tour="pick:0">Time</button><button type="button" class="tbtn" data-tour="pick:1">Distraction</button><button type="button" class="tbtn" data-tour="pick:2">Interaction</button><button type="button" class="tbtn" data-tour="pick:3">Fatigue</button></div>'}
  else if(s===1){b.innerHTML='<div>'+dots+' — your chapter: <b>'+c[2]+'</b>. Open it, do the routine, tick Done.</div><div><button type="button" class="tbtn pri" data-tour="opench">Open my chapter →</button><button type="button" class="tbtn" data-tour="week">My study week</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}
@@ -234,15 +234,15 @@ document.addEventListener("change",function(e){
 document.addEventListener("input",function(e){
  var el=e.target;
  if(el.hasAttribute&&el.hasAttribute("data-note")){N[el.getAttribute("data-note")]=el.value;try{localStorage.setItem(kk("gb-notes-v3"),JSON.stringify(N))}catch(err){}}
- if(el.hasAttribute&&el.hasAttribute("data-user")){return}
+  if(el.hasAttribute&&el.hasAttribute("data-user")){if(SCH.open&&SCH.step===0)schShow(1);return}
 });
 document.addEventListener("click",function(e){
  var h=e.target.closest?e.target.closest("[data-how]"):null;
  if(h){var k=h.getAttribute("data-how");var p=document.querySelector('[data-howpanel="'+k+'"]');if(p)p.hidden=!p.hidden;return}
  var db=e.target.closest?e.target.closest("[data-day]"):null;
- if(db){var di=db.getAttribute("data-day");if(D[di])delete D[di];else D[di]=1;save();paint();return}
+  if(db){var di=db.getAttribute("data-day");if(D[di])delete D[di];else D[di]=1;save();paint();if(SCH.open)schHide();return}
  var da=e.target.closest?e.target.closest("[data-dayact]"):null;
- if(da){var a=da.getAttribute("data-dayact");if(a==="all")D={"0":1,"1":1,"2":1,"3":1,"4":1,"5":1,"6":1};else if(a==="weekdays")D={"0":1,"1":1,"2":1,"3":1,"4":1};else D={};save();paint();return}
+ if(da){var a=da.getAttribute("data-dayact");if(a==="all")D={"0":1,"1":1,"2":1,"3":1,"4":1,"5":1,"6":1};else if(a==="weekdays")D={"0":1,"1":1,"2":1,"3":1,"4":1};else D={};save();paint();if(SCH.open)schHide();return}
  var st=e.target.closest?e.target.closest("[data-schstart]"):null;
  if(st){try{if(!sessionStorage.getItem("gbSchAuto")&&(!hasK(kk("gb-days-v3"))||!onlineCount())){sessionStorage.setItem("gbSchAuto","1");e.preventDefault();schShow(0);return}}catch(e3){}}
  var tr=e.target.closest?e.target.closest("[data-tour]"):null;
@@ -257,7 +257,7 @@ document.addEventListener("click",function(e){
  if(gc){var k3=gc.getAttribute("data-goalcheck");var ta=document.querySelector('[data-note="'+k3+'-note"]');var msg=document.querySelector('[data-goalmsg="'+k3+'"]');var v=ta&&ta.value?ta.value.trim():"";var hasNum=/\d/.test(v);var hasTime=/(before|by|tomorrow|tonight|today|pm|am|min|week|mon|tue|wed|thu|fri)/i.test(v);var pts=(v.length>=12?1:0)+(hasNum?1:0)+(hasTime?1:0);if(msg){msg.hidden=false;if(pts>=2){msg.className="ok";msg.textContent="Looks good ("+pts+"/3): has detail + number/time. Now tick Done."}else{msg.className="bad";msg.textContent="Add more ("+pts+"/3): need 12+ chars"+(hasNum?"":" + a number")+(hasTime?"":" + a time/deadline")+". See example above."}}return}
  var ex=e.target.closest?e.target.closest("[data-exp]"):null;
  if(ex){var k4=ex.getAttribute("data-exp");var out=document.querySelector("[data-expout]");
-  if(k4==="saveuser"){var inp=document.querySelector("[data-user]");user=inp&&inp.value?inp.value.trim():"";try{localStorage.setItem(UKEY,user)}catch(err){}R=loadJ(kk("gb-routines-v3"),{});W=loadJ(kk("gb-week-v3"),{});N=loadJ(kk("gb-notes-v3"),{});if(hasK(kk("gb-days-v3")))D=loadJ(kk("gb-days-v3"),{});else D={"0":1,"1":1,"2":1,"3":1,"4":1};save();paint();return}
+  if(k4==="saveuser"){var inp=document.querySelector("[data-user]");user=inp&&inp.value?inp.value.trim():"";try{localStorage.setItem(UKEY,user)}catch(err){}R=loadJ(kk("gb-routines-v3"),{});W=loadJ(kk("gb-week-v3"),{});N=loadJ(kk("gb-notes-v3"),{});if(hasK(kk("gb-days-v3")))D=loadJ(kk("gb-days-v3"),{});else D={"0":1,"1":1,"2":1,"3":1,"4":1};save();paint();if(SCH.open)schShow(2);return}
   if(k4==="download"){var s2=summary();try{var b=new Blob([s2],{type:"text/plain"});var a2=document.createElement("a");a2.href=URL.createObjectURL(b);a2.download="guidebook-progress"+(user?"-"+user:"")+".txt";a2.click();setTimeout(function(){URL.revokeObjectURL(a2.href)},2000)}catch(err){}return}
   if(k4==="send"){if(!TEACHER_URL){if(out){out.hidden=false;out.textContent="Teacher link not set yet. Tap Download to save your progress for now."}return}var payload={user:user||"(no code)",summary:summary(),routines:R,week:W,notes:N,days:D,at:new Date().toISOString()};if(out){out.hidden=false;out.textContent="Sending..."}try{fetch(TEACHER_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify(payload)}).then(function(){if(out)out.textContent="Sent. Thank you."},function(){if(out)out.textContent="Sent (if offline, use Download instead)."})}catch(err){if(out)out.textContent="Send failed. Use Download instead."}return}
   if(k4==="reset"){if(confirm("Reset progress on this device"+(user?" for "+user:"")+"?")){R={};W={};N={};save();paint()}return}
@@ -266,9 +266,7 @@ document.addEventListener("click",function(e){
  if(w){if(w.disabled)return;var parts=w.getAttribute("data-w").split("|");var mon=monday(),dt=new Date(mon);dt.setDate(mon.getDate()+parseInt(parts[1],10));var key=iso(dt);W[key]=W[key]||{};if(W[key][parts[0]])delete W[key][parts[0]];else W[key][parts[0]]=1;save();paint();return}
  var hq=e.target.closest?e.target.closest("[data-howq]"):null;
  if(hq){var hp=hq.closest?hq.closest(".hero"):null;var pnl=hp?hp.querySelector("[data-howto]"):document.querySelector("[data-howto]");if(pnl)pnl.hidden=!pnl.hidden;return}
- var so=e.target.closest?e.target.closest("[data-schov]"):null;
- if(so){schShow(SCH.step+1);return}
- var cd=e.target.closest?e.target.closest("[data-chdone]"):null;
+  var cd=e.target.closest?e.target.closest("[data-chdone]"):null;
  if(cd){if(cd.disabled)return;
   if(document.querySelector("[data-day]")){goWeek();setTimeout(function(){var s=document.querySelector('[data-exp="send"]');if(s){s.classList.add("sendflash");try{s.scrollIntoView({behavior:"smooth",block:"center"})}catch(e2){s.scrollIntoView()}setTimeout(function(){s.classList.remove("sendflash")},2200)}},350);return}
   location.href="DOC1-practical-short.html#weekcard";return}
