@@ -120,11 +120,6 @@ details[open]>.dbody{grid-template-rows:1fr}
 .hch .n{display:flex;width:30px;height:30px;border-radius:50%;background:#818cf8;color:#020617;align-items:center;justify-content:center;margin:0 auto 8px;font-weight:800}
 .hch b{display:block;margin-bottom:4px}
 .schlight{position:relative;z-index:62;box-shadow:0 0 0 3px #818cf8!important;border-radius:10px}
-.schov{position:fixed;inset:0;background:rgba(2,6,23,.72);z-index:60}
-.schov[hidden]{display:none}
-.schtip{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:61;width:min(480px,92vw);background:#141a2e;border:1px solid rgba(129,140,248,.55);border-radius:16px;padding:16px}
-.schtip[hidden]{display:none}
-.schtip p{margin:8px 0 4px}
 .hgrid2 details.chapter{border:1px solid rgba(129,140,248,.45);border-radius:14px;background:rgba(129,140,248,.07);padding:0 6px}
 .hgrid2 details.chapter summary{padding:14px 12px}
 .hgrid2 details.chapter summary h2{font-size:19px}
@@ -171,7 +166,6 @@ function streak(){var d=new Date(),s=0,g=0;var td=wdi(d);if(!onDay(td)||dayCount
 function summary(){var boxes=document.querySelectorAll("[data-check]");var done=0;boxes.forEach(function(el){if(R[el.getAttribute("data-check")])done++});var days=[];for(var i=0;i<7;i++)if(onDay(i))days.push(["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][i]);var notes=[];document.querySelectorAll("[data-note]").forEach(function(el){var v=(N[el.getAttribute("data-note")]||"").trim();if(v)notes.push("- "+v.slice(0,140))});return "Guidebook progress"+(user?" ("+user+")":"")+" "+iso(new Date())+"\nRoutines: "+done+"/"+boxes.length+"\nWeek: "+weekMarks()+"/"+(onlineCount()*4)+" (online: "+(days.join(",")||"none")+")\nStreak: "+streak()+"d"+(notes.length?"\nMy texts:\n"+notes.join("\n"):"")}
 var CHS=[["chapter-1-self-regulation-time","Time","Plan & focus blocks"],["chapter-2-distraction-concentration","Distraction","One tab, phone away"],["chapter-3-interaction-support","Interaction","Ask with the template"],["chapter-4-fatigue-technology","Fatigue","One stream, move & rest"]];
 var TG={step:0,ch:0};
-function goSid(sid){var h=document.getElementById(sid);var det=h&&h.closest?h.closest("details"):null;if(det){det.open=true;setTimeout(function(){try{det.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){det.scrollIntoView()}},80)}}
 function goWeek(){var w=document.querySelector("[data-day]");var c=w&&w.closest?w.closest(".card"):null;if(c){try{c.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){c.scrollIntoView()}}}
 var SCHT=["[data-user]",'[data-exp="saveuser"]',"#schedule .daypick"];
 var SCH={step:0,open:0};
