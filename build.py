@@ -64,10 +64,10 @@ def vn_body():
             '<button type="button" class="tbtn pri" data-vnav="close">Đóng</button></div></div></div>'
             "<style>.vgrid{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 12px;margin-top:10px;scrollbar-width:none}"
             ".vgrid::-webkit-scrollbar{display:none}"
-            ".vfig{flex:0 0 148px;margin:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:8px;cursor:zoom-in;scroll-snap-align:start}"
+            ".vfig{flex:0 0 220px;margin:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px;cursor:zoom-in;scroll-snap-align:start}"
             ".vfig:hover{border-color:rgba(129,140,248,.6)}"
             ".vfig img{width:100%;height:auto;border-radius:10px;display:block}"
-            ".vfig figcaption{color:#c7d2fe;font-size:12px;margin-top:6px;text-align:center;text-wrap:balance;min-height:2.8em}"
+            ".vfig figcaption{color:#c7d2fe;font-size:13px;margin-top:8px;text-align:center;text-wrap:balance;min-height:2.6em}"
             ".vlight{position:fixed;inset:0;z-index:50;background:rgba(2,6,23,.92);display:flex;align-items:center;justify-content:center;padding:16px}"
             ".vlight[hidden]{display:none}"
             ".vinner{max-width:720px;width:100%;text-align:center}"
