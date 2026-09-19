@@ -117,6 +117,7 @@ details[open]>.dbody{grid-template-rows:1fr}
 .hch{text-align:center}
 .hch .n{display:flex;width:30px;height:30px;border-radius:50%;background:#818cf8;color:#020617;align-items:center;justify-content:center;margin:0 auto 8px;font-weight:800}
 .hch b{display:block;margin-bottom:4px}
+.schlight{box-shadow:0 0 0 3px #818cf8!important;border-radius:10px}
 .hgrid2 details.chapter{border:1px solid rgba(129,140,248,.45);border-radius:14px;background:rgba(129,140,248,.07);padding:0 6px}
 .hgrid2 details.chapter summary{padding:14px 12px}
 .hgrid2 details.chapter summary h2{font-size:19px}
@@ -139,7 +140,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{o
 <body>
 <div class="wrap mx-auto px-4">
 <div class="topbar"><a href="index.html">&larr; Alph</a><span class="muted">Guidebook</span></div>
-<div class="hero card"><div class="eyebrow">Asia University · Students</div><h1 class="grad">Study Smarter Online</h1><div class="sub">Pick what you need — start below.</div></div><div class="grid2"><div class="card"><b>I'm a student — give me routines</b><div class="sub">Routines first: 5-minute fixes for time, distraction, interaction and fatigue.</div><p><a href="DOC1-practical-short.html">Start →</a></p></div><div class="card" id="schedule"><b>Step 1 — My study days</b><div class="muted">Pick your code + online days first, then Start. Same choices appear inside the student guide.</div><div class="prof"><span class="muted">My code:</span><input data-user placeholder="e.g. A01 - saved on this device"><button type="button" class="mini" data-exp="saveuser">Save</button></div><div class="daypick"><button type="button" data-day="0">Mon</button><button type="button" data-day="1">Tue</button><button type="button" data-day="2">Wed</button><button type="button" data-day="3">Thu</button><button type="button" data-day="4">Fri</button><button type="button" data-day="5">Sat</button><button type="button" data-day="6">Sun</button><button type="button" class="q" data-dayact="weekdays">Weekdays</button><button type="button" class="q" data-dayact="all">All</button><button type="button" class="q" data-dayact="clear">Clear</button></div></div></div><p class="muted" style="text-align:center">Teachers & researchers: <a href="DOC3-mix-textbook.html">lessons</a> · <a href="DOC2-detailed-long.html">evidence</a> · <a href="vn.html">posters (VN)</a></p>
+<div class="hero card"><div class="eyebrow">Asia University · Students</div><h1 class="grad">Study Smarter Online</h1><div class="sub">Pick what you need — start below.</div></div><div class="grid2"><div class="card"><b>I'm a student — give me routines</b><div class="sub">Routines first: 5-minute fixes for time, distraction, interaction and fatigue.</div><p><a href="DOC1-practical-short.html" data-schstart>Start →</a></p></div><div class="card" id="schedule"><b>Step 1 — My study days</b><div class="muted">Pick your code + online days first, then Start. Same choices appear inside the student guide.</div><div><button type="button" class="mini" data-sch="start">Show me how</button></div><div class="muted" data-schbody></div><div class="prof"><span class="muted">My code:</span><input data-user placeholder="e.g. A01 - saved on this device"><button type="button" class="mini" data-exp="saveuser">Save</button></div><div class="daypick"><button type="button" data-day="0">Mon</button><button type="button" data-day="1">Tue</button><button type="button" data-day="2">Wed</button><button type="button" data-day="3">Thu</button><button type="button" data-day="4">Fri</button><button type="button" data-day="5">Sat</button><button type="button" data-day="6">Sun</button><button type="button" class="q" data-dayact="weekdays">Weekdays</button><button type="button" class="q" data-dayact="all">All</button><button type="button" class="q" data-dayact="clear">Clear</button></div></div></div><p class="muted" style="text-align:center">Teachers & researchers: <a href="DOC3-mix-textbook.html">lessons</a> · <a href="DOC2-detailed-long.html">evidence</a> · <a href="vn.html">posters (VN)</a></p>
 </div>
 <script>
 (function(){
@@ -165,6 +166,14 @@ var CHS=[["chapter-1-self-regulation-time","Time","Plan & focus blocks"],["chapt
 var TG={step:0,ch:0};
 function goSid(sid){var h=document.getElementById(sid);var det=h&&h.closest?h.closest("details"):null;if(det){det.open=true;setTimeout(function(){try{det.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){det.scrollIntoView()}},80)}}
 function goWeek(){var w=document.querySelector("[data-day]");var c=w&&w.closest?w.closest(".card"):null;if(c){try{c.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){c.scrollIntoView()}}}
+var SCH={step:0};
+function schClear(){document.querySelectorAll(".schlight").forEach(function(el){el.classList.remove("schlight")})}
+function schHi(sel){schClear();var el=document.querySelector(sel);if(!el)return;el.classList.add("schlight");try{el.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){el.scrollIntoView()}}
+function schRender(){var b=document.querySelector("[data-schbody]");if(!b)return;var s=SCH.step;
+ if(s===0){b.innerHTML='<div>Step 1 of 4 — type any code (e.g. your group + number) in <b>My code</b>.</div><div><button type="button" class="tbtn pri" data-sch="next">Next</button></div>';schHi('[data-user]')}
+ else if(s===1){b.innerHTML='<div>Step 2 of 4 — tap <b>Save</b>. Your code is stored on this device.</div><div><button type="button" class="tbtn pri" data-sch="next">Next</button> <button type="button" class="tbtn" data-sch="back">Back</button></div>';schHi('[data-exp="saveuser"]')}
+ else if(s===2){b.innerHTML='<div>Step 3 of 4 — tap your <b>online days</b> (or Weekdays). Grey days are skipped in your score.</div><div><button type="button" class="tbtn pri" data-sch="next">Next</button> <button type="button" class="tbtn" data-sch="back">Back</button></div>';schHi('#schedule .daypick')}
+ else{b.innerHTML='<div>Step 4 of 4 — done! Open the student guide and tap <b>Start</b>.</div><div><button type="button" class="tbtn" data-sch="done">Done</button> <button type="button" class="tbtn" data-sch="back">Back</button></div>';schHi('[data-schstart]')}}
 function tourRender(){var b=document.querySelector("[data-tourbody]");if(!b)return;var s=TG.step,c=CHS[TG.ch],dots="Step "+(s+1)+" of 3";
  if(s===0){b.innerHTML='<div class="muted">'+dots+' — what is your biggest struggle?</div><div><button type="button" class="tbtn" data-tour="pick:0">Time</button><button type="button" class="tbtn" data-tour="pick:1">Distraction</button><button type="button" class="tbtn" data-tour="pick:2">Interaction</button><button type="button" class="tbtn" data-tour="pick:3">Fatigue</button></div>'}
  else if(s===1){b.innerHTML='<div>'+dots+' — your chapter: <b>'+c[2]+'</b>. Open it, do the routine, tick Done.</div><div><button type="button" class="tbtn pri" data-tour="opench">Open my chapter →</button><button type="button" class="tbtn" data-tour="week">My study week</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}
@@ -239,6 +248,12 @@ document.addEventListener("click",function(e){
  if(w){if(w.disabled)return;var parts=w.getAttribute("data-w").split("|");var mon=monday(),dt=new Date(mon);dt.setDate(mon.getDate()+parseInt(parts[1],10));var key=iso(dt);W[key]=W[key]||{};if(W[key][parts[0]])delete W[key][parts[0]];else W[key][parts[0]]=1;save();paint();return}
  var hq=e.target.closest?e.target.closest("[data-howq]"):null;
  if(hq){var hp=hq.closest?hq.closest(".hero"):null;var pnl=hp?hp.querySelector("[data-howto]"):document.querySelector("[data-howto]");if(pnl)pnl.hidden=!pnl.hidden;return}
+ var sc=e.target.closest?e.target.closest("[data-sch]"):null;
+ if(sc){var sa=sc.getAttribute("data-sch");
+  if(sa==="start"){SCH.step=0;schRender();return}
+  if(sa==="next"){SCH.step=Math.min(3,SCH.step+1);schRender();return}
+  if(sa==="back"){SCH.step=Math.max(0,SCH.step-1);schRender();return}
+  if(sa==="done"){schClear();var bb=document.querySelector("[data-schbody]");if(bb)bb.innerHTML="";return}}
  var cd=e.target.closest?e.target.closest("[data-chdone]"):null;
  if(cd){if(cd.disabled)return;
   if(document.querySelector("[data-day]")){goWeek();setTimeout(function(){var s=document.querySelector('[data-exp="send"]');if(s){s.classList.add("sendflash");try{s.scrollIntoView({behavior:"smooth",block:"center"})}catch(e2){s.scrollIntoView()}setTimeout(function(){s.classList.remove("sendflash")},2200)}},350);return}
