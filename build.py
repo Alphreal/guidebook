@@ -235,7 +235,12 @@ details[open]>.dbody{{grid-template-rows:1fr}}
 .hch{{text-align:center}}
 .hch .n{{display:flex;width:30px;height:30px;border-radius:50%;background:#818cf8;color:#020617;align-items:center;justify-content:center;margin:0 auto 8px;font-weight:800}}
 .hch b{{display:block;margin-bottom:4px}}
-.schlight{{box-shadow:0 0 0 3px #818cf8!important;border-radius:10px}}
+.schlight{{position:relative;z-index:62;box-shadow:0 0 0 3px #818cf8!important;border-radius:10px}}
+.schov{{position:fixed;inset:0;background:rgba(2,6,23,.72);z-index:60}}
+.schov[hidden]{{display:none}}
+.schtip{{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:61;width:min(480px,92vw);background:#141a2e;border:1px solid rgba(129,140,248,.55);border-radius:16px;padding:16px}}
+.schtip[hidden]{{display:none}}
+.schtip p{{margin:8px 0 4px}}
 .hgrid2 details.chapter{{border:1px solid rgba(129,140,248,.45);border-radius:14px;background:rgba(129,140,248,.07);padding:0 6px}}
 .hgrid2 details.chapter summary{{padding:14px 12px}}
 .hgrid2 details.chapter summary h2{{font-size:19px}}
@@ -284,14 +289,11 @@ var CHS=[["chapter-1-self-regulation-time","Time","Plan & focus blocks"],["chapt
 var TG={{step:0,ch:0}};
 function goSid(sid){{var h=document.getElementById(sid);var det=h&&h.closest?h.closest("details"):null;if(det){{det.open=true;setTimeout(function(){{try{{det.scrollIntoView({{behavior:"smooth",block:"start"}})}}catch(e){{det.scrollIntoView()}}}},80)}}}}
 function goWeek(){{var w=document.querySelector("[data-day]");var c=w&&w.closest?w.closest(".card"):null;if(c){{try{{c.scrollIntoView({{behavior:"smooth",block:"center"}})}}catch(e){{c.scrollIntoView()}}}}}}
-var SCH={{step:0}};
+var SCHT=[["[data-user]","Your code","Type any code, like your group + number (A01). It keeps your progress private to this device."],['[data-exp="saveuser"]',"Save it","Tap Save. Come back anytime — your progress reloads under this code."],["#schedule .daypick","Pick study days","Tap the days you study online — or Weekdays. Grey days are skipped in your score."],["[data-schstart]","Start learning","Head into the student guide and tap Start. Your week tracker already knows your days!"]];
+var SCH={{step:0,open:0}};
 function schClear(){{document.querySelectorAll(".schlight").forEach(function(el){{el.classList.remove("schlight")}})}}
-function schHi(sel){{schClear();var el=document.querySelector(sel);if(!el)return;el.classList.add("schlight");try{{el.scrollIntoView({{behavior:"smooth",block:"center"}})}}catch(e){{el.scrollIntoView()}}}}
-function schRender(){{var b=document.querySelector("[data-schbody]");if(!b)return;var s=SCH.step;
- if(s===0){{b.innerHTML='<div>Step 1 of 4 — type any code (e.g. your group + number) in <b>My code</b>.</div><div><button type="button" class="tbtn pri" data-sch="next">Next</button></div>';schHi('[data-user]')}}
- else if(s===1){{b.innerHTML='<div>Step 2 of 4 — tap <b>Save</b>. Your code is stored on this device.</div><div><button type="button" class="tbtn pri" data-sch="next">Next</button> <button type="button" class="tbtn" data-sch="back">Back</button></div>';schHi('[data-exp="saveuser"]')}}
- else if(s===2){{b.innerHTML='<div>Step 3 of 4 — tap your <b>online days</b> (or Weekdays). Grey days are skipped in your score.</div><div><button type="button" class="tbtn pri" data-sch="next">Next</button> <button type="button" class="tbtn" data-sch="back">Back</button></div>';schHi('#schedule .daypick')}}
- else{{b.innerHTML='<div>Step 4 of 4 — done! Open the student guide and tap <b>Start</b>.</div><div><button type="button" class="tbtn" data-sch="done">Done</button> <button type="button" class="tbtn" data-sch="back">Back</button></div>';schHi('[data-schstart]')}}}}
+function schHide(){{SCH.open=0;schClear();var o=document.querySelector("[data-schov]");if(o)o.hidden=true;var tp=document.querySelector("[data-schtip]");if(tp)tp.hidden=true}}
+function schShow(n){{SCH.step=(n+SCHT.length)%SCHT.length;SCH.open=1;schClear();var s=SCHT[SCH.step];var el=document.querySelector(s[0]);if(el){{el.classList.add("schlight");try{{el.scrollIntoView({{behavior:"smooth",block:"center"}})}}catch(e){{el.scrollIntoView()}}}}var o=document.querySelector("[data-schov]");if(o)o.hidden=false;var tp=document.querySelector("[data-schtip]");if(tp){{tp.hidden=false;var h=tp.querySelector("[data-schtitle]");if(h)h.textContent=(SCH.step+1)+" / "+SCHT.length+" — "+s[1];var x=tp.querySelector("[data-schtext]");if(x)x.textContent=s[2];var bk=tp.querySelector('[data-sch="back"]');if(bk)bk.disabled=SCH.step===0;var nx=tp.querySelector('[data-sch="next"]');if(nx)nx.textContent=SCH.step===SCHT.length-1?"Done ✓":"Next ›"}}}}
 function tourRender(){{var b=document.querySelector("[data-tourbody]");if(!b)return;var s=TG.step,c=CHS[TG.ch],dots="Step "+(s+1)+" of 3";
  if(s===0){{b.innerHTML='<div class="muted">'+dots+' — what is your biggest struggle?</div><div><button type="button" class="tbtn" data-tour="pick:0">Time</button><button type="button" class="tbtn" data-tour="pick:1">Distraction</button><button type="button" class="tbtn" data-tour="pick:2">Interaction</button><button type="button" class="tbtn" data-tour="pick:3">Fatigue</button></div>'}}
  else if(s===1){{b.innerHTML='<div>'+dots+' — your chapter: <b>'+c[2]+'</b>. Open it, do the routine, tick Done.</div><div><button type="button" class="tbtn pri" data-tour="opench">Open my chapter →</button><button type="button" class="tbtn" data-tour="week">My study week</button><button type="button" class="tbtn" data-tour="back">Back</button></div>'}}
@@ -366,12 +368,14 @@ document.addEventListener("click",function(e){{
  if(w){{if(w.disabled)return;var parts=w.getAttribute("data-w").split("|");var mon=monday(),dt=new Date(mon);dt.setDate(mon.getDate()+parseInt(parts[1],10));var key=iso(dt);W[key]=W[key]||{{}};if(W[key][parts[0]])delete W[key][parts[0]];else W[key][parts[0]]=1;save();paint();return}}
  var hq=e.target.closest?e.target.closest("[data-howq]"):null;
  if(hq){{var hp=hq.closest?hq.closest(".hero"):null;var pnl=hp?hp.querySelector("[data-howto]"):document.querySelector("[data-howto]");if(pnl)pnl.hidden=!pnl.hidden;return}}
+ var so=e.target.closest?e.target.closest("[data-schov]"):null;
+ if(so){{schHide();return}}
  var sc=e.target.closest?e.target.closest("[data-sch]"):null;
  if(sc){{var sa=sc.getAttribute("data-sch");
-  if(sa==="start"){{SCH.step=0;schRender();return}}
-  if(sa==="next"){{SCH.step=Math.min(3,SCH.step+1);schRender();return}}
-  if(sa==="back"){{SCH.step=Math.max(0,SCH.step-1);schRender();return}}
-  if(sa==="done"){{schClear();var bb=document.querySelector("[data-schbody]");if(bb)bb.innerHTML="";return}}}}
+  if(sa==="start"){{schShow(0);return}}
+  if(sa==="next"){{if(SCH.step>=SCHT.length-1){{schHide()}}else{{schShow(SCH.step+1)}}return}}
+  if(sa==="back"){{schShow(SCH.step-1);return}}
+  if(sa==="skip"){{schHide();return}}}}
  var cd=e.target.closest?e.target.closest("[data-chdone]"):null;
  if(cd){{if(cd.disabled)return;
   if(document.querySelector("[data-day]")){{goWeek();setTimeout(function(){{var s=document.querySelector('[data-exp="send"]');if(s){{s.classList.add("sendflash");try{{s.scrollIntoView({{behavior:"smooth",block:"center"}})}}catch(e2){{s.scrollIntoView()}}setTimeout(function(){{s.classList.remove("sendflash")}},2200)}}}},350);return}}
@@ -382,6 +386,7 @@ document.addEventListener("click",function(e){{
    if(d){{var det=d.closest("details");if(det)det.open=true}}}}
  }}
 }});
+document.addEventListener("keydown",function(e){{if(e&&e.key==="Escape"&&SCH.open)schHide()}});
 function openHash(){{
  var id=location.hash;
  if(id&&id.length>1){{var d=document.getElementById(id.slice(1));
@@ -937,7 +942,11 @@ def schedule_html():
     return ('<div class="card" id="schedule"><b>Step 1 — My study days</b>'
             '<div class="muted">Pick your code + online days first, then Start. Same choices appear inside the student guide.</div>'
             '<div><button type="button" class="mini" data-sch="start">Show me how</button></div>'
-            '<div class="muted" data-schbody></div>'
+            '<div class="schov" data-schov hidden></div>'
+            '<div class="schtip" data-schtip hidden><b data-schtitle></b><p class="muted" data-schtext></p>'
+            '<div class="trow"><div><button type="button" class="tbtn" data-sch="back">‹ Back</button>'
+            '<button type="button" class="tbtn" data-sch="skip">Skip</button></div>'
+            '<div><button type="button" class="tbtn pri" data-sch="next">Next ›</button></div></div></div>'
             '<div class="prof"><span class="muted">My code:</span>'
             '<input data-user placeholder="e.g. A01 - saved on this device">'
             '<button type="button" class="mini" data-exp="saveuser">Save</button></div>'
